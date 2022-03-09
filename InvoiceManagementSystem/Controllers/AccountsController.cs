@@ -7,6 +7,7 @@ using InvoiceManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using InvoiceManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace InvoiceManagementSystem.Controllers
 {
@@ -14,13 +15,16 @@ namespace InvoiceManagementSystem.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<ApplicationUser> logger;
 
-        public AccountsController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager )
+        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.logger = logger;
         }
 
+        #region Regiser Section
         [HttpGet]
         public IActionResult Register()
         {
@@ -45,6 +49,11 @@ namespace InvoiceManagementSystem.Controllers
 
                 if (result.Succeeded)
                 {
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var ConfirmationLink = Url.Action("Confirm", "Account",
+                        new { userid = user.Id, token = token }, Request.Scheme);
+                    logger.Log(LogLevel.Warning, ConfirmationLink);
                     await signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Login", "Accounts");
@@ -60,8 +69,10 @@ namespace InvoiceManagementSystem.Controllers
             }
             return View(userViewModel);
         }
-        
+        #endregion
 
+
+        #region Login Section
         [HttpGet]
         public IActionResult Login()
         {
@@ -74,7 +85,7 @@ namespace InvoiceManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password, loginView.RememberMe, false);
 
                 if (result.Succeeded)
@@ -88,10 +99,26 @@ namespace InvoiceManagementSystem.Controllers
             return View(loginView);
         }
 
+        #endregion
+
+
+        #region Forget Password Screen
         public IActionResult forgetPassword()
         {
             return View();
         }
+
+        //public async Task<IActionResult> ForgetPassword(string UserName)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //    }
+        //    return View(UserName);
+        //}
+
+        #endregion
+
         public IActionResult ResetPassword()
         {
             return View();

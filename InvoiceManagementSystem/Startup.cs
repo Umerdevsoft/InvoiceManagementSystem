@@ -32,13 +32,17 @@ namespace InvoiceManagementSystem
             #endregion
 
             #region Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>(options => {
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
 
-            }).AddEntityFrameworkStores<AppDbContext>();
+            }).AddEntityFrameworkStores<AppDbContext>()
+              .AddDefaultTokenProviders();
+            
             #endregion
+            
 
             
         }
