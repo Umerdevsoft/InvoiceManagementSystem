@@ -12,5 +12,15 @@ namespace InvoiceManagementSystem.Controllers
         {
             return View();
         }
+
+        public IActionResult AddCustomers()
+        {
+            return View();
+        }
+
+        public IActionResult EditCustomers()
+        {
+            return View();
+        }
     }
 }

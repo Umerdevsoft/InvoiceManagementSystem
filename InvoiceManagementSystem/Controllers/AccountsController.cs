@@ -42,7 +42,9 @@ namespace InvoiceManagementSystem.Controllers
                     UserName = userViewModel.Email,
                     Email = userViewModel.Email,
                     PasswordHash = userViewModel.Password,
-                    CompanyName = userViewModel.CompanyName
+                    CompanyName = userViewModel.CompanyName,
+                    FullName=userViewModel.FullName
+                    
                 };
 
                 var result = await userManager.CreateAsync(user, userViewModel.Password);
@@ -51,13 +53,14 @@ namespace InvoiceManagementSystem.Controllers
                 {
                     var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    var ConfirmationLink = Url.Action("Confirm", "Account",
+                    var ConfirmationLink = Url.Action("ConfirmEmail", "Accounts",
                         new { userid = user.Id, token = token }, Request.Scheme);
                     logger.Log(LogLevel.Warning, ConfirmationLink);
                     await signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Login", "Accounts");
                 }
+               
 
                 foreach (var error in result.Errors)
                 {
@@ -71,6 +74,35 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
+
+
+        #region ConfirmEmail
+        //public IActionResult ConfirmEmail()
+        //{
+        //    return View();
+        //}
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("Register", "Accounts");
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"This User ID {userId} is invalid";
+                return View("Not Found");
+            }
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return View();
+            }
+            ViewBag.ErrorTitle = "Email cannot be confirmed";
+            return View("Error");
+        }
+        #endregion
 
         #region Login Section
         [HttpGet]
@@ -107,6 +139,7 @@ namespace InvoiceManagementSystem.Controllers
         {
             return View();
         }
+
 
         //public async Task<IActionResult> ForgetPassword(string UserName)
         //{

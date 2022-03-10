@@ -197,21 +197,71 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Customers" asp-action="AllCustomers" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fas fa-user"></i>
                                 <p>
                                     Customers
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="AllCustomers" class="nav-link">
+                                        <i class="far fas fa-user"></i>
+                                        <p>ALL Customers</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="AddCustomers" class="nav-link">
+                                        <i class="far fas fa-plus"></i>
+                                        <p>Add Customers</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
+                                        <i class="far fas fa-pen"></i>
+                                        <p>Edit Customers</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Items" asp-action="AllItems" class="nav-link">
-                                <i class="nav-icon fas fa-list-alt"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fas fa-shopping-cart"></i>
                                 <p>
                                     Items
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="AllCustomers" class="nav-link">
+                                        <i class="far fa fa-shopping-cart"></i>
+                                        <p>ALL Items</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="AddCustomers" class="nav-link">
+                                        <i class="far fas fa-plus"></i>
+                                        <p>Add Items</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
+                                        <i class="far fas fa-pen"></i>
+                                        <p>Edit Items</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+                        @*<li class="nav-item">
+            <a asp-controller="Items" asp-action="AllItems" class="nav-link">
+                <i class="nav-icon fas fa-list-alt"></i>
+                <p>
+                    Items
+                </p>
+            </a>
+        </li>*@
                         <li class="nav-item">
                             <a asp-controller="Invoices" asp-action="AllInvoices" class="nav-link">
                                 <i class="nav-icon fas fa-file-invoice"></i>
