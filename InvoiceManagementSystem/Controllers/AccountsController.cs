@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using InvoiceManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using InvoiceManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using MimeKit;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace InvoiceManagementSystem.Controllers
 {
@@ -16,12 +16,14 @@ namespace InvoiceManagementSystem.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<ApplicationUser> logger;
-
-        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger)
+        private readonly IEmailSender emailSender;
+       
+        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger,IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
+            this.emailSender = emailSender;
         }
 
         #region Regiser Section
@@ -33,6 +35,7 @@ namespace InvoiceManagementSystem.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel userViewModel)
         {
             if (ModelState.IsValid)
@@ -53,10 +56,12 @@ namespace InvoiceManagementSystem.Controllers
                 {
                     var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    var ConfirmationLink = Url.Action("ConfirmEmail", "Accounts",
-                        new { userid = user.Id, token = token }, Request.Scheme);
-                    logger.Log(LogLevel.Warning, ConfirmationLink);
-                    await signInManager.SignInAsync(user, isPersistent: false);
+                    var ConfirmationLink = Url.Action(nameof(ConfirmEmail), "Accounts",
+                        new {email=user.Email,token=token}, Request.Scheme);                 
+                  await emailSender.SendEmailAsync(userViewModel.Email, "test", ConfirmationLink);
+
+                    //logger.Log(LogLevel.Warning, ConfirmationLink);
+                    //await signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Login", "Accounts");
                 }
@@ -73,7 +78,6 @@ namespace InvoiceManagementSystem.Controllers
             return View(userViewModel);
         }
         #endregion
-
 
 
         #region ConfirmEmail
@@ -113,7 +117,7 @@ namespace InvoiceManagementSystem.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel loginView)
+        public async Task<IActionResult> Login(LoginViewModel loginView,string returnurl=null)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +126,8 @@ namespace InvoiceManagementSystem.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Dashboard", "InvoiceDashboard");
+                    return RedirectToAction(returnurl);
+                    //return RedirectToAction("Dashboard", "InvoiceDashboard");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
@@ -152,9 +157,21 @@ namespace InvoiceManagementSystem.Controllers
 
         #endregion
 
+
+        #region ResetPassword
         public IActionResult ResetPassword()
         {
+
             return View();
         }
+        #endregion
+
+        #region ConfirmPasswordReset
+        public IActionResult ConfirmPassword()
+        {
+
+            return View();
+        }
+        #endregion
     }
 }

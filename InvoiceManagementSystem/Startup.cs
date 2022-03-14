@@ -1,8 +1,10 @@
 using InvoiceManagementSystem.Models;
+using InvoiceManagementSystem.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,13 +32,18 @@ namespace InvoiceManagementSystem
             #region ConnectionString
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             #endregion
-
+            services.AddTransient<IEmailSender, EmailSender>();
             #region Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+
+                #region EmailConfirm
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
+                #endregion
 
             }).AddEntityFrameworkStores<AppDbContext>()
               .AddDefaultTokenProviders();
@@ -64,8 +71,8 @@ namespace InvoiceManagementSystem
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
