@@ -1,0 +1,90 @@
+﻿@model InvoiceManagementSystem.ViewModels.ItemsViewModels
+@{
+    ViewData["Title"] = "ItemOverview";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <!---Check box Card start-->
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h2 class="card-title col-9">All Items</h2>
+                    <a class="col-1" asp-controller="Items" asp-action="AddItems" style="text-align:end"><i class="fa fa-plus"></i>New</a>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check1">
+                                            <label for="check1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="mailbox-name"><a href="#">Alexander Pierce</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check2">
+                                            <label for="check2"></label>
+                                        </div>
+                                    </td>
+                                    <td class="mailbox-name"><a href="#">Alexander Pierce</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check3">
+                                            <label for="check3"></label>
+                                        </div>
+                                    </td>
+                                    <td class="mailbox-name"><a href="#">Alexander Pierce</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- End Checkbox card -->
+        </div>
+        
+        <!--Items Detail Card Start-->
+        <!-- /.col -->
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header" data-card-widget="collapse">
+                    <h1>ItemName</h1>
+                    <h3 class="card-title">Overview</h3>
+                    <div class="card-tools">
+                        <button  type="button" id="btneditItem" class="btn btn-tool">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" id="btndelete" class="btn btn-tool" >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    Start creating your amazing application!
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!--Items Detail Card End-->
+        </div>
+        
+        <!-- /.content -->
+    </div>
+    </div>  
+
+
+          
+
+
+

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using InvoiceManagementSystem.ViewModels;
+
 
 namespace InvoiceManagementSystem.Services
 {
@@ -16,22 +18,24 @@ namespace InvoiceManagementSystem.Services
             using (var message = new MailMessage())
             {
                 message.To.Add(new MailAddress(email));//------
-                message.From = new MailAddress("Umersoft11@gmail.com", "Umer");
+                message.From = new MailAddress("basiliuskingly@gmail.com");
                 message.Subject = "Test";
                 message.Body = htmlMessage;
                 message.IsBodyHtml = true;
-                message.Priority = MailPriority.High;
+    
 
-                using (var client = new SmtpClient())
+                using (SmtpClient client = new SmtpClient())
                 {
-
-                    client.Host = "smtp-relay.sendinblue.com";
-                    client.Port = 587;
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("Umersoft11@gmail.com", "dtuqdzbqkcjarqst");
+                   
+                    client.Host = "smtp.gmail.com";
+                    client.UseDefaultCredentials = true;
+                    NetworkCredential networkCredential = new NetworkCredential("basiliuskingly@gmail.com", "password");
+                    client.Credentials = networkCredential;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
                     client.EnableSsl = true;
+                    client.Port = 587;
                     client.Send(message);
+                  
                 }
             }
             return Task.CompletedTask;

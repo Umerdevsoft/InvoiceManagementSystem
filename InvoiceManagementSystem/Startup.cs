@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Net;
+using System.Net.Mail;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,7 +34,11 @@ namespace InvoiceManagementSystem
             #region ConnectionString
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             #endregion
-            services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddTransient<IEmailSender,EmailSender>();
+
+            
+             
             #region Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

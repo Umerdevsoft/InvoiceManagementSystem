@@ -15,7 +15,7 @@ namespace InvoiceManagementSystem.Models
             
         }
 
-      
+        public DbSet<ItemsViewModels> Items { get; set; }
 
     }
 }

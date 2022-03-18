@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Identity;
 using InvoiceManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using MimeKit;
+using MailKit;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using InvoiceManagementSystem.Services;
+
 
 namespace InvoiceManagementSystem.Controllers
 {
@@ -56,12 +58,12 @@ namespace InvoiceManagementSystem.Controllers
                 {
                     var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    var ConfirmationLink = Url.Action(nameof(ConfirmEmail), "Accounts",
+                    var ConfirmationLink = Url.Action("ConfirmEmail", "Accounts",
                         new {email=user.Email,token=token}, Request.Scheme);                 
-                  await emailSender.SendEmailAsync(userViewModel.Email, "test", ConfirmationLink);
+                 await emailSender.SendEmailAsync(user.Email,"Test", ConfirmationLink);
 
-                    //logger.Log(LogLevel.Warning, ConfirmationLink);
-                    //await signInManager.SignInAsync(user, isPersistent: false);
+                    logger.Log(LogLevel.Warning, ConfirmationLink);
+                    await signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Login", "Accounts");
                 }
@@ -126,8 +128,8 @@ namespace InvoiceManagementSystem.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(returnurl);
-                    //return RedirectToAction("Dashboard", "InvoiceDashboard");
+                    //return RedirectToAction(returnurl);
+                    return RedirectToAction("Dashboard", "InvoiceDashboard");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
@@ -173,5 +175,15 @@ namespace InvoiceManagementSystem.Controllers
             return View();
         }
         #endregion
+
+        #region Logout
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Accounts");
+        }
+        #endregion
+
     }
 }

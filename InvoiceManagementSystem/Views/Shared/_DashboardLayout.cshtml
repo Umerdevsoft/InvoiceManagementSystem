@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,10 +6,14 @@
     <title>@ViewData["Title"] - InvoiceManagementSystem</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
+    <link href="~/Theme/Assets/Css/CustomCss.css" rel="stylesheet" />
     <link href="~/Theme/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <!-- Theme style -->
-    <link href="~/Theme/Assets/Css/CustomCss.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!---DataTables Css-->
+    <link rel="stylesheet" href="~/Theme/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Theme/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Theme/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -29,55 +32,32 @@
             <!-- Right navbar links -->
 
             <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <span class="badge badge-danger navbar-badge">Company Name</span>
+                    <a class="nav-link" data-toggle="dropdown">
+                        <p class="badge navbar-badge btncompanyname" style="font-size: 18px !important; font-weight: 700 !important;">Company Name</p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="~/Theme/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="~/Theme/Assets/Img/user.png" alt="User Avatar" class="profileimg" style="max-width: 20% !important; margin: auto !important;">
                             </div>
                             <!-- Message End -->
                         </a>
-                        <!--<div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">-->
-                            <!-- Message Start -->
-                            <!--<div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>-->
-                            <!-- Message End -->
-                        <!--</a>
-                        <div class="dropdown-divider"></div>-->
-                        <!--<a href="#" class="dropdown-item">-->
-                            <!-- Message Start -->
-                            <!--<div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>-->
-                            <!-- Message End -->
-                        <!--</a>-->
+                        <hr />
+                        <div class="UserDetail" style=" text-align: center;">
+                            <div>
+                                <a href="#" class="dropdown-item">UserName</a>
+                            </div>
+                            <div>
+                                <a href="#" class="dropdown-item">Email Address</a>
+                            </div>
+                        </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">Login Out</a>
+                        <a asp-controller="Accounts" asp-action="Login" class="dropdown-item dropdown-footer">Login Out</a>
                     </div>
                 </li>
+                <!-- Messages Dropdown Menu -->
 
 
 
@@ -85,13 +65,6 @@
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link" role="button">
-                        <span class="label label-default">Company Name</span>
-                    </a>
-
-
-                </li>
 
                 <li class="nav-item">
                     <a asp-controller="OrganizationProfile" asp-action="SettingProfile" class="nav-link" role="button">
@@ -100,25 +73,25 @@
                 </li>
                 <!-- Navbar Search -->
                 @*<li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
+                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <div class="navbar-search-block">
+                            <form class="form-inline">
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-navbar" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                </form>
-            </div>
-        </li>*@
+                    </li>*@
 
 
                 <li class="nav-item">
@@ -194,12 +167,12 @@
                                         <p>Add Customers</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
                                         <i class="far fas fa-pen"></i>
                                         <p>Edit Customers</p>
                                     </a>
-                                </li>
+                                </li>*@
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -218,27 +191,25 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a asp-controller="Items" asp-action="ItemOverview" class="nav-link">
+                                        <i class="far fa fa-shopping-cart"></i>
+                                        <p>Item Overview</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a asp-controller="Items" asp-action="AddItems" class="nav-link">
                                         <i class="far fas fa-plus"></i>
                                         <p>Add Items</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a asp-controller="Items" asp-action="EditItems" class="nav-link">
                                         <i class="far fas fa-pen"></i>
                                         <p>Edit Items</p>
                                     </a>
-                                </li>
+                                </li>*@
                             </ul>
                         </li>
-                        @*<li class="nav-item">
-                                <a asp-controller="Items" asp-action="AllItems" class="nav-link">
-                                    <i class="nav-icon fas fa-list-alt"></i>
-                                    <p>
-                                        Items
-                                    </p>
-                                </a>
-                            </li>*@
                         <li class="nav-item">
                             <a asp-controller="Invoices" asp-action="AllInvoices" class="nav-link">
                                 <i class="nav-icon fas fa-file-invoice"></i>
@@ -286,10 +257,26 @@
     <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/Theme/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Theme/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Theme/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Theme/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Theme/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Theme/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Theme/plugins/jszip/jszip.min.js"></script>
+    <script src="~/Theme/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Theme/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Theme/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Theme/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Theme/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Theme/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Theme/dist/js/demo.js"></script>
+    <script src="~/Theme/Assets/js/Datatable.js"></script>
+    
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InvoiceManagementSystem.Models;
+using InvoiceManagementSystem.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +11,41 @@ namespace InvoiceManagementSystem.Controllers
 {
     public class ItemsController : Controller
     {
+        private readonly AppDbContext appDbContext;
 
-        #region Item Main Page
-        public IActionResult AllItems()
+        public ItemsController(AppDbContext appDbContext)
         {
-            return View();
+            this.appDbContext = appDbContext;
         }
 
-        #endregion
+        #region Item Main Page
 
-        #region Add Items Controller
+        [HttpGet]
+
+        public IActionResult AllItems()
+        {
+            var itemsData =  appDbContext.Items;
+            return View(itemsData);
+
+        }  
+ 
+            #endregion
+
+            #region Add Items Controller
+
+            [HttpGet]
         public IActionResult AddItems()
         {
             return View();
         }
+        [HttpPost]
+        public string AddItems(ItemsViewModels itemsViewModels)
+        {
+            appDbContext.Add<ItemsViewModels>(itemsViewModels);
+            appDbContext.SaveChanges();
+            return "Item Save Successfully";
+        }
+       
         #endregion
 
         #region Edit Items Controller
@@ -31,6 +55,12 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
+        #region Overview Items Controller
+        public IActionResult ItemOverview()
+        {
+            return View();
+        }
+        #endregion
 
     }
 }
