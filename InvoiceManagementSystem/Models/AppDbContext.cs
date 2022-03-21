@@ -10,12 +10,16 @@ namespace InvoiceManagementSystem.Models
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
 
-        public DbSet<ItemsViewModels> Items { get; set; }
+        public DbSet<CustomersViewModel> customersViewModels { get; set; }
+        public DbSet<BillingViewModel> billingViewModels { get; set; }
+        public DbSet<ShippingViewModel> shippingViewModels { get; set; }
+        public DbSet<ContactPersonViewModel> contactPersonViewModels { get; set; }
+
 
     }
 }

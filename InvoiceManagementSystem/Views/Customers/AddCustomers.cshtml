@@ -10,380 +10,390 @@
         <h1>AddCustomers</h1>
     </div>
     <div class="card">
-        @*<form class="">*@
-        <div class="container" style="padding-top:10px;padding-bottom:4px">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-2">
-                        <label>Primary Customers</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtSalulation" placeholder="Salulation">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtFirstName" placeholder="FirstName">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtLastName" placeholder="LastName">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-2">
-                        <label>Company Name</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtCompany Name" placeholder="Company Name">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-2">
-                        <label>Customer Name</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtCustomerName" placeholder="Customer Name">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-2">
-                        <label>Customer Email</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="Customer Email" placeholder="Customer Email">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-2">
-                        <label>Customers Phone</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtWorkingPhone" placeholder="Working Phone">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="txtmobile" placeholder="Mobile #">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-2">
-                        <label>Currency</label>
-                    </div>
-                    <div class="col">
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose...</option>
-                            <option value="1">USD</option>
-                            <option value="2">EUR</option>
-                            <option value="3">PKR</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="form-group">
-                <button class="Single" target="1">Address</button>
-                <button class="Single" target="2">Contact Person</button>
-            </div>
-            <div>
-                <div id="div1" class="target" style="display:none">
-                    <hr />
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col">
-                                <label><u>Billing Address</u></label>
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col">
-                                <label><u>Billing Address</u></label>
-                            </div>
+        <div id="msg"></div>
+        <div id="msg1"></div>
+        <div id="msg2"></div>
+        <div id="msg3"></div>
+        <form class="">
+            <div class="container" id="passform" style="padding-top:10px;padding-bottom:4px">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Primary Customers</label>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>Attention</p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>Attention</p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtSalulation" placeholder="Salulation">
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>Country/ Region</p>
-                            </div>
-                            <div class="col">
-                                <select class="custom-select" placeholder="" id="inputGroupSelect01">
-                                    <option value="1"></option>
-                                    <option value="1">Pakistan</option>
-                                    <option value="2">USA</option>
-                                    <option value="3">CANADA</option>
-                                </select>
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>Country/ Region</p>
-                            </div>
-                            <div class="col">
-                                <select class="custom-select" placeholder="" id="inputGroupSelect01">
-                                    <option value="1"></option>
-                                    <option value="1">Pakistan</option>
-                                    <option value="2">USA</option>
-                                    <option value="3">CANADA</option>
-                                </select>
-                            </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtFirstName" placeholder="FirstName">
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>Address</p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Street 1">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>Address</p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="Street 1">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p></p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Street 2">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p></p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="Street 2">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>City</p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>City</p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>State</p>
-                            </div>
-                            <div class="col">
-                                <select class="custom-select" placeholder="" id="inputGroupSelect01">
-                                    <option value="1"></option>
-                                    <option value="1">Pakistan</option>
-                                    <option value="2">USA</option>
-                                    <option value="3">CANADA</option>
-                                </select>
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>State</p>
-                            </div>
-                            <div class="col form">
-                                <select class="custom-select" placeholder="" id="inputGroupSelect01">
-                                    <option value="1"></option>
-                                    <option value="1">Pakistan</option>
-                                    <option value="2">USA</option>
-                                    <option value="3">CANADA</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>Zip Code</p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>Zip Code</p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>Fax</p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>Fax</p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-2">
-                                <p>State</p>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-2">
-                                <p>State</p>
-                            </div>
-                            <div class="col form">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtLastName" placeholder="LastName">
                         </div>
                     </div>
                 </div>
-                <div id="div2" class="target" style="display:none">
-                    @*<input type="text" />*@
-                    <hr />
-                    <label>Contact Person</label>
-                    <div class="form-group">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Salutation</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email Address</th>
-                                    <th>Work Place</th>
-                                    <th>Mobile</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Company Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtCompanyName" placeholder="Company Name">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @*<button class="btn" id="add-row"><a class="fas fa-plus"> Add Contact Person</a></button>*@
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Customer Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtCustomerDisplayName" placeholder="Customer Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Customer Email</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="CustomerEmail" placeholder="Customer Email">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Customers Phone</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtWorkingPhone" placeholder="Working Phone">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="txtmobile" placeholder="Mobile #">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Currency</label>
+                        </div>
+                        <div class="col">
+                            <select class="custom-select" id="txtCurrency">
+                                <option selected>Choose...</option>
+                                <option value="USD">USD</option>
+                                <option value="EURO">EUR</option>
+                                <option value="PKR">PKR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    @*<button class="Single" target="1">Address</button>
+                        <button class="Single" target="2">Contact Person</button>*@
+                    <input id="" class="Single" target="1" type="button" value="Address" />
+                    <input id="" class="Single" target="2" type="button" value="Contact Person" />
+                </div>
+                <div>
+                    <div id="div1" class="target" style="display:none">
+                        <hr />
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label><u>Billing Address</u></label>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col">
+                                    <label><u>Shipping Address</u></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>Attention</p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="billAttention" class="form-control" placeholder="">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>Attention</p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" id="shipAttention" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><span class="fas fa-plus"></span> Add Contact Person</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered box" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <label>Contact Person</label>
-                                                </div>
-                                                <div class="col-2">
-                                                    <input type="text" class="form-control" id="modaltxtSalulation" placeholder="Salulation">
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control" id="modaltxtFirstName" placeholder="FirstName">
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control" id="modaltxtLastName" placeholder="LastName">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <label>Email</label>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control" id="modaltxtEmail" placeholder="xyz@gmail.com">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <label>Work Place</label>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control" id="modaltxtWorkplace" placeholder="Work Place">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <label>Mobile</label>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control" id="modaltxtMobile" placeholder="Mobile #">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" id="add-row" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-                                    </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>Country/ Region</p>
+                                </div>
+                                <div class="col">
+                                    <select class="custom-select" placeholder="" id="billCounrtyRegion">
+                                        <option value="1"></option>
+                                        <option value="1">Pakistan</option>
+                                        <option value="2">USA</option>
+                                        <option value="3">CANADA</option>
+                                    </select>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>Country/ Region</p>
+                                </div>
+                                <div class="col">
+                                    <select class="custom-select" placeholder="" id="shipCounrtyRegion">
+                                        <option value="1"></option>
+                                        <option value="1">Pakistan</option>
+                                        <option value="2">USA</option>
+                                        <option value="3">CANADA</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>Address</p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="billAddressStreet1" placeholder="Street 1">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>Address</p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" class="form-control" id="shipAddressStreet1" placeholder="Street 1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p></p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="billAddressStreet2" placeholder="Street 2">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p></p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" class="form-control" id="shipAddressStreet2" placeholder="Street 2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>City</p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="billCity" placeholder="">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>City</p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" class="form-control" id="shipCity" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>State</p>
+                                </div>
+                                <div class="col">
+                                    <select class="custom-select" placeholder="" id="billState">
+                                        <option value="1"></option>
+                                        <option value="1">Pakistan</option>
+                                        <option value="2">USA</option>
+                                        <option value="3">CANADA</option>
+                                    </select>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>State</p>
+                                </div>
+                                <div class="col form">
+                                    <select class="custom-select" placeholder="" id="shipState">
+                                        <option value="1"></option>
+                                        <option value="1">Pakistan</option>
+                                        <option value="2">USA</option>
+                                        <option value="3">CANADA</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>Zip Code</p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="billZipCode" placeholder="">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>Zip Code</p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" class="form-control" id="shipZipCode" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>Phone</p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="billPhone" placeholder="">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>Phone</p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" class="form-control" id="shipPhone" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-2">
+                                    <p>Fax</p>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="billFax" placeholder="">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <p>Fax</p>
+                                </div>
+                                <div class="col form">
+                                    <input type="text" class="form-control" id="shipFax" placeholder="">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div id="div2" class="target" style="display:none">
+                        @*<input type="text" />*@
+                        <hr />
+                        <label>Contact Person</label>
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Salutation</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email Address</th>
+                                        <th>Work Place</th>
+                                        <th>Mobile</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    </tr>
 
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            @*<button class="btn" id="add-row"><a class="fas fa-plus"> Add Contact Person</a></button>*@
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><span class="fas fa-plus"></span> Add Contact Person</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered box" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <label>Contact Person</label>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <input type="text" class="form-control" id="modaltxtSalulation" placeholder="Salulation">
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" id="modaltxtFirstName" placeholder="FirstName">
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" id="modaltxtLastName" placeholder="LastName">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <label>Email</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" id="modaltxtEmail" placeholder="xyz@gmail.com">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <label>Work Place</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" id="modaltxtWorkplace" placeholder="Work Place">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <label>Mobile</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" id="modaltxtMobile" placeholder="Mobile #">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" id="add-row" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="">
+                        <input id="btnsubmit" type="button" value="Submit" />
+                    </div>
                 </div>
             </div>
-        </div>
-        @*</form>*@
+        </form>
+
     </div>
 </div>
 
@@ -399,54 +409,6 @@
 
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    jQuery('.Single').click(function () {
-        jQuery('.target').hide();
-        jQuery('#div' + $(this).attr('target')).show();
-    })
-
-    $(document).ready(function () {
-        $("#add-row").click(function () {
-            var salutation = $("#modaltxtSalulation").val();
-            var firstName = $("#modaltxtFirstName").val();
-            var lastName = $("#modaltxtLastName").val();
-            var Email = $("#modaltxtEmail").val();
-            var workPlace = $("#modaltxtWorkplace").val();
-            var mobile = $("#modaltxtMobile").val();
-
-            $(".table tbody tr").last().after(
-                '<tr>' +
-                    '<td>'+ salutation + '</td>' +
-                    '<td>' + firstName +'</td>' +
-                    '<td>' + lastName + '</td>' +
-                    '<td>' + Email + '</td>' +
-                    '<td>' + workPlace + '</td>' +
-                    '<td>' + mobile + '</td>' +
-                '</tr>'
-            );
-            $("#modaltxtSalulation").val("");
-            $("#modaltxtFirstName").val("");
-            $("#modaltxtLastName").val("");
-            $("#modaltxtEmail").val("");
-            $("#modaltxtWorkplace").val("");
-            $("#modaltxtMobile").val("");
-        })
-    })
-
-    $(document).ready(function () {
-        $("#btnsubmit").click(function (e) {
-            var valdata = $("#friendform").serialize();
-            alert(valdata);
-
-            $.ajax({
-                url: "/Customers/AddCustomers",
-                type: "POST",
-                dataType: "json",
-                contentType: "application/x-www-form-urlencoded; charset-UTF-8",
-                data: valdata
-            })
-        })
-    })
-</script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+<script src="~/lib/jquery-3.6.0.js"></script>
+<script src="~/Theme/Assets/js/AddCustomer.js"></script>

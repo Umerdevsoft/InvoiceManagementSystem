@@ -9,32 +9,32 @@ namespace InvoiceManagementSystem.ViewModels
 {
     public class BillingViewModel
     {
-        [key]
-        public int ID { get; set; }
+        [Key]
+        public int Billing_Id { get; set; }
         [Required]
-        public string Attention { get; set; }
+        public string B_Attention { get; set; }
         [Required]
-        public string Country_Region { get; set; }
+        public string B_Country_Region { get; set; }
         [Required]
-        public string Address_Street1 { get; set; }
+        public string B_Address_Street1 { get; set; }
         [Required]
-        public string Address_Street2 { get; set; }
+        public string B_Address_Street2 { get; set; }
         [Required]
-        public string City { get; set; }
+        public string B_City { get; set; }
         [Required]
 
-        public string State { get; set; }
+        public string B_State { get; set; }
         [Required]
-        public int ZipCode { get; set; }
+        public int B_ZipCode { get; set; }
 
         [Required]
-        public int Phone { get; set; }
+        public int B_Phone { get; set; }
 
         [Required]
-        public int Fax { get; set; }
+        public int B_Fax { get; set; }
 
         [ForeignKey("CustID")]
-        public int CustID { get; set; }
+        public int B_CustID { get; set; }
         public CustomersViewModel CustomersViewModels { get; set; }
     }
 }

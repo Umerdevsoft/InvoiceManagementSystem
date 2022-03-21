@@ -10,33 +10,33 @@ namespace InvoiceManagementSystem.ViewModels
     public class ShippingViewModel
     {
 
-        [key]
-        public int ID { get; set; }
+        [Key]
+        public int Shipping_Id { get; set; }
         [Required]
-        public string Attention { get; set; }
+        public string S_Attention { get; set; }
         [Required]
-        public string Country_Region { get; set; }
+        public string S_Country_Region { get; set; }
         [Required]
-        public string Address_Street1 { get; set; }
+        public string S_Address_Street1 { get; set; }
         [Required]
-        public string Address_Street2 { get; set; }
+        public string S_Address_Street2 { get; set; }
         [Required]
-        public string City { get; set; }
+        public string S_City { get; set; }
         [Required]
 
-        public string State { get; set; }
+        public string S_State { get; set; }
         [Required]
-        public int ZipCode { get; set; }
+        public int S_ZipCode { get; set; }
 
         [Required]
-        public int Phone { get; set; }
+        public int S_Phone { get; set; }
 
         [Required]
-        public int Fax { get; set; }
+        public int S_Fax { get; set; }
 
         [ForeignKey("CustID")]
-        public int CustID { get; set; }
+        public int S_CustID { get; set; }
         public CustomersViewModel CustomersViewModels { get; set; }
-       
+
     }
 }

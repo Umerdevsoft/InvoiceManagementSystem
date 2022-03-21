@@ -10,29 +10,29 @@ namespace InvoiceManagementSystem.ViewModels
     public class ContactPersonViewModel
     {
         [Key]
-        public int ID { get; set; }
+        public int C_P_Id { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
-        public string Salulation { get; set; }
+        //[DataType(DataType.Text)]
+        public string C_P_Salulation { get; set; }
         [Required]
-        [DataType(DataType.Text)]
-        public string FirstName { get; set; }
+        //[DataType(DataType.Text)]
+        public string C_P_FirstName { get; set; }
         [Required]
-        [DataType(DataType.Text)]
-        public string LastName { get; set; }
+        //[DataType(DataType.Text)]
+        public string C_P_LastName { get; set; }
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        //[EmailAddress]
+        public string C_P_Email { get; set; }
         [Required]
-       
-        public string WorkPlace { get; set; }
+
+        public string C_P_WorkPlace { get; set; }
         [Required]
-        [DataType(DataType.PhoneNumber)]
-        public int Mobile { get; set; }
+        //[DataType(DataType.PhoneNumber)]
+        public int C_P_Mobile { get; set; }
 
         [ForeignKey("CustID")]
-        public int CustID { get; set; }
+        public int C_P_CustID { get; set; }
         public CustomersViewModel CustomersViewModels { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace InvoiceManagementSystem.ViewModels
 {
     public class CustomersViewModel
     {
-        [key]
+        [Key]
         public int CustID { get; set; }
         [Required]
         [DataType(DataType.Text)]
@@ -20,25 +20,24 @@ namespace InvoiceManagementSystem.ViewModels
         [DataType(DataType.Text)]
         public string LastName { get; set; }
         [Required]
-        public string  CompanyName { get; set; }
+        public string CompanyName { get; set; }
         [Required]
         [DataType(DataType.Text)]
         public string CustomerDisplayName { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-       
-        [DataType(DataType.PhoneNumber)]
-        public  int WorkPhone { get; set; }
-        [DataType(DataType.PhoneNumber)]
+
+        public int WorkPhone { get; set; }
+        [Required]
         public int Mobile { get; set; }
         [Required]
-       
+
         public string Currency { get; set; }
 
-        public IEnumerable<BillingViewModel>  BillingViewModels { get; set; }
+        public IEnumerable<BillingViewModel> BillingViewModels { get; set; }
 
-        public IEnumerable<ShippingViewModel>  ShippingViewModels { get; set; }
+        public IEnumerable<ShippingViewModel> ShippingViewModels { get; set; }
 
         public IEnumerable<ContactPersonViewModel> ContactPersonViewModels { get; set; }
 
