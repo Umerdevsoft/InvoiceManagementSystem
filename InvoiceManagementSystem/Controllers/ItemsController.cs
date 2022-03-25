@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//using System.Web.Mvc;
 
 namespace InvoiceManagementSystem.Controllers
 {
@@ -19,21 +20,17 @@ namespace InvoiceManagementSystem.Controllers
         }
 
         #region Item Main Page
-
         [HttpGet]
-
         public IActionResult AllItems()
         {
-            var itemsData =  appDbContext.Items;
+            var itemsData = appDbContext.Items;
             return View(itemsData);
+        }
+        #endregion
 
-        }  
- 
-            #endregion
+        #region Add Items Controller
 
-            #region Add Items Controller
-
-            [HttpGet]
+        [HttpGet]
         public IActionResult AddItems()
         {
             return View();
@@ -45,7 +42,7 @@ namespace InvoiceManagementSystem.Controllers
             appDbContext.SaveChanges();
             return "Item Save Successfully";
         }
-       
+
         #endregion
 
         #region Edit Items Controller
@@ -56,11 +53,36 @@ namespace InvoiceManagementSystem.Controllers
         #endregion
 
         #region Overview Items Controller
+        [HttpGet]
         public IActionResult ItemOverview()
         {
             return View();
         }
+
         #endregion
 
+        #region ItemOverviewList
+        [HttpGet]
+        public IEnumerable<ItemsViewModels> ItemOverviewList()
+        {
+            var allItems = appDbContext.Items;
+            return allItems;
+            //return View();
+        }
+        #endregion  
+
+        #region ItemOverviewList
+        [HttpPost]
+        public JsonResult ItemDelete(ItemsViewModels objDelete)
+        {
+            var item = appDbContext.Items.Find(objDelete.ID);
+            appDbContext.Items.Remove(item);
+            appDbContext.SaveChanges();
+            var obj1 = objDelete.ID;
+            return Json(obj1);
+
+            //return View();
+        }
+        #endregion
     }
 }

@@ -36,7 +36,7 @@ namespace InvoiceManagementSystem.Controllers
             //var val = appDbContext.customersViewModels.Where(a => a.Email == customersViewModel.Email);
             //var val1 = appDbContext.customersViewModels.Find(customersViewModel.Email.Where(a=>a.));
             //int id= val1.CustID;
-            int userId = appDbContext.customersViewModels
+            int userId = appDbContext.Customers
              .Where(m => m.Email == customersViewModel.Email)
                .Select(m => m.CustID)
                .SingleOrDefault();

@@ -15,10 +15,11 @@ namespace InvoiceManagementSystem.Models
 
         }
 
-        public DbSet<CustomersViewModel> customersViewModels { get; set; }
-        public DbSet<BillingViewModel> billingViewModels { get; set; }
-        public DbSet<ShippingViewModel> shippingViewModels { get; set; }
-        public DbSet<ContactPersonViewModel> contactPersonViewModels { get; set; }
+        public DbSet<ItemsViewModels> Items { get; set; }
+        public DbSet<CustomersViewModel> Customers { get; set; }
+        public DbSet<BillingViewModel> Billings { get; set; }
+        public DbSet<ShippingViewModel> Shippings { get; set; }
+        public DbSet<ContactPersonViewModel> ContactPerson { get; set; }
 
 
     }
