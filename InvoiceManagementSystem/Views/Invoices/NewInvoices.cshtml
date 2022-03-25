@@ -1,0 +1,251 @@
+﻿
+@{
+    ViewData["Title"] = "NewInvoices";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1> <i class="fas fa-file-invoice"></i>New Invoices</h1>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Customers Name</label>
+                                </div>
+                                <div class="col-8">
+                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Select" />
+                                    <div class="dropdown-menu col-11">
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-controller="Customers" asp-action="AddCustomers"><i class="fa fa-plus"></i> New Customers</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Invoice #</label>
+                                </div>
+                                <div class="col-8" style="display:flex">
+                                    <input type="text" class="form-control" />
+                                    <a data-toggle="modal" data-target="#exampleModal"><i class="fas fa-cog" style="padding-left:5px;padding-top:10px; font-size:20px"></i></a>
+                                    <!--Invoice Number Modal Start -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Invoice Number</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                        Your invoice numbers are set on auto-generate mode to save your time. Are you
+                                                        sure about changing this setting?
+                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Continue auto-generating invoice number
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                                    I will add them manually each time
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <label>Prefix</label>
+                                                            <input class="form-control" type="text" />
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <label>Next Number</label>
+                                                            <input class="form-control" type="text" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                                                    <button type="button" class="btn btn-danger">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Invoice Number Model End-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Order Number</label>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <div class="col-1">
+                                    <label>Terms</label>
+                                </div>
+                                <div class="col-2">
+                                    <select class="form-control select2" style="width: 100%;">
+                                        <option selected="selected">Net 15</option>
+                                        <option>Net 30</option>
+                                        <option>Net 45</option>
+                                        <option>Net 60</option>
+                                    </select>
+                                </div>
+                                <div class="col-1">
+                                    <label>Due Date</label>
+                                </div>
+                                <div class="col-2">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Sales Person</label>
+                                </div>
+                                <div class="col-8">
+                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Select" />
+                                    <div class="dropdown-menu col-11">
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-controller="Invoices" asp-action="Salespersons"><i class="fas fa-cog"></i> Manage Salespersons</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Subject</label>
+                                </div>
+                                <div class="col-8">
+                                    <textarea class="form-control"></textarea>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                    <!--Table-->
+                    <div class="form-group">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ITEMS DETAILS</th>
+                                    <th scope="col">QUANTITY</th>
+                                    <th scope="col">RATE</th>
+                                    <th scope="col">DISCOUNT</th>
+                                    <th scope="col">AMOUNT</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <button type="button" class="btn btn-primary"><i class="far fa fa-plus"></i>Add another line</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row" style="text-align:end">
+                            <div class="col-8">
+                                <label>Sub Total</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row" style="text-align:end">
+                            <div class="col-8">
+                                <label>Shipping Charges</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row" style="text-align:end">
+                            <div class="col-8">
+                                <label>Adjustment</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-2">
+                                <label>Customer Notes</label>
+                            </div>
+                            <div class="col-4">
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row" style="text-align:end">
+                            <div class="col-8">
+                                <label>Total(PKR)</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Card-->
+                <div class="card-footer">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-2">
+                                <button type="button" class="btn btn-block btn-outline-primary btn-lg">Save as Draft</button>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-block btn-outline-success btn-lg">Save and Send</button>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-block btn-outline-danger btn-lg">Cencel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+>
+

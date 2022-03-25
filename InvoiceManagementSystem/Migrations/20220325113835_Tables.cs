@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InvoiceManagementSystem.Migrations
 {
-    public partial class INMSystemDB : Migration
+    public partial class Tables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,8 @@ namespace InvoiceManagementSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -44,6 +46,45 @@ namespace InvoiceManagementSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CustID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Salutation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkPhone = table.Column<int>(type: "int", nullable: false),
+                    Mobile = table.Column<int>(type: "int", nullable: false),
+                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CustID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SellingPrice = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tax = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +193,90 @@ namespace InvoiceManagementSystem.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Billings",
+                columns: table => new
+                {
+                    Billing_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    B_Attention = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    B_Country_Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    B_Address_Street1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    B_Address_Street2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    B_City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    B_State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    B_ZipCode = table.Column<int>(type: "int", nullable: false),
+                    B_Phone = table.Column<int>(type: "int", nullable: false),
+                    B_Fax = table.Column<int>(type: "int", nullable: false),
+                    B_CustID = table.Column<int>(type: "int", nullable: false),
+                    CustomersViewModelsCustID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Billings", x => x.Billing_Id);
+                    table.ForeignKey(
+                        name: "FK_Billings_Customers_CustomersViewModelsCustID",
+                        column: x => x.CustomersViewModelsCustID,
+                        principalTable: "Customers",
+                        principalColumn: "CustID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContactPerson",
+                columns: table => new
+                {
+                    C_P_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    C_P_Salulation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    C_P_FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    C_P_LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    C_P_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    C_P_WorkPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    C_P_Mobile = table.Column<int>(type: "int", nullable: false),
+                    C_P_CustID = table.Column<int>(type: "int", nullable: false),
+                    CustomersViewModelsCustID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactPerson", x => x.C_P_Id);
+                    table.ForeignKey(
+                        name: "FK_ContactPerson_Customers_CustomersViewModelsCustID",
+                        column: x => x.CustomersViewModelsCustID,
+                        principalTable: "Customers",
+                        principalColumn: "CustID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shippings",
+                columns: table => new
+                {
+                    Shipping_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    S_Attention = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_Country_Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_Address_Street1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_Address_Street2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_ZipCode = table.Column<int>(type: "int", nullable: false),
+                    S_Phone = table.Column<int>(type: "int", nullable: false),
+                    S_Fax = table.Column<int>(type: "int", nullable: false),
+                    S_CustID = table.Column<int>(type: "int", nullable: false),
+                    CustomersViewModelsCustID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shippings", x => x.Shipping_Id);
+                    table.ForeignKey(
+                        name: "FK_Shippings_Customers_CustomersViewModelsCustID",
+                        column: x => x.CustomersViewModelsCustID,
+                        principalTable: "Customers",
+                        principalColumn: "CustID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +315,21 @@ namespace InvoiceManagementSystem.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Billings_CustomersViewModelsCustID",
+                table: "Billings",
+                column: "CustomersViewModelsCustID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContactPerson_CustomersViewModelsCustID",
+                table: "ContactPerson",
+                column: "CustomersViewModelsCustID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shippings_CustomersViewModelsCustID",
+                table: "Shippings",
+                column: "CustomersViewModelsCustID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,10 +350,25 @@ namespace InvoiceManagementSystem.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Billings");
+
+            migrationBuilder.DropTable(
+                name: "ContactPerson");
+
+            migrationBuilder.DropTable(
+                name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "Shippings");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }

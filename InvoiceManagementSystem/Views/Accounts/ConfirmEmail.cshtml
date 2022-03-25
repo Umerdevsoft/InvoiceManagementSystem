@@ -1,9 +1,25 @@
-﻿@model InvoiceManagementSystem.Controllers.AccountsController
+﻿
 @{
     ViewData["Title"] = "ConfirmEmail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+<div class="container-fluid" style="padding-top:50px">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Registation Add Successfully</h1>
+                </div>
+                <div class="card-body">
+                    <p>Please Check your email to send the link to access the your account</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Accounts" asp-action="Login">Login</a>
+                </div>
+            </div>
 
-<h1>Thank You for confirming your email</h1>
+        </div>
+    </div>
 
+</div>

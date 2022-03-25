@@ -48,8 +48,8 @@ namespace InvoiceManagementSystem.Controllers
                     Email = userViewModel.Email,
                     PasswordHash = userViewModel.Password,
                     CompanyName = userViewModel.CompanyName,
-                    FullName=userViewModel.FullName
-                    
+                    FullName = userViewModel.FullName
+
                 };
 
                 var result = await userManager.CreateAsync(user, userViewModel.Password);
@@ -59,15 +59,19 @@ namespace InvoiceManagementSystem.Controllers
                     var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     var ConfirmationLink = Url.Action("ConfirmEmail", "Accounts",
-                        new {email=user.Email,token=token}, Request.Scheme);                 
-                 await emailSender.SendEmailAsync(user.Email,"Test", ConfirmationLink);
+                        new { email = user.Email, token = token }, Request.Scheme);
+                    await emailSender.SendEmailAsync(user.Email, "Test", ConfirmationLink).ConfigureAwait(false);
 
                     logger.Log(LogLevel.Warning, ConfirmationLink);
+
+
+
                     await signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("Login", "Accounts");
+                    return RedirectToAction("ConfirmEmail", "Accounts");
+
                 }
-               
+
 
                 foreach (var error in result.Errors)
                 {
@@ -77,27 +81,25 @@ namespace InvoiceManagementSystem.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
 
             }
+
             return View(userViewModel);
         }
         #endregion
 
 
         #region ConfirmEmail
-        //public IActionResult ConfirmEmail()
-        //{
-        //    return View();
-        //}
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+       
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
-            if (userId == null || token == null)
+            if (email == null || token == null)
             {
                 return RedirectToAction("Register", "Accounts");
             }
 
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"This User ID {userId} is invalid";
+                ViewBag.ErrorMessage = $"This User ID {email} is invalid";
                 return View("Not Found");
             }
             var result = await userManager.ConfirmEmailAsync(user, token);

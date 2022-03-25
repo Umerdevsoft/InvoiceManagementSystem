@@ -34,7 +34,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown">
-                        <p class="badge navbar-badge btncompanyname" style="font-size: 18px !important; font-weight: 700 !important;">Company Name</p>
+                        <p class="badge navbar-badge btncompanyname" style="font-size: 18px !important; font-weight: 700 !important;">@ViewBag.CompanyName</p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
@@ -137,7 +137,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a asp-controller="InvoiceDashboard" asp-action="Dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -168,11 +168,11 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
-                                        <i class="far fas fa-pen"></i>
-                                        <p>Edit Customers</p>
-                                    </a>
-                                </li>*@
+                    <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
+                        <i class="far fas fa-pen"></i>
+                        <p>Edit Customers</p>
+                    </a>
+                </li>*@
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -203,21 +203,44 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a asp-controller="Items" asp-action="EditItems" class="nav-link">
-                                        <i class="far fas fa-pen"></i>
-                                        <p>Edit Items</p>
-                                    </a>
-                                </li>*@
+                    <a asp-controller="Items" asp-action="EditItems" class="nav-link">
+                        <i class="far fas fa-pen"></i>
+                        <p>Edit Items</p>
+                    </a>
+                </li>*@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Invoices" asp-action="AllInvoices" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-file-invoice"></i>
                                 <p>
                                     Invoice
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="Invoices" asp-action="AllInvoices" class="nav-link">
+                                        <i class="fas fa-file-invoice"></i>
+                                        <p>All Invoices</p>
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
+                    <a asp-controller="Items" asp-action="ItemOverview" class="nav-link">
+                        <i class="far fa fa-shopping-cart"></i>
+                        <p>Item Overview</p>
+                    </a>
+                </li>*@
+                                <li class="nav-item">
+                                    <a asp-controller="Invoices" asp-action="NewInvoices" class="nav-link">
+                                        <i class="far fas fa-plus"></i>
+                                        <p>New Invoices</p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
+
                         <li class="nav-item">
                             <a asp-controller="PaymentsRecevied" asp-action="AllPayments" class="nav-link">
                                 <i class="nav-icon fas fa fa-credit-card"></i>

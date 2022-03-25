@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InvoiceManagementSystem.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,15 @@ namespace InvoiceManagementSystem.Controllers
 {
     public class InvoiceDashboardController : Controller
     {
-        public IActionResult Dashboard()
+        private readonly UserManager<ApplicationUser> userManager1;
+        public InvoiceDashboardController(UserManager<ApplicationUser> userManager)
         {
-            return View();
+            this.userManager1 = userManager;
+        }
+        public IActionResult Dashboard()
+        { 
+            ViewBag.CompanyName = userManager1.GetUserName(HttpContext.User);
+            return View();  
         }
     }
 }
