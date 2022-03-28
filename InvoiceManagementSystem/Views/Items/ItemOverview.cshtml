@@ -1,4 +1,4 @@
-﻿@*@model InvoiceManagementSystem.ViewModels.ItemsViewModels*@
+﻿@model InvoiceManagementSystem.ViewModels.ItemsViewModels
 @{
     ViewData["Title"] = "ItemOverview";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -31,28 +31,144 @@
 
         <!-- /.content -->
     </div>
+    @*Edit Modal-------------------------------------------------------------------------------------------------------------*@
+    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>*@
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div style="padding-left:25px;padding-top:10px;" class="row">
+                    <h1>  Edit Items</h1>
+                </div>
+
+                <div style="margin:10px;" class="card Itemformbox">
+                    <div style="" class="container">
+                        <form class="form-group">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label>Types:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optradio" id="radioDiv1" value="Goods">Goods
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optradio" id="radioDiv2" value="Service">Services
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control txtitemsName" id="txtitemsName" placeholder="Items Name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label>Unit</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <select class="form-control txtItemsUnit" searchable="Search here.." id="txtItemsUnit">
+                                            <option value="" disabled selected>Select</option>
+                                            <option value="Meter">Meter (m)</option>
+                                            <option value="Kilogram">Kilogram (kg)</option>
+                                            <option value="Ampere">Ampere (A)</option>
+                                            <option value="Kelvin">Kelvin (K)</option>
+                                            <option value="Candela">Candela (cd)</option>
+                                            <option value="liter">liter (l)</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label>Selling Price</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control txtsellingPrice" id="txtsellingPrice" placeholder="PKR" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label>Description</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <textarea class="form-control txtDescription" id="txtDescription" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label>Tax</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <select class="form-control txtItemTax" searchable="Search here.." id="txtItemTax">
+                                            <option value="" disabled selected>Select a Tax</option>
+                                            <option value="5%">5%</option>
+                                            <option value="10%">10%</option>
+                                            <option value="20%">20%</option>
+                                            <option value="30%">30%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <button type="button" id="btn_Update" class="btn btn-block btn-outline-success btn-lg">Update</button>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="btn btn-block btn-outline-danger btn-lg" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Edit Modal*@
+    @*-------------------------------------------------------------------------------------------------------------------------------*@
 </div>
 
 <script src="~/lib/jquery-3.6.0.js"></script>
 <script>
 
     $(document).ready(function () {
+        function loop(allItems) {
+            var myRow;
+            var myCard;
+            $.each(allItems, function (index, item) {
+
+                myRow = '<tr class="upd" target="' + item.id + '"><td id="updDiv"><div target="' + item.id + '"  class="icheck-primary"> <input type="checkbox" value="" class="master' + item.id + '" id="check"> </div></td><td class="mailbox-name"><a>' + item.name + '</a></td></tr>';
+                $('#MailBoxTable').append(myRow);
+                myCard = '<div class="card" id="card' + item.id + '" style="display:none"><div class="card-header" data-card-widget="collapse"><h1>' + item.name + '</h1> <h3 class="card-title">Overview</h3><div class="card-tools"><div class="row"><input type="text" id="divInput' + item.id + '" value="' + item.id + '" style="display:none"><div id="' + item.id + '" class="divUpdate  col" target="' + item.id + '"><a type="button" id="btnUpdate' + item.id + '" target="' + item.id + '" class="btn btn-tool" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-edit"></i></a></div><div id="" class="divDelete col" target="' + item.id + '"><a type="button" id="btnDelete' + item.id + '" target="' + item.id + '" class="btn btn-tool"><i class="fas fa-trash"></i></a></div></div></div></div><div class="card-body"><div class="row"><div class="col-4">Item type</div><div class="col-8"><b>' + item.type + '</b></div></div><div class="row"><div class="col-4">Created Source</div><div class="col-8"><b></b></div></div><br /><div class="row"><div class="col-4"><b>Sales Information</b></div></div><div class="row"><div class="col-4">Selling Price</div><div class="col-8"><b>PKR ' + item.sellingPrice + '</b></div></div><div class="row"><div class="col-4">Description</div><div class="col-8">' + item.description + '</div></div></div></div>'
+                $('#myDisplay').append(myCard);
+
+            });
+        }
+
         $.ajax({
             type: 'GET',
             url: '/Items/ItemOverviewList',
             dataType: 'json',
             success: function (allItems) {
                 console.log(allItems);
-                var myRow;
-                var myCard;
-                $.each(allItems, function (index, item) {
-
-                    myRow = '<tr class="upd" target="' + item.id + '"><td id="updDiv"><div target="' + item.id + '"  class="icheck-primary"> <input type="checkbox" value="" class="master' + item.id + '" id="check"> </div></td><td class="mailbox-name"><a>' + item.name + '</a></td></tr>';
-                    $('#MailBoxTable').append(myRow);
-                    myCard = '<div class="card" id="card' + item.id + '" style="display:none" ><div class="card-header" data-card-widget="collapse" ><h1>' + item.name + '</h1> <h3 class="card-title">Overview</h3><div class="card-tools"><div class="divTool" target="' + item.id + '"><input type="text" id="divInput' + item.id + '" value="' + item.id + '" style="display:none"><button type="button" id="btneditItem" class="btn btn-tool"><i class="fas fa-edit"></i></button><a type="button" id="btnDelete' + item.id + '" target="' + item.id + '" class="btn btn-tool"><i class="fas fa-trash"></i></a></div></div></div><div class="card-body"><div class="row"><div class="col-4">Item type</div><div class="col-8"><b>' + item.type + '</b></div></div><div class="row"><div class="col-4">Created Source</div><div class="col-8"><b></b></div></div><br /><div class="row"><div class="col-4"><b>Sales Information</b></div></div><div class="row"><div class="col-4">Selling Price</div><div class="col-8"><b>PKR ' + item.sellingPrice + '</b></div></div><div class="row"><div class="col-4">Description</div><div class="col-8">' + item.description + '</div></div></div></div >'
-                    $('#myDisplay').append(myCard);
-
-                });
+                loop(allItems);
 
                 $('.icheck-primary').click(function () {
                     if ($('.master' + $(this).attr('target')).is(":checked")) {
@@ -63,13 +179,13 @@
                     }
                 });
 
-                $('.divTool').click(function () {
-                    $('#btnDelete' + $(this).attr('target')).click(function () {
+                /*delete button--------------------------------------------------------------------------------------*/
+                $('.divDelete').click(function () {
+                    $('#btnDelete' + $(this).attr('target')).show(function () {
 
                         var proceed = confirm("do you want to Delete An item ?");
-                        if (proceed)
-                        {
-                            Div_id = $('#divInput' + $(this).attr('target')).val();
+                        if (proceed) {
+                            var Div_id = $('#divInput' + $(this).attr('target')).val();
                             console.log(Div_id);
                             var objDelete = { id: Div_id };
                             console.log(objDelete);
@@ -83,13 +199,70 @@
                                 }
                             });
                         }
-                        else
-                        {
+                        else {
                             location.reload();
                         }
                     });
                 });
+                //--------------------------------------------------------------------------------------------------------------
 
+                $('.divUpdate').click(function () {
+                    $('#btnUpdate' + $(this).attr('target')).show(function () {
+                        DivUpdate_Id = $('#divInput' + $(this).attr('target')).val();
+                        var objUpdate = { id: DivUpdate_Id };
+                        $.ajax({
+                            type: 'GET',
+                            url: '/Items/EditItems',
+                            data: objUpdate,
+                            success: function (item) {
+                                //if (item.type == "Goods") {
+                                //    $("#radioDiv1").prop("checked", true);
+                                //    $("#radioDiv2").prop("checked", false);
+                                //    //var item_Type = $(".radioDiv1").val();
+                                //}
+                                //else {
+                                //    $("#radioDiv1").prop("checked", false);
+                                //    $("#radioDiv2").prop("checked", true);
+                                //    //var item_Type = $(".radioDiv2").val();
+                                //}
+                                $('#txtitemsName').val(item.name);
+                                $('#txtItemsUnit').val(item.unit);
+                                $('#txtsellingPrice').val(item.sellingPrice);
+                                $('#txtDescription').val(item.description);
+                                $('#txtItemTax').val(item.tax);
+                            }
+                        });
+
+
+                    });
+                });
+
+                $('#btn_Update').click(function () {
+
+                    var item_Type = $('input[name="optradio"]:checked').val();
+                    var item_Name = $('#txtitemsName').val();
+                    var item_Unit = $('#txtItemsUnit').val();
+                    var item_SellingPrice = $('#txtsellingPrice').val();
+                    var item_Description = $('#txtDescription').val();
+                    var item_Tax = $('#txtItemTax').val();
+
+                    var objUpdatePost = { id: DivUpdate_Id, type: item_Type, name: item_Name, unit: item_Unit, sellingPrice: item_SellingPrice, description: item_Description, tax: item_Tax };
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Items/EditItems_Post',
+                        data: objUpdatePost,
+                        success: function (msg) {
+                            location.reload();
+                            $("#radioDiv1").prop("checked", false);
+                            $("#radioDiv2").prop("checked", false);
+                            $('#txtitemsName').val("");
+                            $('#txtItemsUnit').val("");
+                            $('#txtsellingPrice').val("");
+                            $('#txtDescription').val("");
+                            $('#txtItemTax').val("");
+                        }
+                    });
+                });
             },
             error: function () {
                 /* $('#termoneError').text('An error occurred');*/
@@ -101,3 +274,6 @@
 
 
 </script>
+@*myCard = '<div class="card" id="card' + item.id + '" style="display:none"><div class="card-header" data-card-widget="collapse"><h1>' + item.name + '</h1> <h3 class="card-title">Overview</h3><div class="card-tools"><div class="row"><input type="text" id="divInput' + item.id + '" value="' + item.id + '" style="display:none"><div id="' + item.id + '" class="divUpdate  col" target="' + item.id + '"><a type="button" id="btnUpdate' + item.id + '" target="' + item.id + '" class="btn btn-tool"><i class="fas fa-edit"></i></a></div><div id="" class="divDelete col" target="' + item.id + '"><a type="button" id="btnDelete' + item.id + '" target="' + item.id + '" class="btn btn-tool"><i class="fas fa-trash"></i></a></div></div></div></div><div class="card-body"><div class="row"><div class="col-4">Item type</div><div class="col-8"><b>' + item.type + '</b></div></div><div class="row"><div class="col-4">Created Source</div><div class="col-8"><b></b></div></div><br /><div class="row"><div class="col-4"><b>Sales Information</b></div></div><div class="row"><div class="col-4">Selling Price</div><div class="col-8"><b>PKR ' + item.sellingPrice + '</b></div></div><div class="row"><div class="col-4">Description</div><div class="col-8">' + item.description + '</div></div></div></div>'*@
+
+@*asp-route-id="' + item.id + '" asp-controller="Items" asp-action="EditItems"*@

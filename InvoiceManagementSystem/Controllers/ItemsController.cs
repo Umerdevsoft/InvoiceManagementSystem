@@ -46,9 +46,19 @@ namespace InvoiceManagementSystem.Controllers
         #endregion
 
         #region Edit Items Controller
-        public IActionResult EditItems()
+        [HttpGet]
+        public JsonResult EditItems(ItemsViewModels objUpdate)
         {
-            return View();
+            var item = appDbContext.Items.Find(objUpdate.ID);
+            return Json(item);
+        }
+
+        [HttpPost]
+        public string EditItems_Post(ItemsViewModels objUpdatePost)
+        {
+            var item = appDbContext.Items.Update(objUpdatePost);
+            appDbContext.SaveChanges();
+            return "Item Updated successfully";
         }
         #endregion
 
@@ -71,7 +81,7 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion  
 
-        #region ItemOverviewList
+        #region ItemDelete
         [HttpPost]
         public JsonResult ItemDelete(ItemsViewModels objDelete)
         {
