@@ -37,8 +37,8 @@ namespace InvoiceManagementSystem
 
             services.AddTransient<IEmailSender,EmailSender>();
 
-            
-             
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
             #region Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -50,6 +50,13 @@ namespace InvoiceManagementSystem
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = true;
                 #endregion
+
+                services.AddSession(options =>
+                {
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
+                    options.Cookie.IsEssential = true;
+                });
 
             }).AddEntityFrameworkStores<AppDbContext>()
               .AddDefaultTokenProviders();

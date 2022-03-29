@@ -68,7 +68,7 @@ namespace InvoiceManagementSystem.Controllers
 
                     await signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("ConfirmEmail", "Accounts");
+                    return View("ConfirmEmail", "Accounts");
 
                 }
 
@@ -126,11 +126,11 @@ namespace InvoiceManagementSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password, loginView.RememberMe, false);
+                var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password,  isPersistent:false, lockoutOnFailure:false);
 
                 if (result.Succeeded)
                 {
-                    //return RedirectToAction(returnurl);
+                  
                     return RedirectToAction("Dashboard", "InvoiceDashboard");
                 }
 
@@ -143,31 +143,85 @@ namespace InvoiceManagementSystem.Controllers
         #endregion
 
 
-        #region Forget Password Screen
+        #region Forgot Password Screen
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult forgetPassword()
         {
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel forgetPasswordView)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(forgetPasswordView.Email);
+                if (user !=null && await userManager.IsEmailConfirmedAsync(user))
+                {
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
-        //public async Task<IActionResult> ForgetPassword(string UserName)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
+                    var passwordResetLink = Url.Action("ResetPassword", "Accounts",new { email = forgetPasswordView.Email, token = token },Request.Scheme);
+                    
 
-        //    }
-        //    return View(UserName);
-        //}
+                    logger.Log(LogLevel.Warning, passwordResetLink);
+
+                    return View("forgotPasswordConfirmation");
+                }
+                return View("forgotPasswordConfirmation");
+            }
+            return View(forgetPasswordView);
+        }
+
+        
+
 
         #endregion
 
 
         #region ResetPassword
-        public IActionResult ResetPassword()
-        {
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token,string Email)
+        {
+            if (token ==null || Email ==null)
+            {
+                ModelState.AddModelError("", "Invalid Password reset token");
+            }
             return View();
         }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordView)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(resetPasswordView.Email);
+                if (user !=null)
+                {
+
+                }
+                    var result = await userManager.ResetPasswordAsync(user, resetPasswordView.Token, resetPasswordView.Password);
+                    if (!result.Succeeded)
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        return View();
+                    }
+                await signInManager.RefreshSignInAsync(user);
+                    return View("ConfirmPassword");
+               
+             }
+            return View(resetPasswordView);
+        }
+        
         #endregion
 
         #region ConfirmPasswordReset

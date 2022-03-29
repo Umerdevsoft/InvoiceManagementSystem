@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> signmanager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -54,7 +56,11 @@
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a asp-controller="Accounts" asp-action="Login" class="dropdown-item dropdown-footer">Login Out</a>
+                        @if (signmanager.IsSignedIn(User))
+                        {
+                             <a asp-controller="Accounts" asp-action="Login" class="dropdown-item dropdown-footer">Login Out @User.Identity.Name</a>
+
+                        }
                     </div>
                 </li>
                 <!-- Messages Dropdown Menu -->
@@ -137,7 +143,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a asp-controller="InvoiceDashboard" asp-action="Dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -168,11 +174,11 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                    <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
-                        <i class="far fas fa-pen"></i>
-                        <p>Edit Customers</p>
-                    </a>
-                </li>*@
+                                        <a asp-controller="Customers" asp-action="EditCustomers" class="nav-link">
+                                            <i class="far fas fa-pen"></i>
+                                            <p>Edit Customers</p>
+                                        </a>
+                                    </li>*@
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -203,11 +209,11 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                    <a asp-controller="Items" asp-action="EditItems" class="nav-link">
-                        <i class="far fas fa-pen"></i>
-                        <p>Edit Items</p>
-                    </a>
-                </li>*@
+                                        <a asp-controller="Items" asp-action="EditItems" class="nav-link">
+                                            <i class="far fas fa-pen"></i>
+                                            <p>Edit Items</p>
+                                        </a>
+                                    </li>*@
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -226,11 +232,11 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                    <a asp-controller="Items" asp-action="ItemOverview" class="nav-link">
-                        <i class="far fa fa-shopping-cart"></i>
-                        <p>Item Overview</p>
-                    </a>
-                </li>*@
+                                        <a asp-controller="Items" asp-action="ItemOverview" class="nav-link">
+                                            <i class="far fa fa-shopping-cart"></i>
+                                            <p>Item Overview</p>
+                                        </a>
+                                    </li>*@
                                 <li class="nav-item">
                                     <a asp-controller="Invoices" asp-action="NewInvoices" class="nav-link">
                                         <i class="far fas fa-plus"></i>
@@ -298,7 +304,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Theme/dist/js/demo.js"></script>
     <script src="~/Theme/Assets/js/Datatable.js"></script>
-    
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

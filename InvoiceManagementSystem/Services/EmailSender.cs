@@ -18,7 +18,7 @@ namespace InvoiceManagementSystem.Services
             using (var message = new MailMessage())
             {
                 message.To.Add(new MailAddress(email));//------
-                message.From = new MailAddress("demostreetware@gmail.com");
+                message.From = new MailAddress("sited476@gmail.com");
                 message.Subject = "Test";
                 message.Body = htmlMessage;
                 message.IsBodyHtml = true;
@@ -29,7 +29,7 @@ namespace InvoiceManagementSystem.Services
 
                     client.Host = "smtp.gmail.com";
                     client.UseDefaultCredentials = false;
-                    NetworkCredential networkCredential = new NetworkCredential("demostreetware@gmail.com", "Admin@1234");
+                    NetworkCredential networkCredential = new NetworkCredential("sited476@gmail.com", "Streetware@123");
                     client.Credentials = networkCredential;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
                     client.EnableSsl = true;

@@ -1,4 +1,4 @@
-﻿
+﻿@model InvoiceManagementSystem.ViewModels.OrganizationModelView
 @{
     ViewData["Title"] = "SettingProfile";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -73,10 +73,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-2">
-                    <button type="button" class="btn btn-block btn-outline-primary btn-lg">Update</button>
+                    <button type="button" id="btnUpdateprofile" class="btn btn-block btn-outline-primary btn-lg">Update</button>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-block btn-outline-danger btn-lg">Cencel</button>
+                    <button type="button" class="btn btn-block btn-outline-danger btn-lg">Cancel</button>
                 </div>
             </div>
         </div>
@@ -84,4 +84,32 @@
 
 
 </div>
+<script src="~/lib/jquery-3.6.0.js"></script>
+<script>
+    $(document).ready(function () {
+        ////$("#btnUpdateprofile").click(function () {
+        ////    var alldata = {
+        ////        FullName: $("#txtFullName").val(),
+        ////        CompanyName: $("#txtOrganizationName").val(),
+        ////        OldPassword: $("#txtOldPassword").val(),
+        ////        NewPassword: $("#txtNewPassword").val(),
+        ////        ConfirmPassword: $("#txtconfirmPassword").val(),
+        ////        Currency: $("inputChangeCurrence").val()
+
+        ////    }
+            $.ajax({
+                url: "/GetDataProfile/OrganizationProfile",
+                datatype: "json",
+                type: "GET",
+                success: function (value) {
+                    console.log(value);
+                    
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+        });
+</script>
 
