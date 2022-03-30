@@ -26,6 +26,21 @@ namespace InvoiceManagementSystem.Controllers
             var itemsData = appDbContext.Items;
             return View(itemsData);
         }
+
+        [HttpPost]
+        public IActionResult AllItems(ItemsViewModels itemsViewModels)
+        {
+            //string[] ids = itemsViewModels["ID"].Split(new char[] { ',' });
+
+            //foreach (string id in ids)
+            //{
+            //    var item = appDbContext.Items.Find(int.Parse(id));
+            //    appDbContext.Items.Remove(item);
+            //    appDbContext.SaveChanges();
+            //}
+            return View(itemsViewModels);
+        }
+
         #endregion
 
         #region Add Items Controller
@@ -93,6 +108,22 @@ namespace InvoiceManagementSystem.Controllers
 
             //return View();
         }
+
+        [HttpPost]
+        public JsonResult ItemDeleteList(ItemsViewModels objDelete1)
+        {
+            if (objDelete1 == null)
+            {
+                return Json("Something went Wrong, Plz Try Again");
+            }
+            var item = appDbContext.Items.Find(objDelete1.ID);
+            appDbContext.Items.Remove(item);
+            appDbContext.SaveChanges();
+            return Json("Items Deleted Successfully");
+        }
+
         #endregion
+
+
     }
 }

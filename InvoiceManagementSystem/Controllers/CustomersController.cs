@@ -22,6 +22,7 @@ namespace InvoiceManagementSystem.Controllers
             return View();
         }
 
+        #region AddCustomer_AddBilling_AddShipping_AddContactPerson
         [HttpGet]
         public IActionResult AddCustomers()
         {
@@ -64,11 +65,47 @@ namespace InvoiceManagementSystem.Controllers
             appDbContext.SaveChanges();
             return "Contact Person Added";
         }
+        #endregion
         public IActionResult EditCustomers()
         {
-
             return View();
         }
+
+        #region CustomersOverviewList
+        [HttpGet]
+        public IEnumerable<CustomersViewModel> CustomersOverviewList()
+        {
+            var allCustomers = appDbContext.Customers;
+            return allCustomers;
+
+        }
+        #endregion
+
+        #region CustomersDeleteList
+        [HttpPost]
+        public JsonResult CustomersDeleteList(CustomersViewModel objDelete)
+        {
+            if (objDelete == null)
+            {
+                return Json("Something went Wrong, Plz Try Again");
+            }
+
+            var Customer = appDbContext.Customers.Where(y => y.CustID == objDelete.CustID).FirstOrDefault();
+            appDbContext.Customers.Remove(Customer);
+            var Billing = appDbContext.Billings.Where(x => x.B_CustID == objDelete.CustID).FirstOrDefault();
+            appDbContext.Billings.Remove(Billing);
+            var shipping = appDbContext.Shippings.Where(a => a.S_CustID == objDelete.CustID).FirstOrDefault();
+            appDbContext.Shippings.Remove(shipping);
+
+            var contactPersons = appDbContext.ContactPerson.Where(x => x.C_P_CustID == objDelete.CustID);
+            foreach (var ContactPerson in contactPersons)
+            {
+                appDbContext.ContactPerson.Remove(ContactPerson);
+            }
+            appDbContext.SaveChanges();
+            return Json("Customers Deleted Successfully");
+        }
+        #endregion
     }
 }
 
