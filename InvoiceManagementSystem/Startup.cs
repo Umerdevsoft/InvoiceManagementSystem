@@ -39,31 +39,33 @@ namespace InvoiceManagementSystem
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
+
+
             #region Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
+                #region Password Setting
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 3;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-
+                #endregion
+                #region lockout Setting
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                #endregion
+                #region User Setting
+                options.User.RequireUniqueEmail = true;
+                #endregion
                 #region EmailConfirm
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = true;
                 #endregion
 
-                services.AddSession(options =>
-                {
-                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
-                    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
-                    options.Cookie.IsEssential = true;
-                });
-
+                
             }).AddEntityFrameworkStores<AppDbContext>()
               .AddDefaultTokenProviders();
-            
+
             #endregion
             
-
             
         }
 

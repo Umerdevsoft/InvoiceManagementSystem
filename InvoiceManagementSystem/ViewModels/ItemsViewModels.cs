@@ -8,8 +8,8 @@ namespace InvoiceManagementSystem.ViewModels
 {
     public class ItemsViewModels
     {
-       
-        public int ID { get; set; }
+        [Key]
+        public int Item_ID { get; set; }
         [Required]
         public string Type { get; set; }
        
@@ -27,5 +27,7 @@ namespace InvoiceManagementSystem.ViewModels
         public string Description { get; set; }
         [Required]
         public  string Tax { get; set; }
+        public List<Invoice_Item> Invoice_Items { get; set; }
+
     }
 }

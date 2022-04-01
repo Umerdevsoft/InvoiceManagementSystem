@@ -52,6 +52,8 @@ namespace InvoiceManagementSystem.Controllers
 
                 };
 
+              
+
                 var result = await userManager.CreateAsync(user, userViewModel.Password);
 
                 if (result.Succeeded)
@@ -121,17 +123,20 @@ namespace InvoiceManagementSystem.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel loginView,string returnurl=null)
+        public async Task<IActionResult> Login(LoginViewModel loginView,string returnurl=null )
         {
             if (ModelState.IsValid)
             {
 
-                var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password,  isPersistent:false, lockoutOnFailure:false);
+                var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password, isPersistent:false, lockoutOnFailure:false);
 
+              
+                
                 if (result.Succeeded)
                 {
                   
                     return RedirectToAction("Dashboard", "InvoiceDashboard");
+                    
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");

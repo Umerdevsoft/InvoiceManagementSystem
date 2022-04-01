@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoiceManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220328060943_allTables")]
-    partial class allTables
+    [Migration("20220401114145_Tables")]
+    partial class Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -188,6 +188,26 @@ namespace InvoiceManagementSystem.Migrations
                     b.ToTable("ContactPerson");
                 });
 
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.CurrencyViewModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("CurrencyCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CurrencyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Currency");
+                });
+
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.CustomersViewModel", b =>
                 {
                     b.Property<int>("CustID")
@@ -195,13 +215,15 @@ namespace InvoiceManagementSystem.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("C_CurrID")
+                        .HasColumnType("int");
+
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Currency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CurrencyViewModelID")
+                        .HasColumnType("int");
 
                     b.Property<string>("CustomerDisplayName")
                         .IsRequired()
@@ -231,12 +253,92 @@ namespace InvoiceManagementSystem.Migrations
 
                     b.HasKey("CustID");
 
+                    b.HasIndex("CurrencyViewModelID");
+
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.Invoice_Item", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Invoice_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InvoicesViewModelsInvoice_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Item_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ItemsViewModelsItem_ID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InvoicesViewModelsInvoice_ID");
+
+                    b.HasIndex("ItemsViewModelsItem_ID");
+
+                    b.ToTable("Invoice_Items");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.InvoicesViewModels", b =>
+                {
+                    b.Property<int>("Invoice_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("CustomersViewModelCustID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Invoice_Cust_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SalePerson_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Terms")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("salesPersonsViewModelID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Invoice_ID");
+
+                    b.HasIndex("CustomersViewModelCustID");
+
+                    b.HasIndex("salesPersonsViewModelID");
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.ItemsViewModels", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Item_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -264,9 +366,29 @@ namespace InvoiceManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Item_ID");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.SalesPersonsViewModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("SalesPerson");
                 });
 
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.ShippingViewModel", b =>
@@ -471,6 +593,45 @@ namespace InvoiceManagementSystem.Migrations
                     b.Navigation("CustomersViewModels");
                 });
 
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.CustomersViewModel", b =>
+                {
+                    b.HasOne("InvoiceManagementSystem.ViewModels.CurrencyViewModel", "CurrencyViewModel")
+                        .WithMany()
+                        .HasForeignKey("CurrencyViewModelID");
+
+                    b.Navigation("CurrencyViewModel");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.Invoice_Item", b =>
+                {
+                    b.HasOne("InvoiceManagementSystem.ViewModels.InvoicesViewModels", "InvoicesViewModels")
+                        .WithMany("Invoice_Items")
+                        .HasForeignKey("InvoicesViewModelsInvoice_ID");
+
+                    b.HasOne("InvoiceManagementSystem.ViewModels.ItemsViewModels", "ItemsViewModels")
+                        .WithMany("Invoice_Items")
+                        .HasForeignKey("ItemsViewModelsItem_ID");
+
+                    b.Navigation("InvoicesViewModels");
+
+                    b.Navigation("ItemsViewModels");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.InvoicesViewModels", b =>
+                {
+                    b.HasOne("InvoiceManagementSystem.ViewModels.CustomersViewModel", "CustomersViewModel")
+                        .WithMany()
+                        .HasForeignKey("CustomersViewModelCustID");
+
+                    b.HasOne("InvoiceManagementSystem.ViewModels.SalesPersonsViewModel", "salesPersonsViewModel")
+                        .WithMany()
+                        .HasForeignKey("salesPersonsViewModelID");
+
+                    b.Navigation("CustomersViewModel");
+
+                    b.Navigation("salesPersonsViewModel");
+                });
+
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.ShippingViewModel", b =>
                 {
                     b.HasOne("InvoiceManagementSystem.ViewModels.CustomersViewModel", "CustomersViewModels")
@@ -538,6 +699,16 @@ namespace InvoiceManagementSystem.Migrations
                     b.Navigation("ContactPersonViewModels");
 
                     b.Navigation("ShippingViewModels");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.InvoicesViewModels", b =>
+                {
+                    b.Navigation("Invoice_Items");
+                });
+
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.ItemsViewModels", b =>
+                {
+                    b.Navigation("Invoice_Items");
                 });
 #pragma warning restore 612, 618
         }

@@ -64,7 +64,7 @@ namespace InvoiceManagementSystem.Controllers
         [HttpGet]
         public JsonResult EditItems(ItemsViewModels objUpdate)
         {
-            var item = appDbContext.Items.Find(objUpdate.ID);
+            var item = appDbContext.Items.Find(objUpdate.Item_ID);
             return Json(item);
         }
 
@@ -100,10 +100,10 @@ namespace InvoiceManagementSystem.Controllers
         [HttpPost]
         public JsonResult ItemDelete(ItemsViewModels objDelete)
         {
-            var item = appDbContext.Items.Find(objDelete.ID);
+            var item = appDbContext.Items.Find(objDelete.Item_ID);
             appDbContext.Items.Remove(item);
             appDbContext.SaveChanges();
-            var obj1 = objDelete.ID;
+            var obj1 = objDelete.Item_ID;
             return Json(obj1);
 
             //return View();
@@ -116,7 +116,7 @@ namespace InvoiceManagementSystem.Controllers
             {
                 return Json("Something went Wrong, Plz Try Again");
             }
-            var item = appDbContext.Items.Find(objDelete1.ID);
+            var item = appDbContext.Items.Find(objDelete1.Item_ID);
             appDbContext.Items.Remove(item);
             appDbContext.SaveChanges();
             return Json("Items Deleted Successfully");
