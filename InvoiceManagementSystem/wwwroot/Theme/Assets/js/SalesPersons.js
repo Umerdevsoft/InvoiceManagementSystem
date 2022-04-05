@@ -62,6 +62,8 @@
                         $("#txtnamesales").val("");
                         $("#txtemailsales").val("");
                         $("#SalePersonModel").show();
+                        $("#SalesForm").hide();
+
                     }
                    
                 }

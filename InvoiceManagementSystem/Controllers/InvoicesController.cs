@@ -31,6 +31,15 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
+        #region Invoices Overview
+
+        public IActionResult InvoicesOverview()
+        {
+            return View();
+
+        }
+        #endregion
+
         #region Sales Person Add
         [HttpGet]
         public IActionResult SalesPersons()
@@ -66,23 +75,7 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
-        //#region Sales Persons Update
-        //public JsonResult SalesPersonUpdate(SalesPersonsViewModel salesPersonsViewModel)
-        //{
-        //    var data = appDbContext1.SalesPerson.FirstOrDefault(s => s.ID == salesPersonsViewModel.ID);
-        //    if (data !=null)
-        //    {
-        //        data.Name = salesPersonsViewModel.Name;
-        //        data.Email = salesPersonsViewModel.Email;
-        //        appDbContext1.SaveChanges();
-        //    }
-        //    return Json(salesPersonsViewModel);
-        //}
-        //#endregion
-        //public JsonResult SalesPersonsByID(int ID)
-        //{
-        //    return Json(appDbContext1.SalesPerson.FirstOrDefault(s => s.ID == ID));
-        //}
+
     }
 }
 
