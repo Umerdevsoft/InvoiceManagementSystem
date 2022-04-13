@@ -10,10 +10,11 @@ namespace InvoiceManagementSystem.Controllers
 {
     public class InvoicesController : Controller
     {
-        private readonly AppDbContext appDbContext1;
+        private readonly AppDbContext appDbContext;
+
         public InvoicesController(AppDbContext appDbContext)
         {
-            this.appDbContext1 = appDbContext;
+            this.appDbContext = appDbContext;
         }
 
         #region All Invoices
@@ -23,7 +24,6 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
-
         #region New Invoice
         public IActionResult NewInvoices()
         {
@@ -31,51 +31,63 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
-        #region Invoices Overview
-
-        public IActionResult InvoicesOverview()
+        #region SalesPersonList
+        [HttpGet]
+        public IEnumerable<SalesPersonsViewModel> SalesPersonList()
         {
-            return View();
-
+            var allSp = appDbContext.SalesPerson;
+            return allSp;
         }
         #endregion
 
-        #region Sales Person Add
-        [HttpGet]
-        public IActionResult SalesPersons()
-        {
-            return View();
-        }
-
+        #region AddSalesPerson
         [HttpPost]
-        public JsonResult SalesPersons(SalesPersonsViewModel salesPersonsViewModel)
+        public JsonResult AddSalesPerson(SalesPersonsViewModel salesPerson)
         {
-            var search = appDbContext1.SalesPerson.Where(s => s.Email == salesPersonsViewModel.Email).FirstOrDefault();
-            var err = "Sales Person is already exist";
-            if (search == null)
+            if (salesPerson.Name == null && salesPerson.Email == null && salesPerson.ID == 0)
             {
-                appDbContext1.SalesPerson.Add(salesPersonsViewModel);
-                appDbContext1.SaveChanges();
-                var saleperson = appDbContext1.SalesPerson.Where(s => s.Email == salesPersonsViewModel.Email).FirstOrDefault();
-                return Json(saleperson);
+                return Json("Error");
             }
-            return Json(err);
-               
-            
+            if ((salesPerson.Name == null || salesPerson.Email == null) && salesPerson.ID == 0)
+            {
+                return Json("Error");
+            }
+            appDbContext.Add<SalesPersonsViewModel>(salesPerson);
+            appDbContext.SaveChanges();
+            return Json("Sales Person Added Successfully");
 
         }
         #endregion
-
-
-        #region Sales Persons Select All
         [HttpGet]
-        public JsonResult SalesPersonList()
+        public JsonResult DeleteSalesPerson(SalesPersonsViewModel salesPerson)
         {
-            return Json(appDbContext1.SalesPerson.ToList());
-        }
-        #endregion
+            if (salesPerson == null)
+            {
+                return Json("Error");
+            }
 
+            var Person = appDbContext.SalesPerson.Where(x => x.ID == salesPerson.ID).FirstOrDefault();
+            appDbContext.SalesPerson.Remove(Person);
+            appDbContext.SaveChanges();
+            return Json("Sales Person Deleted Successfully");
+        }
+
+        [HttpGet]
+        public JsonResult Invoice_Auto_Generate_Number()
+        {
+            var maxValue = appDbContext.Invoices.Max(x => x.InvoiceNumber);
+            maxValue++;
+            return Json(maxValue);
+        }
+
+        //[HttpGet]
+        //public JsonResult Invoice_Manual_Generate_Number(string obj)
+        //{
+
+        //    var result = "dsd";
+
+        //    return Json(result);
+        //}
 
     }
 }
-

@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1> <i class="fas fa-file-invoice"></i>New Invoices</h1>
+            <h1> <i class="fas fa-file-invoice"></i> New Invoices</h1>
         </div>
     </div>
     <hr />
@@ -19,24 +19,49 @@
                 <div class="card-body">
                     <form>
                         <div class="form-group">
+                            @*<div class="row">
+                                    <div class="col-2">
+                                        <label>Customers Name</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <select class="form-control selectpicker" id="select-country" data-live-search="true">
+
+                                        </select>
+                                    </div>
+                                </div>*@
                             <div class="row">
                                 <div class="col-2">
                                     <label>Customers Name</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Select" />
-                                    <div class="dropdown-menu col-11">
-                                        <a class="dropdown-item" href="#">Link 1</a>
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#Customermodal"><i class="fa fa-plus"></i> New Customers</a>
-                                    </div>
+                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" id="d_input" placeholder="Select Customer" value="" />
+                                    <div class="dropdown-menu col-11" id="myDropdown">
 
+                                        <input type="text" placeholder="Search..." id="myInput" class="dropdown-item form-control" onkeyup="filterFunction()">
+                                        <div class="dropdown-divider"></div>
+                                        <div id="options_Div" style="max-height: 200px; overflow-y: auto;">
+                                            @*<a class="dropdown-item" href="#">Link 1</a>
+                                                <a class="dropdown-item" href="#">Link 2</a>
+                                                <a class="dropdown-item" href="#">Link 3</a>
+                                                <a class="dropdown-item" href="#">Link 4</a>
+                                                <a class="dropdown-item" href="#">Link 5</a>
+                                                <a class="dropdown-item" href="#">Link 6</a>
+                                                <a class="dropdown-item" href="#">Link 7</a>
+                                                <a class="dropdown-item" href="#">Link 8</a>
+                                                <a class="dropdown-item" href="#">Link 9</a>
+                                                <a class="dropdown-item" href="#">Link 10</a>
+                                                <a class="dropdown-item" href="#">Link 11</a>
+                                                <a class="dropdown-item" href="#">Link 12</a>*@
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <span class="dropdown-item" data-toggle="modal" data-target="#Customermodal" id="customer_Open"><i class="fa fa-plus"></i> New Customers</span>
+                                    </div>
                                 </div>
+
+
                                 <!--Customer Modal Start-->
-                                <div id="Customermodal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
+                                <div id="Customermodal" class="modal fade" role="dialog" data-backdrop="static">
+                                    <div class="modal-dialog" style="max-width: 70%;">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title">New Customer</h4>
@@ -124,7 +149,7 @@
 
                                                     <div class="form-group">
                                                         @*<button class="Single" target="1">Address</button>
-                                        <button class="Single" target="2">Contact Person</button>*@
+                                                            <button class="Single" target="2">Contact Person</button>*@
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <input id="" class="Single btn btn-block btn-outline-primary" target="1" type="button" value="Address" />
@@ -331,7 +356,61 @@
                                                         <div id="div2" class="target" style="display:none">
                                                             @*<input type="text" />*@
                                                             <hr />
-                                                            <label>Contact Person</label>
+                                                            <label></label>
+
+                                                            <div class="" id="contact_Add" style="display:none">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-2" style="margin-top:7px">
+                                                                            <label>Contact Person</label>
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <input type="text" class="form-control" id="modaltxtSalulation" placeholder="Salulation">
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input type="text" class="form-control" id="modaltxtFirstName" placeholder="FirstName">
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input type="text" class="form-control" id="modaltxtLastName" placeholder="LastName">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-2" style="margin-top:7px">
+                                                                            <label>Email</label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input type="text" class="form-control" id="modaltxtEmail" placeholder="xyz@gmail.com">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <label>Work Place</label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input type="text" class="form-control" id="modaltxtWorkplace" placeholder="Work Place">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <label>Mobile</label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input type="text" class="form-control" id="modaltxtMobile" placeholder="Mobile #">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="" style="float:right; margin-bottom:15px">
+                                                                    <button type="button" class="btn btn-secondary" id="contact_div_Save">Close</button>
+                                                                    <button type="button" id="add-row" class="btn btn-primary">Save changes</button>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="form-group">
                                                                 <table class="table">
                                                                     <thead>
@@ -353,93 +432,19 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 @*<button class="btn" id="add-row"><a class="fas fa-plus"> Add Contact Person</a></button>*@
-
                                                                 <!-- Button trigger modal -->
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><span class="fas fa-plus"></span> Add Contact Person</button>
-                                                                <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered box" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-2">
-                                                                                            <label>Contact Person</label>
-                                                                                        </div>
-                                                                                        <div class="col-2">
-                                                                                            <input type="text" class="form-control" id="modaltxtSalulation" placeholder="Salulation">
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <input type="text" class="form-control" id="modaltxtFirstName" placeholder="FirstName">
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <input type="text" class="form-control" id="modaltxtLastName" placeholder="LastName">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-2">
-                                                                                            <label>Email</label>
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <input type="text" class="form-control" id="modaltxtEmail" placeholder="xyz@gmail.com">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-2">
-                                                                                            <label>Work Place</label>
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <input type="text" class="form-control" id="modaltxtWorkplace" placeholder="Work Place">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-2">
-                                                                                            <label>Mobile</label>
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <input type="text" class="form-control" id="modaltxtMobile" placeholder="Mobile #">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                <button type="button" id="add-row" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                <button type="button" class="btn btn-primary" id="contact_Open_Form"><span class="fas fa-plus"></span> Add Contact Person</button>
                                                             </div>
-
                                                         </div>
-                                                        <div class="">
-                                                            <input class="btn btn-block btn-outline-success" id="btnsubmit" type="button" value="Submit" />
+                                                        <div class="" style="margin-top:40px">
+                                                            <input class="btn btn-block btn-outline-success" id="btnsubmit" data-dismiss="modal" type="button" value="Submit" />
                                                         </div>
                                                     </div>
                                                 </div>
-
-
-
-
-
                                             </div>
                                             <!--Customer Body Content End-->
 
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
+
 
                                         </div>
                                     </div>
@@ -453,8 +458,13 @@
                                     <label>Invoice #</label>
                                 </div>
                                 <div class="col-8" style="display:flex">
-                                    <input type="text" class="form-control" />
-                                    <a data-toggle="modal" data-target="#exampleModal"><i class="fas fa-cog" style="padding-left:5px;padding-top:10px; font-size:20px"></i></a>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="">INV -</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" id="invoiceConfirmNumber" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <a data-toggle="modal" data-target="#exampleModal" id="invoice_Number_Management"><i class="fas fa-cog" style="padding-left:5px;padding-top:10px; font-size:20px"></i></a>
                                     <!--Invoice Number Modal Start -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -473,32 +483,36 @@
                                                     <div class="row">
                                                         <div class="col-7">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                                <input class="form-check-input" type="radio" name="chkINV" id="chkAuto" checked>
                                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                                     Continue auto-generating invoice number
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div id="autoHide" class="col-2">
+                                                            <label>Prefix</label>
+                                                            <input class="form-control" type="text" id="prefix" disabled="disabled" value="INV -" />
+                                                        </div>
+                                                        <div id="autoHide" class="col-3">
+                                                            <label>Next Number</label>
+                                                            <input class="form-control" type="text" disabled="disabled" id="nextNumber" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-7">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                                <input class="form-check-input" type="radio" name="chkINV" id="chkManual">
                                                                 <label class="form-check-label" for="flexRadioDefault2">
                                                                     I will add them manually each time
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-2">
-                                                            <label>Prefix</label>
-                                                            <input class="form-control" type="text" />
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <label>Next Number</label>
-                                                            <input class="form-control" type="text" />
-                                                        </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                                                    <button type="button" class="btn btn-danger">Cancel</button>
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal" id="radioModalSave">Save</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -507,40 +521,46 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-2">
                                     <label>Order Number</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" id="input_Order" class="form-control" />
                                 </div>
-                        </div>
                             </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-2">
                                     <label>Invoice Date</label>
                                 </div>
                                 <div class="col-2">
-                                    <input type="date" class="form-control" />
+                                    <input type="date" id="input_InvoiceDate" class="form-control" />
                                 </div>
                                 <div class="col-1">
                                     <label>Terms</label>
                                 </div>
                                 <div class="col-2">
-                                    <select class="form-control select2" style="width: 100%;">
-                                        <option selected="selected">Net 15</option>
+                                    <select class="form-control select2" id="selectedTerm" style="width: 100%;">
+                                        <option>Net 15</option>
                                         <option>Net 30</option>
                                         <option>Net 45</option>
                                         <option>Net 60</option>
+                                        <option>Due end of the month</option>
+                                        <option>Due end of the next month</option>
+                                        <option>Due on Receipt</option>
+                                        <option selected="selected">Custom</option>
                                     </select>
                                 </div>
                                 <div class="col-1">
                                     <label>Due Date</label>
                                 </div>
                                 <div class="col-2">
-                                    <input type="date" class="form-control" />
+                                    <input type="date" id="selectedDate" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -550,13 +570,19 @@
                                     <label>Sales Person</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Select" />
-                                    <div class="dropdown-menu col-11">
-                                        <a class="dropdown-item" href="#">Link 1</a>
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                        <a class="dropdown-item" href="#">Link 3</a>
+                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" id="sp_Input" placeholder="Select Sales Person" />
+                                    <div class="dropdown-menu col-11" id="sp_MyDropdown">
+
+                                        <input type="text" placeholder="Search..." id="sp_myInput" class="dropdown-item form-control" onkeyup="filterFunction3()">
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#SalePersonModel"><i class="fas fa-cog"></i> Manage Salespersons</a>
+
+                                        <div id="sp_options_Div" style="max-height: 200px; overflow-y: auto;">
+                                            @*<a class="dropdown-item" href="">Link 1</a>
+                                                <a class="dropdown-item" href="">Link 2</a>
+                                                <a class="dropdown-item" href="">Link 3</a>*@
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <span class="dropdown-item" data-toggle="modal" data-target="#SalePersonModel" id="sP_Manage"><i class="fas fa-cog"></i> Manage Salespersons</span>
                                     </div>
                                 </div>
                                 <!--Sales Person Model-->
@@ -568,7 +594,7 @@
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <div class="modal-body">
-                                                <div id="SalesForm">
+                                                <div id="SalesForm" style="display:none">
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-6">
@@ -591,13 +617,41 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <p>@ViewBag.message</p>
+
+                                                    <hr />
                                                 </div>
-                                                <hr />
+
+                                                <div id="salesFormUpdate" style="display:none">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label>Name</label>
+                                                                <input type="text" class="form-control" id="updateNameSales" />
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label>Email</label>
+                                                                <input type="email" class="form-control" id="updateEmailSales" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <button type="button" id="btnSalepersonUpdate" class="btn btn-block btn-outline-success">Update</button>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <button type="button" id="btnSalepersonUpdateCancel" class="btn btn-block btn-outline-danger">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr />
+                                                </div>
+
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <input type="search" class="form-control" placeholder="Search" />
+                                                            <input type="text" class="form-control" placeholder="Search" id="sP_Search" onkeyup="filterFunction4()" />
                                                         </div>
 
                                                         <div class="col-6" style="text-align:end">
@@ -617,9 +671,10 @@
                                                                             <tr>
                                                                                 <th scope="col">Sales Persons Name</th>
                                                                                 <th scope="col">Email</th>
+                                                                                <th scope="col">Action</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody>
+                                                                        <tbody id="sp_Manage_Div">
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -655,23 +710,33 @@
                     </form>
                     <!--Table-->
                     <div class="form-group">
-                        <table class="table">
+                        <table class="table" id="tb_item">
                             <thead>
                                 <tr>
-                                    <th scope="col">ITEMS DETAILS</th>
+                                    <th class="col-4" scope="col">ITEMS DETAILS</th>
                                     <th scope="col">QUANTITY</th>
                                     <th scope="col">RATE</th>
                                     <th scope="col">DISCOUNT</th>
                                     <th scope="col">AMOUNT</th>
+                                    <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
-                            
+                            <tbody id="td_body">
+                                @*<tr>
+                                    <td class="col-4" > <input class="form-control" type="text" /></td>
+                                    <td><input class="form-control" type="text" /></td>
+                                    <td><input type="text" class="form-control" /></td>
+                                    <td><input type="text" class="form-control" /></td>
+                                    <td><input type="text" class="form-control" /></td>
+                                    <td><a type="button" style="margin-top:6px" id="btn_ItemDelete">Delete</a></td>
+                                    </tr>*@
+                            </tbody>
                         </table>
                     </div>
                     <div class="form-group">
                         <div class="container">
                             <div class="row">
-                                <button type="button" class="btn btn-primary"><i class="far fa fa-plus"></i>Add another line</button>
+                                <button type="button" id="rowEffect" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1"><i class="far fa fa-plus"></i> Select Item</button>
                             </div>
                         </div>
                     </div>
@@ -681,7 +746,7 @@
                                 <label>Sub Total</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" />
+                                <input type="text" readonly="readonly" id="sub_Total" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -691,7 +756,7 @@
                                 <label>Shipping Charges</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" />
+                                <input type="number" id="shipping_Charges" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -701,7 +766,7 @@
                                 <label>Adjustment</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" />
+                                <input type="number" id="amount_Adjustment" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -711,7 +776,7 @@
                                 <label>Customer Notes</label>
                             </div>
                             <div class="col-4">
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control" id="customer_Notes"></textarea>
                             </div>
                         </div>
                     </div>
@@ -721,7 +786,7 @@
                                 <label>Total(PKR)</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" />
+                                <input type="text" id="total_Amount" readonly="readonly" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -746,7 +811,975 @@
         </div>
     </div>
 </div>
+
+<!-- Items Modal for select Item -------------------------------------------------------------------------------------------------------------------------------->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered box" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Select Item</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Items Details</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-control dropdown-toggle" data-toggle="dropdown" id="modalItemName" placeholder="Type or Click to select an item" value="" onkeyup="filterFunction2()" autocomplete="off" />
+                            <div class="dropdown-menu col-11" id="ItemsOptionsDiv" style="max-height: 200px; overflow-y: auto;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Quantity</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="modalItemQuantity" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Rate</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="modalItemRate" readonly="readonly" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Discount</label>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-control" id="modalItemDiscount" aria-label="Default select example">
+                                <option selected value="1   ">Click to select discount</option>
+                                <option value="5">5 %</option>
+                                <option value="10">10 %</option>
+                                <option value="15">15 %</option>
+                                <option value="20">20 %</option>
+                                <option value="25">25 %</option>
+                                <option value="30">30 %</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Amount</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="modalItemAmount" readonly="readonly" placeholder="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeTableItem" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="addTableItem" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Items Modal for update Item -------------------------------------------------------------------------------------------------------------------------------->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered box" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Edit Item</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Item Details</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="modalItemDetailsUpdate" readonly="readonly" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Quantity</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" id="modalItemQuantityUpdate" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Rate</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" id="modalItemRateUpdate" readonly="readonly" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Discount</label>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-control" id="modalItemDiscountUpdate" aria-label="Default select example">
+                                <option selected value="1">Click to select discount</option>
+                                <option value="5">5 %</option>
+                                <option value="10">10 %</option>
+                                <option value="15">15 %</option>
+                                <option value="20">20 %</option>
+                                <option value="25">25 %</option>
+                                <option value="30">30 %</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="margin-top:4px">Amount</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" id="modalItemAmountUpdate" readonly="readonly" placeholder="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeTableItemUpdate" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="addTableItemUpdate" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="~/lib/jquery-3.6.0.js"></script>
 <script src="~/Theme/Assets/js/AddCustomer.js"></script>
-<script src="~/Theme/Assets/js/SalesPersons.js"></script>
+<script>
+    $(document).ready(function () {
 
+
+        //---------Get-Customers-List---------------------------------------------------------------------------------------------------
+        $.ajax({
+            type: 'GET',
+            url: '/Customers/CustomersOverviewList',
+            dataType: 'json',
+            success: function (allCustomers) {
+                var option;
+                $.each(allCustomers, function (index, item) {
+                    option = '<a class="dropdown-item" id="d_Item" target="' + item.custID + '" value="' + item.customerDisplayName + '" > <input name="mine" style="display:none"  type="text" id="d_Item_Input' + item.custID + '" target="' + item.custID + '" value="' + item.customerDisplayName + '" /> <div class="class_Div_Cust" id="div_Cust" target="' + item.custID + '" value="' + item.customerDisplayName + '"></div>' + item.customerDisplayName + '</span>';
+                    $('#options_Div').append(option);
+                });
+            }
+        });
+        //---------------------------------------------------------------------------------------------------------------------------
+
+        //---------Get-Items-List---------------------------------------------------------------------------------------------------
+
+        $.ajax({
+            type: 'GET',
+            url: '/Items/ItemOverviewList',
+            dataType: 'json',
+            success: function (allItems) {
+                var item_Row;
+                $.each(allItems, function (index, itemR) {
+                    item_Row = '<a class="dropdown-item" id="item_r" target="' + itemR.item_ID + '" value="' + itemR.name + '" >  <input name="mine" style="display:none" type="text" id="item_r_Input' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.name + '" /> <input style="display:none" type="text" id="item_r_InputRate' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.sellingPrice + '" />  <div class="class_Div_Item" id="div_Item" target="' + itemR.item_ID + '" value="' + itemR.name + '"></div>' + itemR.name + '</span>';
+                    $('#ItemsOptionsDiv').append(item_Row);
+                });
+            }
+        });
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        //---------Get-SalesPersons-List---------------------------------------------------------------------------------------------------
+        var sP_Manage_Table;
+        $.ajax({
+            type: 'GET',
+            url: '/Invoices/SalesPersonList',
+            dataType: 'json',
+            success: function (allSPersons) {
+                console.log(allSPersons);
+                sP_Manage_Table = allSPersons;
+                var item_Rows;
+                $.each(allSPersons, function (index, itemSp) {
+                    item_Rows = '<a class="dropdown-item" id="sP_r" target="' + itemSp.id + '" value="' + itemSp.name + '" >  <input name="mine" style="display:none" type="text" id="sP_r_Input' + itemSp.id + '" target="' + itemSp.item_ID + '" value="' + itemSp.name + '" /> <input style="display:none" type="text" id="sP_r_InputRate' + itemSp.id + '" target="' + itemSp.id + '" value="' + itemSp.name + '" />  <div class="class_Div_sP" id="div_sP" target="' + itemSp.id + '" value="' + itemSp.name + '"></div>' + itemSp.name + '</span>';
+                    $('#sp_options_Div').append(item_Rows);
+                });
+            }
+        });
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        //----Invoice-Date------------------------------------------------------------------------------------------------------------------------
+        var dated = new Date();
+        var dd1 = dated.getDate();
+        var mm1 = dated.getMonth() + 1;
+        if (dd1 < 10) {
+            dd1 = '0' + dd1;
+        }
+        if (mm1 < 10) {
+            mm1 = '0' + mm1;
+        }
+        var set_dated = dated.getFullYear() + "-" + mm1 + "-" + dd1;
+        $("#input_InvoiceDate").val(set_dated);
+        //---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        $(document).on("click", "#d_Item", function () {
+            var name = $(this).closest('#options_Div').children('#d_Item').children('#d_Item_Input' + $(this).attr('target')).val();
+            $('#d_input').val(name);
+            name = "";
+        });
+
+        $(document).on("click", "#sP_r", function () {
+            var sP_name = $(this).closest('#sp_options_Div').children('#sP_r').children('#sP_r_Input' + $(this).attr('target')).val();
+            $('#sp_Input').val(sP_name);
+            sP_name = "";
+        });
+
+        var Rate_count;
+        var Amount_Count;
+        $(document).on("click", "#item_r", function () {
+            var name1 = $(this).closest('#ItemsOptionsDiv').children('#item_r').children('#item_r_Input' + $(this).attr('target')).val();
+            var rate1 = $(this).closest('#ItemsOptionsDiv').children('#item_r').children('#item_r_InputRate' + $(this).attr('target')).val();
+            $('#modalItemName').val(name1);
+            $('#modalItemQuantity').val(1);
+            $('#modalItemRate').val(rate1);
+            $('#modalItemAmount').val(rate1);
+
+            name1 = "";
+            Rate_count = rate1;
+            Amount_Count = rate1;
+        });
+
+        $('#closeTableItem').click(function () {
+            $('#modalItemName').val("");
+            $('#modalItemQuantity').val("");
+            $('#modalItemRate').val("");
+            $('#modalItemDiscount').val("");
+            $('#modalItemAmount').val("");
+            Rate_count = "";
+            Amount_Count = "";
+        });
+
+        //Add Item Row
+        //-------------------------------------------------------------------------------------
+        var subTotalArr = [];
+        var subTotalObj = {};
+        $('#addTableItem').click(function () {
+            var it_Name = $('#modalItemName').val();
+            var it_Quantity = $('#modalItemQuantity').val();
+            var it_Rate = $('#modalItemRate').val();
+            var it_Discount = $('#modalItemDiscount').val();
+            var it_Amount = $('#modalItemAmount').val();
+
+            var myRow2;
+            myRow2 = '<tr><td>' + it_Name + '</td><td>' + it_Quantity + '</td><td>' + it_Rate + '</td><td>' + it_Discount + ' %</td><td>' + it_Amount + '</td><td><a type="button" class="block" style="margin-top:2px" id="btn_ItemUpdate" data-toggle="modal" data-target="#exampleModalCenter2">Edit</a> | <a type="button" class="block" style="margin-top:2px" id="btn_ItemDelete">Delete</a></td></tr>';
+            $('#td_body').append(myRow2);
+
+            $('#modalItemName').val("");
+            $('#modalItemQuantity').val("");
+            $('#modalItemRate').val("");
+            $('#modalItemDiscount').val("");
+            $('#modalItemAmount').val("");
+            Rate_count = "";
+            Amount_Count = "";
+
+            it_Int_Amount = parseInt(it_Amount);
+            subTotalObj = { Name: it_Name, Amount: it_Int_Amount };
+            subTotalArr.push(subTotalObj);
+            //subTotalArr
+            console.log(subTotalArr);
+            var subTotalAmt = 0;
+            $.each(subTotalArr, function (index, value) {
+                subTotalAmt = subTotalAmt + value.Amount;
+            });
+            //console.log(subTotalAmt);
+            $('#shipping_Charges').val(0);
+            $('#amount_Adjustment').val(0);
+            $('#sub_Total').val(subTotalAmt);
+            $('#total_Amount').val(subTotalAmt);
+        });
+        //-------------------------------------------------------------------------------------
+
+        $('#shipping_Charges').change(function () {
+            $('#amount_Adjustment').val("");
+            var val1, val2, add;
+            if ($('#shipping_Charges').val() != "") {
+                val1 = parseInt($('#shipping_Charges').val());
+                val2 = parseInt($('#sub_Total').val());
+                add = val1 + val2;
+                $('#total_Amount').val(add);
+            }
+
+        });
+
+        $('#amount_Adjustment').change(function () {
+            var A_val1, A_val2, A_val3, A_add;
+            if ($('#shipping_Charges').val() == "") {
+                A_val1 = 0;
+            }
+            else {
+                A_val1 = parseInt($('#shipping_Charges').val());
+            }
+
+            if ($('#amount_Adjustment').val() == "") {
+                A_val2 = 0;
+            }
+            else {
+                A_val2 = parseInt($('#amount_Adjustment').val());
+            }
+
+            A_val3 = parseInt($('#sub_Total').val());
+            A_add = A_val1 + A_val2 + A_val3;
+            $('#total_Amount').val(A_add);
+        });
+
+        $('#invoice_Number_Management').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Invoices/Invoice_Auto_Generate_Number',
+                dataType: 'json',
+                success: function (nextNumber) {
+                    $('#nextNumber').val(nextNumber);
+                }
+            });
+        });
+
+        $("input[name='chkINV']").click(function () {
+            if ($("#chkManual").is(":checked")) {
+                /*$("#prefix").attr("disabled", "disabled");*/
+                $("#nextNumber").removeAttr("disabled");
+                //$("#nextNumber").attr("disabled", "disabled");
+                $("#nextNumber").focus();
+            } else {
+                //$("#prefix").removeAttr("disabled");
+                //$("#nextNumber").removeAttr("disabled");
+                //$("#txtPassportNumber").focus();
+                //$("#prefix").attr("disabled", "disabled");
+                $("#nextNumber").attr("disabled", "disabled");
+            }
+        });
+
+        $('#radioModalSave').click(function () {
+            $('#invoiceConfirmNumber').val($('#nextNumber').val());
+        });
+
+
+
+        //Multiple datepick code
+        //-------------------------------------------------------------------------------------
+        $('#selectedTerm').change(function () {
+            var now = new Date();
+            if ($('#selectedTerm').val() == "Net 15") {
+                var day = now.getDate() + 15;
+                var month = now.getMonth() + 1;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $('#selectedDate').val(today);
+            }
+            else if ($('#selectedTerm').val() == "Net 30") {
+                var day = now.getDate();
+                var month = now.getMonth() + 2;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $('#selectedDate').val(today);
+            }
+            else if ($('#selectedTerm').val() == "Net 45") {
+                var day = now.getDate() + 15;
+                var month = now.getMonth() + 2;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $('#selectedDate').val(today);
+            }
+            else if ($('#selectedTerm').val() == "Net 60") {
+                var day = now.getDate();
+                var month = now.getMonth() + 3;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                console.log(today.toString());
+                $('#selectedDate').val(today);
+            }
+            else if ($('#selectedTerm').val() == "Due end of the month") {
+                var lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                var day = lastDayOfMonth.getDate();
+                var month = lastDayOfMonth.getMonth() + 1;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var lastDay = lastDayOfMonth.getFullYear() + "-" + month + "-" + day;
+                $('#selectedDate').val(lastDay);
+            }
+            else if ($('#selectedTerm').val() == "Due end of the next month") {
+                var lastDayOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 2, 0);
+                var day = lastDayOfNextMonth.getDate();
+                var month = lastDayOfNextMonth.getMonth() + 1;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var lastDay = lastDayOfNextMonth.getFullYear() + "-" + month + "-" + day;
+                $('#selectedDate').val(lastDay);
+            }
+            else if ($('#selectedTerm').val() == "Due on Receipt") {
+                var day = now.getDate();
+                var month = now.getMonth() + 1;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $('#selectedDate').val(today);
+            }
+            else if ($('#selectedTerm').val() == "Custom") {
+                $('#selectedDate').val(today);
+            }
+
+
+        });
+        //-------------------------------------------------------------------------------------
+
+
+
+        $(document).on('change', '#modalItemQuantity', function () {
+            $('#modalItemDiscount').val("");
+            var Q_val, f_R_val;
+            if ($('#modalItemQuantity').val() == 0) {
+                Q_val = 1;
+                $('#modalItemQuantity').val(1);
+            }
+            else if ($('#modalItemQuantity').val() == "") {
+                Q_val = 1
+            }
+            else {
+                Q_val = $('#modalItemQuantity').val();
+            }
+            R_val = $('#modalItemRate').val();
+            f_R_val = Rate_count * Q_val;
+            $('#modalItemAmount').val(f_R_val);
+            Amount_Count = f_R_val;
+            Q_val = "";
+            R_val = "";
+            f_R_val = "";
+
+        });
+
+        $(document).on('change', '#modalItemDiscount', function () {
+            var dis_val, dis_val1, A_val, Per_val;
+            if ($('#modalItemDiscount').val() == 1) {
+                $('#modalItemAmount').val(Amount_Count);
+            }
+            else {
+                dis_val1 = $('#modalItemDiscount').val();
+                dis_val = parseInt(dis_val1);
+                Per_val = (Amount_Count * dis_val) / 100;
+                A_val = Amount_Count - Per_val;
+                $('#modalItemAmount').val(A_val);
+            }
+
+        });
+
+        //Delete Item Row
+        //-------------------------------------------------------------------------------------
+        $(document).on('click', '#btn_ItemDelete', function () {
+            var alp = $(this).closest('tr').find("td:eq(0)").text();
+            for (var i = subTotalArr.length - 1; i >= 0; i--) {
+                if (subTotalArr[i].Name == alp) {
+                    subTotalArr.splice(i, 1);
+                    break;
+                }
+            }
+
+            //console.log(subTotalArr);
+
+            $(this).closest('tr').remove();
+            var subTotalAmt1 = 0;
+            $.each(subTotalArr, function (index, value) {
+                subTotalAmt1 = subTotalAmt1 + value.Amount;
+            });
+            console.log(subTotalAmt1);
+            $('#shipping_Charges').val(0);
+            $('#amount_Adjustment').val(0);
+            $('#sub_Total').val(subTotalAmt1);
+            $('#total_Amount').val(subTotalAmt1);
+        });
+
+        //Update Item Row
+        //-------------------------------------------------------------------------------------
+        var R_val_Update, AmountCount_Update, currentRow;
+        $(document).on('click', '#btn_ItemUpdate', function () {
+            currentRow = $(this).closest("tr");
+            var col1 = currentRow.find("td:eq(0)").text();
+            var col2 = currentRow.find("td:eq(1)").text();
+            var col3 = currentRow.find("td:eq(2)").text();
+            var col4 = currentRow.find("td:eq(3)").text();
+            var col5 = currentRow.find("td:eq(4)").text();
+            var col2Int = parseInt(col2);
+            var col3Int = parseInt(col3);
+            AmountCount_Update = col3Int * col2Int;
+            var discountSubstring = col4.substring(0, col4.length - 2);
+            var col4discountSubInt = parseInt(discountSubstring);
+            var col5Int = parseInt(col5);
+            R_val_Update = col3;
+            $('#modalItemDetailsUpdate').val(col1);
+            $('#modalItemQuantityUpdate').val(col2Int);
+            $('#modalItemRateUpdate').val(col3Int);
+            $('#modalItemDiscountUpdate').val(col4discountSubInt);
+            $('#modalItemAmountUpdate').val(col5Int);
+        });
+
+        $(document).on('click', '#closeTableItemUpdate', function () {
+            $('#modalItemDetailsUpdate').val("");
+            $('#modalItemQuantityUpdate').val("");
+            $('#modalItemRateUpdate').val("");
+            $('#modalItemDiscountUpdate').val("");
+            $('#modalItemAmountUpdate').val("");
+        });
+
+        $(document).on('change', '#modalItemQuantityUpdate', function () {
+            $('#modalItemDiscountUpdate').val("");
+            var Q_val_Update, f_R_val_Update;
+            if ($('#modalItemQuantityUpdate').val() == 0) {
+                Q_val_Update = 1;
+                $('#modalItemQuantityUpdate').val(1);
+            }
+            else if ($('#modalItemQuantityUpdate').val() == "") {
+                Q_val_Update = 1
+            }
+            else {
+                Q_val_Update = $('#modalItemQuantityUpdate').val();
+            }
+
+            f_R_val_Update = R_val_Update * Q_val_Update;
+            AmountCount_Update = f_R_val_Update;
+            $('#modalItemAmountUpdate').val(f_R_val_Update);
+
+
+        });
+
+        $(document).on('change', '#modalItemDiscountUpdate', function () {
+            var dis_val_Update, dis_val_Update1, A_val_Update, Per_val_Update;
+            if ($('#modalItemDiscountUpdate').val() == 1) {
+                $('#modalItemAmountUpdate').val(AmountCount_Update);
+            }
+            else {
+                dis_val_Update1 = $('#modalItemDiscountUpdate').val();
+                dis_val_Update = parseInt(dis_val_Update1);
+                Per_val_Update = (AmountCount_Update * dis_val_Update) / 100;
+                A_val_Update = AmountCount_Update - Per_val_Update;
+                $('#modalItemAmountUpdate').val(A_val_Update);
+            }
+
+        });
+
+        $(document).on('click', '#addTableItemUpdate', function () {
+            var det, quan, rate, dis, amt, quan_Int, rate_Int, dis_Int, amt_Int;
+            det = $('#modalItemDetailsUpdate').val();
+            quan = $('#modalItemQuantityUpdate').val();
+            rate = $('#modalItemRateUpdate').val();
+            dis = $('#modalItemDiscountUpdate').val();
+            amt = $('#modalItemAmountUpdate').val();
+
+            quan_Int = parseInt(quan);
+            rate_Int = parseInt(rate);
+            dis_Int = parseInt(dis);
+            amt_Int = parseInt(amt);
+
+
+            for (var i = subTotalArr.length - 1; i >= 0; i--) {
+                if (subTotalArr[i].Name == det) {
+                    subTotalArr.splice(i, 1);
+                    break;
+                }
+            }
+
+            currentRow.remove();
+
+            var myRow3;
+            myRow3 = '<tr><td>' + det + '</td><td>' + quan + '</td><td>' + rate + '</td><td>' + dis + ' %</td><td>' + amt + '</td><td><a type="button" class="block" style="margin-top:2px" id="btn_ItemUpdate" data-toggle="modal" data-target="#exampleModalCenter2">Edit</a> | <a type="button" class="block" style="margin-top:2px" id="btn_ItemDelete">Delete</a></td></tr>';
+            $('#td_body').append(myRow3);
+
+            subTotalObj = { Name: det, Amount: amt_Int };
+            subTotalArr.push(subTotalObj);
+
+            var subTotalAmt2 = 0;
+            $.each(subTotalArr, function (index, value1) {
+                subTotalAmt2 = subTotalAmt2 + value1.Amount;
+            });
+            console.log(subTotalAmt2);
+            $('#shipping_Charges').val(0);
+            $('#amount_Adjustment').val(0);
+            $('#sub_Total').val(subTotalAmt2);
+            $('#total_Amount').val(subTotalAmt2);
+
+
+        });
+
+
+
+        //-------------------------------------------------------------------------------------
+
+        $("#add-row").click(function () {
+            $('#contact_Add').hide();
+
+        });
+
+        $("#contact_div_Save").click(function () {
+            $('#contact_Add').hide();
+            $('#modaltxtSalulation').val("");
+            $('#modaltxtFirstName').val("");
+            $('#modaltxtLastName').val("");
+            $('#modaltxtEmail').val("");
+            $('#modaltxtWorkplace').val("");
+            $('#modaltxtMobile').val("");
+        });
+
+        $('#contact_Open_Form').click(function () {
+            $('#contact_Add').show();
+            $('#modaltxtSalulation').val("");
+            $('#modaltxtFirstName').val("");
+            $('#modaltxtLastName').val("");
+            $('#modaltxtEmail').val("");
+            $('#modaltxtWorkplace').val("");
+            $('#modaltxtMobile').val("");
+        });
+
+        $('#customer_Open').click(function () {
+            $('#txtSalulation').val("");
+            $('#txtFirstName').val("");
+            $('#txtLastName').val("");
+            $('#txtCompanyName').val("");
+            $('#txtCustomerDisplayName').val("");
+            $('#CustomerEmail').val("");
+            $('#txtWorkingPhone').val("");
+            $('#txtmobile').val("");
+            $('#billAttention').val("");
+            $('#shipAttention').val("");
+            $('#billAddressStreet1').val("");
+            $('#shipAddressStreet1').val("");
+            $('#billAddressStreet2').val("");
+            $('#shipAddressStreet2').val("");
+            $('#billCity').val("");
+            $('#shipCity').val("");
+            $('#billZipCode').val("");
+            $('#shipZipCode').val("");
+            $('#billPhone').val("");
+            $('#shipPhone').val("");
+            $('#billFax').val("");
+            $('#shipFax').val("");
+        });
+
+        $("#btnsubmit").click(function () {
+
+            $('#options_Div').children('.dropdown-item').remove();
+
+            $.ajax({
+                type: 'GET',
+                url: '/Customers/CustomersOverviewList',
+                dataType: 'json',
+                success: function (allCustomers) {
+                    var option;
+                    $.each(allCustomers, function (index, item) {
+                        option = '<a class="dropdown-item" id="d_Item" target="' + item.custID + '" value="' + item.customerDisplayName + '" > <input name="mine" style="display:none"  type="text" id="d_Item_Input' + item.custID + '" target="' + item.custID + '" value="' + item.customerDisplayName + '" /> <div class="class_Div_Cust" id="div_Cust" target="' + item.custID + '" value="' + item.customerDisplayName + '"></div>' + item.customerDisplayName + '</span>';
+                        $('#options_Div').append(option);
+                    });
+                }
+            });
+
+            var dDname = $('#txtCustomerDisplayName').val();
+            $('#d_input').val(dDname);
+            dDname = "";
+        });
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        $('#sP_Manage').click(function () {
+            $('#sp_Manage_Div').children('#sP_row').remove();
+            var item_Row_s;
+            console.log(sP_Manage_Table);
+            $.each(sP_Manage_Table, function (index, m_Sp) {
+                item_Row_s = '<tr id="sP_row"> <td style="display:none">' + m_Sp.id + '</td> <td>' + m_Sp.name + '</td><td>' + m_Sp.email + '</td><td class="sP_Desc" target="' + m_Sp.id + '"><a type="button" class="block" style="margin-top:2px" id="btn_sP_Update" target="' + m_Sp.id + '">Edit <input name="" style="display:none" type="text" id="sP_Name_Input' + m_Sp.id + '" target="' + m_Sp.item_ID + '" value="' + m_Sp.name + '" /></a> | <a type="button" class="block" style="margin-top:2px" id="btn_sP_Delete">Delete</a></td></tr>';
+                $('#sp_Manage_Div').append(item_Row_s);
+            });
+        });
+
+        $("#btnnewsaleperson").click(function () {
+            $("#salesFormUpdate").hide();
+            $('#txtnamesales').val("");
+            $('#txtemailsales').val("");
+            $("#SalesForm").show();
+        });
+
+        $("#btnSalepersonCancel").click(function () {
+            $("#SalesForm").hide();
+        });
+
+        $("#btnSalepersonSave").click(function () {
+            var sP_Inp_Name, sP_Inp_Email;
+            var sP_Obj = {};
+
+            sP_Inp_Name = $('#txtnamesales').val();
+            sP_Inp_Email = $('#txtemailsales').val();
+            sP_Obj = { name: sP_Inp_Name, email: sP_Inp_Email };
+
+            $.ajax({
+                url: '/Invoices/AddSalesPerson',
+                type: 'POST',
+                dataType: 'json',
+                data: sP_Obj,
+                success: function (Mesg) {
+                    console.log(Mesg);
+                    $('#sp_options_Div').children('#sP_r').remove();
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Invoices/SalesPersonList',
+                        dataType: 'json',
+                        success: function (all_SPersons) {
+                            sP_Manage_Table = all_SPersons;
+                            var item_Rows_Again;
+                            $.each(all_SPersons, function (index, itemSp_Again) {
+                                item_Rows_Again = '<a class="dropdown-item" id="sP_r" target="' + itemSp_Again.id + '" value="' + itemSp_Again.name + '" >  <input name="mine" style="display:none" type="text" id="sP_r_Input' + itemSp_Again.id + '" target="' + itemSp_Again.item_ID + '" value="' + itemSp_Again.name + '" /> <input style="display:none" type="text" id="sP_r_InputRate' + itemSp_Again.id + '" target="' + itemSp_Again.id + '" value="' + itemSp_Again.name + '" />  <div class="class_Div_sP" id="div_sP" target="' + itemSp_Again.id + '" value="' + itemSp_Again.name + '"></div>' + itemSp_Again.name + '</span>';
+                                $('#sp_options_Div').append(item_Rows_Again);
+                            });
+
+                            $("#SalesForm").hide();
+                            $('#sp_Manage_Div').children('#sP_row').remove();
+                            var merge_Sp_Row_Again;
+                            $.each(sP_Manage_Table, function (index, m_Sp_Again) {
+                                merge_Sp_Row_Again = '<tr id="sP_row"><td style="display:none">' + m_Sp_Again.id + '</td> <td>' + m_Sp_Again.name + '</td><td>' + m_Sp_Again.email + '</td><td class="sP_Desc" target="' + m_Sp_Again.id + '"><a type="button" class="block" style="margin-top:2px" id="btn_sP_Update" target="' + m_Sp_Again.id + '">Edit <input name="" style="display:none" type="text" id="sP_Name_Input' + m_Sp_Again.id + '" target="' + m_Sp_Again.item_ID + '" value="' + m_Sp_Again.name + '" /></a> | <a type="button" class="block" style="margin-top:2px" id="btn_sP_Delete">Delete</a></td></tr>';
+                                $('#sp_Manage_Div').append(merge_Sp_Row_Again);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        var sP_Col1_id;
+        $(document).on("click", "#btn_sP_Update", function () {
+            $('#SalesForm').hide();
+            var sP_name1 = $(this).closest("tr")
+            var sP_col1 = sP_name1.find("td:eq(0)").text();
+            var sP_col2 = sP_name1.find("td:eq(1)").text();
+            var sP_col3 = sP_name1.find("td:eq(2)").text();
+            console.log(sP_col1);
+            console.log(sP_col2);
+            sP_Col1_id = sP_col1;
+            $('#updateNameSales').val(sP_col2);
+            $('#updateEmailSales').val(sP_col3);
+
+            $('#salesFormUpdate').show();
+        });
+
+        $(document).on("click", "#btn_sP_Delete", function () {
+            var sP_Del_Row = $(this).closest("tr")
+            var sP_Del_Col_Id = sP_Del_Row.find("td:eq(0)").text();
+            console.log(sP_Del_Col_Id);
+            sP_Del_Obj = { id: sP_Del_Col_Id };
+            $.ajax({
+                url: '/Invoices/DeleteSalesPerson',
+                type: 'GET',
+                dataType: 'json',
+                data: sP_Del_Obj,
+                success: function (Messeg) {
+                    console.log(Messeg);
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Invoices/SalesPersonList',
+                        dataType: 'json',
+                        success: function (all_Del_sPersons) {
+                            $('#sp_options_Div').children('#sP_r').remove();
+                            sP_Manage_Table = all_Del_sPersons;
+                            var item_Rows_Delete;
+                            $.each(all_Del_sPersons, function (index, itemSp_Agn_Del) {
+                                item_Rows_Delete = '<a class="dropdown-item" id="sP_r" target="' + itemSp_Agn_Del.id + '" value="' + itemSp_Agn_Del.name + '" >  <input name="mine" style="display:none" type="text" id="sP_r_Input' + itemSp_Agn_Del.id + '" target="' + itemSp_Agn_Del.item_ID + '" value="' + itemSp_Agn_Del.name + '" /> <input style="display:none" type="text" id="sP_r_InputRate' + itemSp_Agn_Del.id + '" target="' + itemSp_Agn_Del.id + '" value="' + itemSp_Agn_Del.name + '" />  <div class="class_Div_sP" id="div_sP" target="' + itemSp_Agn_Del.id + '" value="' + itemSp_Agn_Del.name + '"></div>' + itemSp_Agn_Del.name + '</span>';
+                                $('#sp_options_Div').append(item_Rows_Delete);
+                            });
+
+                            $("#SalesForm").hide();
+                            $('#sp_Manage_Div').children('#sP_row').remove();
+                            var merge_Sp_Row_Del;
+                            $.each(sP_Manage_Table, function (index, m_Sp_Agn_Del) {
+                                merge_Sp_Row_Del = '<tr id="sP_row"><td style="display:none">' + m_Sp_Agn_Del.id + '</td> <td>' + m_Sp_Agn_Del.name + '</td><td>' + m_Sp_Agn_Del.email + '</td><td class="sP_Desc" target="' + m_Sp_Agn_Del.id + '"><a type="button" class="block" style="margin-top:2px" id="btn_sP_Update" target="' + m_Sp_Agn_Del.id + '">Edit <input name="" style="display:none" type="text" id="sP_Name_Input' + m_Sp_Agn_Del.id + '" target="' + m_Sp_Agn_Del.item_ID + '" value="' + m_Sp_Agn_Del.name + '" /></a> | <a type="button" class="block" style="margin-top:2px" id="btn_sP_Delete">Delete</a></td></tr>';
+                                $('#sp_Manage_Div').append(merge_Sp_Row_Del);
+                            });
+                        }
+                    });
+                }
+            });
+
+        });
+
+        $(document).on("click", "#btnSalepersonUpdateCancel", function () {
+            $('#salesFormUpdate').hide();
+            $('#updateNameSales').val("");
+            $('#updateEmailSales').val("");
+        });
+
+        $(document).on("click", "#btnSalepersonUpdate", function () {
+            var sP_Col1_Obj = {};
+            var sP_Upd_Obj = {};
+            var sP_Up_Name = $('#updateNameSales').val();
+            var sP_Up_Email = $('#updateEmailSales').val();
+            sP_Upd_Obj = { name: sP_Up_Name, email: sP_Up_Email };
+            sP_Col1_Obj = { id: sP_Col1_id };
+            $.ajax({
+                url: '/Invoices/DeleteSalesPerson',
+                type: 'GET',
+                dataType: 'json',
+                data: sP_Col1_Obj,
+                success: function (Messg) {
+                    console.log(Messg);
+
+                    $.ajax({
+                        url: '/Invoices/AddSalesPerson',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: sP_Upd_Obj,
+                        success: function (Masg) {
+                            console.log(Masg);
+                            $('#sp_options_Div').children('#sP_r').remove();
+
+                            $.ajax({
+                                type: 'GET',
+                                url: '/Invoices/SalesPersonList',
+                                dataType: 'json',
+                                success: function (all_sPersons) {
+                                    sP_Manage_Table = all_sPersons;
+                                    var item_Rows_Again_and_Again;
+                                    $.each(all_sPersons, function (index, itemSp_Agn) {
+                                        item_Rows_Again_and_Again = '<a class="dropdown-item" id="sP_r" target="' + itemSp_Agn.id + '" value="' + itemSp_Agn.name + '" >  <input name="mine" style="display:none" type="text" id="sP_r_Input' + itemSp_Agn.id + '" target="' + itemSp_Agn.item_ID + '" value="' + itemSp_Agn.name + '" /> <input style="display:none" type="text" id="sP_r_InputRate' + itemSp_Agn.id + '" target="' + itemSp_Agn.id + '" value="' + itemSp_Agn.name + '" />  <div class="class_Div_sP" id="div_sP" target="' + itemSp_Agn.id + '" value="' + itemSp_Agn.name + '"></div>' + itemSp_Agn.name + '</span>';
+                                        $('#sp_options_Div').append(item_Rows_Again_and_Again);
+                                    });
+
+                                    $("#SalesForm").hide();
+                                    $('#sp_Manage_Div').children('#sP_row').remove();
+                                    var merge_Sp_Row_Again_and_Again;
+                                    $.each(sP_Manage_Table, function (index, m_Sp_Agn) {
+                                        merge_Sp_Row_Again_and_Again = '<tr id="sP_row"><td style="display:none">' + m_Sp_Agn.id + '</td> <td>' + m_Sp_Agn.name + '</td><td>' + m_Sp_Agn.email + '</td><td class="sP_Desc" target="' + m_Sp_Agn.id + '"><a type="button" class="block" style="margin-top:2px" id="btn_sP_Update" target="' + m_Sp_Agn.id + '">Edit <input name="" style="display:none" type="text" id="sP_Name_Input' + m_Sp_Agn.id + '" target="' + m_Sp_Agn.item_ID + '" value="' + m_Sp_Agn.name + '" /></a> | <a type="button" class="block" style="margin-top:2px" id="btn_sP_Delete">Delete</a></td></tr>';
+                                        $('#sp_Manage_Div').append(merge_Sp_Row_Again_and_Again);
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#salesFormUpdate').hide();
+        });
+
+
+    });
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function filterFunction3() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("sp_myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("sp_MyDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function filterFunction2() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("modalItemName");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("ItemsOptionsDiv");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function filterFunction4() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("sP_Search");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("sp_Manage_Div");
+        a = div.getElementsByTagName("tr");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    //----------------------------------------------------------------------------------
+
+</script>

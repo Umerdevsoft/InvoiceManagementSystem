@@ -23,23 +23,23 @@ namespace InvoiceManagementSystem.Controllers
         [HttpGet]
         public IActionResult AllItems()
         {
-        
-            return View();
+            var itemsData = appDbContext.Items;
+            return View(itemsData);
         }
 
-        //[HttpPost]
-        //public IActionResult AllItems(ItemsViewModels itemsViewModels)
-        //{
-        //    string[] ids = itemsViewModels["ID"].Split(new char[] { ',' });
+        [HttpPost]
+        public IActionResult AllItems(ItemsViewModels itemsViewModels)
+        {
+            //string[] ids = itemsViewModels["ID"].Split(new char[] { ',' });
 
-        //    foreach (string id in ids)
-        //    {
-        //        var item = appDbContext.Items.Find(int.Parse(id));
-        //        appDbContext.Items.Remove(item);
-        //        appDbContext.SaveChanges();
-        //    }
-        //    return View(itemsViewModels);
-        //}
+            //foreach (string id in ids)
+            //{
+            //    var item = appDbContext.Items.Find(int.Parse(id));
+            //    appDbContext.Items.Remove(item);
+            //    appDbContext.SaveChanges();
+            //}
+            return View(itemsViewModels);
+        }
 
         #endregion
 

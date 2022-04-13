@@ -11,9 +11,10 @@ namespace InvoiceManagementSystem.ViewModels
     {
         [Key]
         public int Invoice_ID { get; set; }
-       [Required]
-       
-        public string InvoiceNumber { get; set; }
+        [Required]
+        public int InvoiceNumber { get; set; }
+        [Required]
+        public string InvoiceNumberString { get; set; }
         [Required]
         public string OrderNumber { get; set; }
         [Required]
@@ -25,11 +26,11 @@ namespace InvoiceManagementSystem.ViewModels
         [Required]
         public string Subject { get; set; }
 
-        
+
         [ForeignKey("SalePerson_ID")]
         public int SalePerson_ID { get; set; }
 
-        
+
         public SalesPersonsViewModel salesPersonsViewModel { get; set; }
 
         [ForeignKey("Invoice_Cust_ID")]

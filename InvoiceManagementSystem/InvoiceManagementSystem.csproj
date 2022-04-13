@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Theme\Assets\js\Bootstrap-Table-Editable.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Nlog.editorconfig" />
   </ItemGroup>
 

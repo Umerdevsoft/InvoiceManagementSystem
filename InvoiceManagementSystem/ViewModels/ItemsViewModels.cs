@@ -12,7 +12,7 @@ namespace InvoiceManagementSystem.ViewModels
         public int Item_ID { get; set; }
         [Required]
         public string Type { get; set; }
-       
+
         [Required]
         [DataType(DataType.Text)]
         public string Name { get; set; }
@@ -20,13 +20,13 @@ namespace InvoiceManagementSystem.ViewModels
         public string Unit { get; set; }
 
         [Required]
-        
-        public double SellingPrice  { get; set; }
+
+        public double SellingPrice { get; set; }
         [Required]
         [DataType(DataType.Text)]
         public string Description { get; set; }
         [Required]
-        public  string Tax { get; set; }
+        public string Tax { get; set; }
         public List<Invoice_Item> Invoice_Items { get; set; }
 
     }

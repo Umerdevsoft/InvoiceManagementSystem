@@ -168,6 +168,29 @@
 
         //});
 
+        $('#txtSalulation').val("");
+        $('#txtFirstName').val("");
+        $('#txtLastName').val("");
+        $('#txtCompanyName').val("");
+        $('#txtCustomerDisplayName').val("");
+        $('#CustomerEmail').val("");
+        $('#txtWorkingPhone').val("");
+        $('#txtmobile').val("");
+        $('#billAttention').val("");
+        $('#shipAttention').val("");
+        $('#billAddressStreet1').val("");
+        $('#shipAddressStreet1').val("");
+        $('#billAddressStreet2').val("");
+        $('#shipAddressStreet2').val("");
+        $('#billCity').val("");
+        $('#shipCity').val("");
+        $('#billZipCode').val("");
+        $('#shipZipCode').val("");
+        $('#billPhone').val("");
+        $('#shipPhone').val("");
+        $('#billFax').val("");
+        $('#shipFax').val("");
+
     });
 
     //$("#btnsubmit").click(function myfunction() {
