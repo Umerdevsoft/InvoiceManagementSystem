@@ -1,4 +1,5 @@
-﻿ 
+﻿@model IEnumerable<InvoiceManagementSystem.Models.ApplicationUser>
+
 @{
     ViewData["Title"] = "SettingProfile";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -20,7 +21,7 @@
                         <label>FullName</label>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" name="FullName"  id="txtFullName" placeholder="Full Name" />
+                        <input type="text" class="form-control" name="FullName" id="txtFullName" placeholder="Full Name" />
                     </div>
                 </div>
             </div>
@@ -87,30 +88,47 @@
 </div>
 <script src="~/lib/jquery-3.6.0.js"></script>
 <script>
-    $(document).ready(function () {
-        ////$("#btnUpdateprofile").click(function () {
-        ////    var alldata = {
-        ////        FullName: $("#txtFullName").val(),
-        ////        CompanyName: $("#txtOrganizationName").val(),
-        ////        OldPassword: $("#txtOldPassword").val(),
-        ////        NewPassword: $("#txtNewPassword").val(),
-        ////        ConfirmPassword: $("#txtconfirmPassword").val(),
-        ////        Currency: $("inputChangeCurrence").val()
-
-        ////    }
-            $.ajax({
-                url: "/GetDataProfile/OrganizationProfile",
-                datatype: "json",
-                type: "GET",
-                success: function (value) {
-                    console.log(value);
-                    
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            })
-
+        $(document).ready(function () {
+            GetCurrency();
         });
+    function GetCurrency() {
+        $.ajax({
+            type: "GET",
+            url: "/OrganizationProfile/CurrencyData",
+            data: "{}",
+            success: function (data) {
+                var s = '<option value ="-1">Please Select a Currency </option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '" >' + data[i].currencyName + '</option>';
+                }
+                $("#inputChangeCurrence").html(s);
+            }
+        });
+    }
+    //$(document).ready(function () {
+    //    ////$("#btnUpdateprofile").click(function () {
+    //    ////    var alldata = {
+    //    ////        FullName: $("#txtFullName").val(),
+    //    ////        CompanyName: $("#txtOrganizationName").val(),
+    //    ////        OldPassword: $("#txtOldPassword").val(),
+    //    ////        NewPassword: $("#txtNewPassword").val(),
+    //    ////        ConfirmPassword: $("#txtconfirmPassword").val(),
+    //    ////        Currency: $("inputChangeCurrence").val()
+
+    //    ////    }
+    //    $.ajax({
+    //        url: "/GetDataProfile/OrganizationProfile",
+    //        datatype: "json",
+    //        type: "GET",
+    //        success: function (value) {
+    //            console.log(value);
+
+    //        },
+    //        error: function (err) {
+    //            console.log(err);
+    //        }
+    //    })
+
+    //});
 </script>
 

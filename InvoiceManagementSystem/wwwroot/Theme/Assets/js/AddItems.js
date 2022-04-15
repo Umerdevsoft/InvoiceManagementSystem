@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    Validation();
     $("#btnSaveItems").click(function (e) {
         var Type = $("#optradio").val();
         var Name = $("#txtitemsName").val();
@@ -40,3 +41,32 @@
 
     });
 });
+function Validation() {
+    $("#btnSaveItems").click(function () {
+        var msgtype = "Please Select the type";
+        var msgitemName = "Please Enter the Item Name";
+        var msgunit = "Please Select the Unit";
+        var msgsellingprice = "Please Enter the Selling Price";
+        var msgdescription = "Please Enter the Description";
+        var msgtax = "Please select selectTax";
+        if ($('input[name="type"]:checked').length == 0) {
+            alert(msgtype);
+        }
+        if ($.trim($("#txtitemsName").val()) == "") {
+            alert(msgitemName);
+        }
+        if ($.trim($("#selectUnit").val()) == "") {
+
+            alert(msgunit);
+        }
+        if ($.trim($("#txtsellingPrice").val()) == "") {
+            alert(msgsellingprice);
+        }
+        if ($.trim($("#txtDescription").val()) == "") {
+            alert(msgdescription);
+        }
+        if ($.trim($("#selectTax").val()) == "") {
+            alert(msgtax);
+        }
+    });
+}

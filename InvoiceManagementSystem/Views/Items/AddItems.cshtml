@@ -16,7 +16,7 @@
         <div id="msg" class="alert alert-dismissible alert-success" style="display:none">
 
         </div>
-        <form method="post" class="form-group" id="ADDITEMFORM" asp-controller="Items" asp-action="AddItems">
+        <form method="post" class="form-group" id="ADDITEMFORM">
             <div class="form-group">
                 <div class="row">
                     <div class="col-2">
@@ -24,10 +24,10 @@
                     </div>
                     <div class="col-6">
                         <label class="radio-inline">
-                            <input asp-for="Type" type="radio" name="Type" id="optradio" value="Goods">Goods
+                            <input asp-for="Type" name="type" type="radio" id="optradio" value="Goods" required>Goods
                         </label>
                         <label class="radio-inline">
-                            <input asp-for="Type" type="radio" name="Type" id="optradio" value="Service">Services
+                            <input asp-for="Type" type="radio" name="type" id="optradio" value="Service" required>Services
                         </label>
                     </div>
                 </div>
@@ -38,9 +38,10 @@
                         <label>Name</label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="Name" type="text" class="form-control" id="txtitemsName" placeholder="Items Name" />
+                        <input asp-for="Name" type="text" name="item" class="form-control" id="txtitemsName" placeholder="Items Name" />
                     </div>
-                  
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
             </div>
             <div class="form-group">
@@ -59,6 +60,8 @@
                             <option value="liter">liter (l)</option>
 
                         </select>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please Select the field.</div>
                     </div>
                     
                 </div>
@@ -70,6 +73,9 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="SellingPrice" type="text" class="form-control" id="txtsellingPrice" placeholder="PKR" />
+
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                    </div>
             </div>
@@ -79,7 +85,11 @@
                         <label>Description</label>
                     </div>
                     <div class="col-8">
-                        <textarea asp-for="Description"   class="form-control" id="txtDescription" placeholder="Description"></textarea>
+                        <textarea asp-for="Description" class="form-control" id="txtDescription" placeholder="Description"></textarea>
+
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+
                     </div>
                    
                 </div>
@@ -90,13 +100,15 @@
                         <label>Tax</label>
                     </div>
                     <div class="col-8">
-                        <select asp-for="Tax"  class="form-control" id="selectTax" searchable="Search here..">
+                        <select asp-for="Tax" class="form-control" id="selectTax" searchable="Search here..">
                             <option value="" disabled selected>Select a Tax</option>
                             <option value="5%">5%</option>
                             <option value="10%">10%</option>
                             <option value="20%">20%</option>
                             <option value="30%">30%</option>
                         </select>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please Select the field.</div>
                     </div>
                   
                 </div>
@@ -105,7 +117,7 @@
       <div class="form-group">
           <div class="row">
               <div class="col-2">
-              <button type="button" class="btn btn-block btn-outline-success btn-lg" id="btnSaveItems">Save</button>            
+                  <button type="button" value="validate" name="validateButton" class="btn btn-block btn-outline-success btn-lg" id="btnSaveItems">Save</button>
               </div>
               <div class="col-2">
                   <button type="button" class="btn btn-block btn-outline-danger btn-lg">Cancel</button>

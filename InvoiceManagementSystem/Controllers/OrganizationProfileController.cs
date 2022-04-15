@@ -28,20 +28,18 @@ namespace InvoiceManagementSystem.Controllers
             return View();
         }
 
-      
-        //public async Task<IActionResult> SettingProfile(ApplicationUser applicationUser)
-        //{
-        //    var user = new ApplicationUser
-        //    {
-        //        FullName = applicationUser.FullName,
-        //        CompanyName = applicationUser.CompanyName,
-        //        PasswordHash = applicationUser.PasswordHash
-        //    };
-            
+        #region Currency Show data
+        [HttpGet]
+        public IActionResult CurrencyData()
+        {
+            return Json(AppDbContext.Currency.Select(x => new
+            {
+                ID = x.ID,
+                CurrencyName = x.CurrencyNameWithCode
+            }).ToList());
+        }
 
-        //    return View(user);
-        //}
-
+        #endregion
 
 
 

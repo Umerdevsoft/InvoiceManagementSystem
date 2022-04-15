@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    validation();
     cache: false
     $('.Single').click(function () {
         $('.target').hide();
@@ -220,3 +221,154 @@
     //});
 
 });
+
+function GetCurrency() {
+    $.ajax({
+        type: "GET",
+        url: "/Customers/CurrencyData",
+        data: "{}",
+        success: function (data) {
+            var s = '<option value ="-1">Please Select a Currency </option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].id + '" >' + data[i].currencyName + '</option>';
+            }
+            $("#inputChangeCurrence").html(s);
+        }
+    });
+}
+
+function validation() {
+    $("#btnsubmit").click(function () {
+        var msgsalulation = "Please Enter The Salulation";
+        var msgfirstname = "Please Enter The FirstName";
+        var msglastname = "Please Enter The LastName";
+        var msgcompanyname = "Please Enter the CompanyName";
+        var msgcustomername = "Please Enter The Customer Name";
+        var msgcustomeremail = "Please Enter The Customer Email";
+        var msgcustomerworkphone = "Please Enter The Working Phone";
+        var msgcustomerMobile = "Please Enter The Mobile Number";
+        var msgcurreny = "Please select the Curreny";
+        var msgaddressattention = "Please Enter The  Attention";
+        var msgcountryaddress = "Please select  Country/Region";
+        var msgaddressaddress = "Please Enter  the Address";
+        var msgcityaddress = "Please Enter  the City";
+        var msgstateaddress = "Please Select  the State";
+        var msgzipcodeaddress = "Please Enter  the Zipcode";
+        var msgphoneaddress = "Please Enter the Phone";
+        var msgfaxaddress = "Please Enter the fax";
+        var msgshippingattention = "Please Enter The  Attention";
+        var msgcountryshipping = "Please select  Country/Region";
+        var msgaddressshipping = "Please Enter  the Address";
+        var msgcityshipping = "Please Enter  the City";
+        var msgstateshipping = "Please Select  the State";
+        var msgzipcodeshipping = "Please Enter  the Zipcode";
+        var msgphoneshipping = "Please Enter the Phone";
+        var msgfaxshipping = "Please Enter the fax";
+        var msgEmail = "Please Enter the Email";
+        var msgworkplace = "Please Enter the Work Place";
+        if ($.trim($("#txtSalulation").val()) == "") {
+            alert(msgsalulation);
+        }
+        if ($.trim($("#txtFirstName").val()) == "") {
+            alert(msgfirstname);
+        }
+        if ($.trim($("#txtLastName").val()) == "") {
+            alert(msglastname);
+        }
+        if ($.trim($("#txtCompanyName").val()) == "") {
+            alert(msgcompanyname);
+        }
+        if ($.trim($("#txtCustomerDisplayName").val()) == "") {
+            alert(msgcustomername);
+        }
+        if ($.trim($("#txtCustomerDisplayName").val()) == "") {
+            alert(msgcustomername);
+        }
+        if ($.trim($("#CustomerEmail").val()) == "") {
+            alert(msgcustomeremail);
+        }
+        if ($.trim($("#txtWorkingPhone").val()) == "") {
+            alert(msgcustomerworkphone);
+        }
+        if ($.trim($("#txtmobile").val()) == "") {
+            alert(msgcustomerMobile);
+        }
+        if ($.trim($("#inputChangeCurrence").val()) == "") {
+            alert(msgcurreny);
+        }
+        if ($.trim($("#billAttention").val()) == "") {
+            alert(msgaddressattention);
+        }
+        if ($.trim($("#shipAttention").val()) == "") {
+            alert(msgshippingattention);
+        }
+        if ($.trim($("#billCounrtyRegion").val()) == "") {
+            alert(msgcountryaddress);
+        }
+        if ($.trim($("#shipCounrtyRegion").val()) == "") {
+            alert(msgcountryshipping);
+        }
+        if ($.trim($("#billAddressStreet1").val()) == "") {
+            alert(msgaddressaddress);
+        }
+        if ($.trim($("#billAddressStreet2").val()) == "") {
+            alert(msgaddressaddress);
+        }
+        if ($.trim($("#shipAddressStreet1").val()) == "") {
+            alert(msgaddressshipping);
+        }
+        if ($.trim($("#shipAddressStreet2").val()) == "") {
+            alert(msgaddressshipping);
+        }
+        if ($.trim($("#billCity").val()) == "") {
+            alert(msgcityaddress);
+        }
+        if ($.trim($("#shipCity").val()) == "") {
+            alert(msgcityshipping);
+        }
+        if ($.trim($("#billState").val()) == "") {
+            alert(msgstateaddress);
+        }
+        if ($.trim($("#shipState").val()) == "") {
+            alert(msgstateshipping);
+        }
+        if ($.trim($("#billZipCode").val()) == "") {
+            alert(msgzipcodeaddress);
+        }
+        if ($.trim($("#shipZipCode").val()) == "") {
+            alert(msgzipcodeshipping);
+        }
+        if ($.trim($("#billPhone").val()) == "") {
+            alert(msgphoneaddress);
+        }
+        if ($.trim($("#shipPhone").val()) == "") {
+            alert(msgphoneshipping);
+        }
+        if ($.trim($("#billFax").val()) == "") {
+            alert(msgfaxaddress);
+        }
+        if ($.trim($("#shipFax").val()) == "") {
+            alert(msgfaxshipping);
+        }
+        if ($.trim($("#modaltxtSalulation").val()) == "") {
+            alert(msgsalulation);
+        }
+        if ($.trim($("#modaltxtFirstName").val()) == "") {
+            alert(msgfirstname);
+        }
+        if ($.trim($("#modaltxtLastName").val()) == "") {
+            alert(msglastname);
+        }
+        if ($.trim($("#modaltxtEmail").val()) == "") {
+            alert(msgEmail);
+        }
+        if ($.trim($("#modaltxtWorkplace").val()) == "") {
+            alert(msgEmail);
+        }
+        if ($.trim($("#modaltxtMobile").val()) == "") {
+            alert(msgcustomerMobile);
+        }
+
+
+    });
+}

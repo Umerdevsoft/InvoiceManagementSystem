@@ -19,13 +19,17 @@ namespace InvoiceManagementSystem.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<ApplicationUser> logger;
         private readonly IEmailSender emailSender;
-       
-        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger,IEmailSender emailSender)
+        private readonly AppDbContext appDbContext1;
+
+
+        public AccountsController(AppDbContext appDbContext,UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,ILogger<ApplicationUser> logger,IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.appDbContext1 = appDbContext;
+
         }
 
         #region Regiser Section
@@ -123,20 +127,19 @@ namespace InvoiceManagementSystem.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel loginView,string returnurl=null )
+        public async Task<IActionResult> Login(LoginViewModel loginView)
         {
             if (ModelState.IsValid)
+
             {
 
-                var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password, isPersistent:false, lockoutOnFailure:false);
+                var result = await signInManager.PasswordSignInAsync(loginView.Email, loginView.Password, isPersistent: false, lockoutOnFailure: false);
 
-              
-                
                 if (result.Succeeded)
                 {
-                  
+                    TempData["Email"] = loginView.Email;
                     return RedirectToAction("Dashboard", "InvoiceDashboard");
-                    
+
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
@@ -158,28 +161,32 @@ namespace InvoiceManagementSystem.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel forgetPasswordView)
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(forgetPasswordView.Email);
-                if (user !=null && await userManager.IsEmailConfirmedAsync(user))
+
+
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user != null && await userManager.IsEmailConfirmedAsync(user))
                 {
                     var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
-                    var passwordResetLink = Url.Action("ResetPassword", "Accounts",new { email = forgetPasswordView.Email, token = token },Request.Scheme);
-                    
+                    var passwordresetlink = Url.Action("ResetPassword", "Accounts", new { email = model.Email, token = token }, Request.Scheme);
+                    await emailSender.SendEmailAsync(user.Email, "Test", passwordresetlink).ConfigureAwait(false);
 
-                    logger.Log(LogLevel.Warning, passwordResetLink);
 
-                    return View("forgotPasswordConfirmation");
+                    logger.Log(LogLevel.Warning, passwordresetlink);
+
+                    return View("ForgetPasswordConfirmation");
                 }
-                return View("forgotPasswordConfirmation");
+                return View("ForgetPasswordConfirmation");
             }
-            return View(forgetPasswordView);
+            return View(model);
         }
 
-        
+
+
 
 
         #endregion
@@ -202,31 +209,29 @@ namespace InvoiceManagementSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordView)
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(resetPasswordView.Email);
-                if (user !=null)
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user != null)
                 {
-
-                }
-                    var result = await userManager.ResetPasswordAsync(user, resetPasswordView.Token, resetPasswordView.Password);
-                    if (!result.Succeeded)
+                    var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                    if (result.Succeeded)
                     {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                        return View();
+                        return View("ConfirmPassword");
                     }
-                await signInManager.RefreshSignInAsync(user);
-                    return View("ConfirmPassword");
-               
-             }
-            return View(resetPasswordView);
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model);
+                }
+                return View("ConfirmPassword");
+            }
+            return View(model);
         }
-        
+
         #endregion
 
         #region ConfirmPasswordReset
