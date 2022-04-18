@@ -26,6 +26,10 @@ namespace InvoiceManagementSystem.ViewModels
         [Required]
         public string Subject { get; set; }
 
+        public string Status { get; set; }
+        public string CustomerNote { get; set; }
+
+
 
         [ForeignKey("SalePerson_ID")]
         public int SalePerson_ID { get; set; }
@@ -36,9 +40,10 @@ namespace InvoiceManagementSystem.ViewModels
         [ForeignKey("Invoice_Cust_ID")]
         public int Invoice_Cust_ID { get; set; }
 
-        public CustomersViewModel CustomersViewModel { get; set; }
+        public CustomersViewModel Customers { get; set; }
 
         public List<Invoice_Item> Invoice_Items { get; set; }
+        public List<AmountViewModel> Amounts { get; set; }
 
     }
 }

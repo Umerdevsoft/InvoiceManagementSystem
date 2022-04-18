@@ -34,7 +34,7 @@
                                     <label>Customers Name</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" id="d_input" placeholder="Select Customer" value="" />
+                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" id="d_input" readonly="readonly" placeholder="Click to Select or Add Customer" value="" />
                                     <div class="dropdown-menu col-11" id="myDropdown">
 
                                         <input type="text" placeholder="Search..." id="myInput" class="dropdown-item form-control" onkeyup="filterFunction()">
@@ -462,8 +462,10 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">INV -</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="" id="invoiceConfirmNumber" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="number" class="form-control" placeholder="" id="invoiceConfirmNumber" readonly="readonly" aria-label="" aria-describedby="basic-addon1">
+
                                     </div>
+
                                     <a data-toggle="modal" data-target="#exampleModal" id="invoice_Number_Management"><i class="fas fa-cog" style="padding-left:5px;padding-top:10px; font-size:20px"></i></a>
                                     <!--Invoice Number Modal Start -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -495,7 +497,7 @@
                                                         </div>
                                                         <div id="autoHide" class="col-3">
                                                             <label>Next Number</label>
-                                                            <input class="form-control" type="text" disabled="disabled" id="nextNumber" />
+                                                            <input class="form-control" type="number" disabled="disabled" id="nextNumber" />
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -512,7 +514,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-success" data-dismiss="modal" id="radioModalSave">Save</button>
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="radioModalCancel">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -520,6 +522,23 @@
                                     <!--Invoice Number Model End-->
                                 </div>
                             </div>
+                            <div class="status_Div">
+                                <div class="row" id="invoice_Validate_No" style="display:none">
+                                    <div class="col-2">
+                                    </div>
+                                    <div class="col">
+                                        <span style="color:red">Number Already Exist !</span>
+                                    </div>
+                                </div>
+                                <div class="row" id="invoice_Validate_Yes" style="display:none">
+                                    <div class="col-2">
+                                    </div>
+                                    <div class="col">
+                                        <span style="color:green">Alright .</span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="form-group">
@@ -528,7 +547,7 @@
                                     <label>Order Number</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" id="input_Order" class="form-control" />
+                                    <input type="number" id="input_Order" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -570,7 +589,7 @@
                                     <label>Sales Person</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" id="sp_Input" placeholder="Select Sales Person" />
+                                    <input class="form-control dropdown-toggle" data-toggle="dropdown" id="sp_Input" readonly="readonly" placeholder="Click to Select or Add Sales Person" />
                                     <div class="dropdown-menu col-11" id="sp_MyDropdown">
 
                                         <input type="text" placeholder="Search..." id="sp_myInput" class="dropdown-item form-control" onkeyup="filterFunction3()">
@@ -701,7 +720,7 @@
                                     <label>Subject</label>
                                 </div>
                                 <div class="col-8">
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" id="inv_Subject"></textarea>
 
                                 </div>
 
@@ -796,7 +815,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-2">
-                                <button type="button" class="btn btn-block btn-outline-primary btn-lg">Save as Draft</button>
+                                <button type="button" class="btn btn-block btn-outline-primary btn-lg" id="saveAsDraft">Save as Draft</button>
                             </div>
                             <div class="col-2">
                                 <button type="button" class="btn btn-block btn-outline-success btn-lg">Save and Send</button>
@@ -825,6 +844,9 @@
             <div class="modal-body">
                 <div class="form-group">
                     <div class="row">
+                        <div style="display:none">
+                            <input type="text" class="form-control" id="modalItem_Id" placeholder="">
+                        </div>
                         <div class="col-3">
                             <label style="margin-top:4px">Items Details</label>
                         </div>
@@ -909,6 +931,9 @@
                         <div class="col-3">
                             <label style="margin-top:4px">Item Details</label>
                         </div>
+                        <div class="" style="display:none">
+                            <input type="number" class="form-control" id="modalItemIdUpdate">
+                        </div>
                         <div class="col">
                             <input type="text" class="form-control" id="modalItemDetailsUpdate" readonly="readonly" placeholder="">
                         </div>
@@ -979,17 +1004,22 @@
 
 
         //---------Get-Customers-List---------------------------------------------------------------------------------------------------
-        $.ajax({
-            type: 'GET',
-            url: '/Customers/CustomersOverviewList',
-            dataType: 'json',
-            success: function (allCustomers) {
-                var option;
-                $.each(allCustomers, function (index, item) {
-                    option = '<a class="dropdown-item" id="d_Item" target="' + item.custID + '" value="' + item.customerDisplayName + '" > <input name="mine" style="display:none"  type="text" id="d_Item_Input' + item.custID + '" target="' + item.custID + '" value="' + item.customerDisplayName + '" /> <div class="class_Div_Cust" id="div_Cust" target="' + item.custID + '" value="' + item.customerDisplayName + '"></div>' + item.customerDisplayName + '</span>';
-                    $('#options_Div').append(option);
-                });
-            }
+
+
+        $('#d_input').click(function () {
+            $('#options_Div').children('a').remove();
+            $.ajax({
+                type: 'GET',
+                url: '/Customers/CustomersOverviewList',
+                dataType: 'json',
+                success: function (allCustomers) {
+                    var option;
+                    $.each(allCustomers, function (index, item) {
+                        option = '<a class="dropdown-item" id="d_Item" target="' + item.custID + '" value="' + item.customerDisplayName + '" > <input name="mine" style="display:none"  type="text" id="d_Item_Input' + item.custID + '" target="' + item.custID + '" value="' + item.customerDisplayName + '" /> <input style="display:none"  type="text" id="d_Item_Id' + item.custID + '" value="' + item.custID + '" /> <div class="class_Div_Cust" id="div_Cust" target="' + item.custID + '" value="' + item.customerDisplayName + '"></div>' + item.customerDisplayName + '</span>';
+                        $('#options_Div').append(option);
+                    });
+                }
+            });
         });
         //---------------------------------------------------------------------------------------------------------------------------
 
@@ -1002,7 +1032,7 @@
             success: function (allItems) {
                 var item_Row;
                 $.each(allItems, function (index, itemR) {
-                    item_Row = '<a class="dropdown-item" id="item_r" target="' + itemR.item_ID + '" value="' + itemR.name + '" >  <input name="mine" style="display:none" type="text" id="item_r_Input' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.name + '" /> <input style="display:none" type="text" id="item_r_InputRate' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.sellingPrice + '" />  <div class="class_Div_Item" id="div_Item" target="' + itemR.item_ID + '" value="' + itemR.name + '"></div>' + itemR.name + '</span>';
+                    item_Row = '<a class="dropdown-item" id="item_r" target="' + itemR.item_ID + '" value="' + itemR.name + '" >  <input name="mine" style="display:none" type="text" id="item_r_Input' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.name + '" /> <input style="display:none" type="text" id="item_r_InputRate' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.sellingPrice + '" /> <input style="display:none" type="text" id="item_r_InputId' + itemR.item_ID + '" target="' + itemR.item_ID + '" value="' + itemR.item_ID + '" /> <div class="class_Div_Item" id="div_Item" target="' + itemR.item_ID + '" value="' + itemR.name + '"></div>' + itemR.name + '</span>';
                     $('#ItemsOptionsDiv').append(item_Row);
                 });
             }
@@ -1011,19 +1041,23 @@
 
         //---------Get-SalesPersons-List---------------------------------------------------------------------------------------------------
         var sP_Manage_Table;
-        $.ajax({
-            type: 'GET',
-            url: '/Invoices/SalesPersonList',
-            dataType: 'json',
-            success: function (allSPersons) {
-                console.log(allSPersons);
-                sP_Manage_Table = allSPersons;
-                var item_Rows;
-                $.each(allSPersons, function (index, itemSp) {
-                    item_Rows = '<a class="dropdown-item" id="sP_r" target="' + itemSp.id + '" value="' + itemSp.name + '" >  <input name="mine" style="display:none" type="text" id="sP_r_Input' + itemSp.id + '" target="' + itemSp.item_ID + '" value="' + itemSp.name + '" /> <input style="display:none" type="text" id="sP_r_InputRate' + itemSp.id + '" target="' + itemSp.id + '" value="' + itemSp.name + '" />  <div class="class_Div_sP" id="div_sP" target="' + itemSp.id + '" value="' + itemSp.name + '"></div>' + itemSp.name + '</span>';
-                    $('#sp_options_Div').append(item_Rows);
-                });
-            }
+
+
+        $('#sp_Input').click(function () {
+            $('#sp_options_Div').children('a').remove();
+            $.ajax({
+                type: 'GET',
+                url: '/Invoices/SalesPersonList',
+                dataType: 'json',
+                success: function (allSPersons) {
+                    sP_Manage_Table = allSPersons;
+                    var item_Rows;
+                    $.each(allSPersons, function (index, itemSp) {
+                        item_Rows = '<a class="dropdown-item" id="sP_r" target="' + itemSp.id + '" value="' + itemSp.name + '" >  <input name="mine" style="display:none" type="text" id="sP_r_Input' + itemSp.id + '" target="' + itemSp.item_ID + '" value="' + itemSp.name + '" /> <input style="display:none" type="text" id="sP_r_InputRate' + itemSp.id + '" target="' + itemSp.id + '" value="' + itemSp.name + '" /> <input style="display:none" type="text" id="sP_r_Id' + itemSp.id + '" value="' + itemSp.id + '" /> <div class="class_Div_sP" id="div_sP" target="' + itemSp.id + '" value="' + itemSp.name + '"></div>' + itemSp.name + '</span>';
+                        $('#sp_options_Div').append(item_Rows);
+                    });
+                }
+            });
         });
         //----------------------------------------------------------------------------------------------------------------------------------
 
@@ -1041,24 +1075,34 @@
         $("#input_InvoiceDate").val(set_dated);
         //---------------------------------------------------------------------------------------------------------------------------------------------
 
-
+        var inv_Cust_Id;
         $(document).on("click", "#d_Item", function () {
             var name = $(this).closest('#options_Div').children('#d_Item').children('#d_Item_Input' + $(this).attr('target')).val();
+            inv_Cust_Id = $(this).closest('#options_Div').children('#d_Item').children('#d_Item_Id' + $(this).attr('target')).val();
             $('#d_input').val(name);
+            console.log(inv_Cust_Id);
             name = "";
         });
 
+        var inv_SalePerson_Id;
         $(document).on("click", "#sP_r", function () {
             var sP_name = $(this).closest('#sp_options_Div').children('#sP_r').children('#sP_r_Input' + $(this).attr('target')).val();
+            inv_SalePerson_Id = $(this).closest('#sp_options_Div').children('#sP_r').children('#sP_r_Id' + $(this).attr('target')).val();
+            console.log(inv_SalePerson_Id);
             $('#sp_Input').val(sP_name);
             sP_name = "";
         });
 
         var Rate_count;
         var Amount_Count;
+        var ItemId_Pass;
         $(document).on("click", "#item_r", function () {
+            ItemId_Pass = "";
             var name1 = $(this).closest('#ItemsOptionsDiv').children('#item_r').children('#item_r_Input' + $(this).attr('target')).val();
             var rate1 = $(this).closest('#ItemsOptionsDiv').children('#item_r').children('#item_r_InputRate' + $(this).attr('target')).val();
+            ItemId_Pass = $(this).closest('#ItemsOptionsDiv').children('#item_r').children('#item_r_InputId' + $(this).attr('target')).val();
+            console.log(ItemId_Pass);
+            $('#modalItem_Id').val(ItemId_Pass);
             $('#modalItemName').val(name1);
             $('#modalItemQuantity').val(1);
             $('#modalItemRate').val(rate1);
@@ -1083,17 +1127,22 @@
         //-------------------------------------------------------------------------------------
         var subTotalArr = [];
         var subTotalObj = {};
+        var item_Table_Obj = {};
+        var item_Table_Arr = [];
         $('#addTableItem').click(function () {
+            var it_Use_Id = $('#modalItem_Id').val();
             var it_Name = $('#modalItemName').val();
             var it_Quantity = $('#modalItemQuantity').val();
             var it_Rate = $('#modalItemRate').val();
             var it_Discount = $('#modalItemDiscount').val();
             var it_Amount = $('#modalItemAmount').val();
 
+            //console.log(it_Use_Id);
             var myRow2;
-            myRow2 = '<tr><td>' + it_Name + '</td><td>' + it_Quantity + '</td><td>' + it_Rate + '</td><td>' + it_Discount + ' %</td><td>' + it_Amount + '</td><td><a type="button" class="block" style="margin-top:2px" id="btn_ItemUpdate" data-toggle="modal" data-target="#exampleModalCenter2">Edit</a> | <a type="button" class="block" style="margin-top:2px" id="btn_ItemDelete">Delete</a></td></tr>';
+            myRow2 = '<tr><td style="display:none"> ' + it_Use_Id + '</td> <td>' + it_Name + '</td><td>' + it_Quantity + '</td><td>' + it_Rate + '</td><td>' + it_Discount + ' %</td><td>' + it_Amount + '</td><td><a type="button" class="block" style="margin-top:2px" id="btn_ItemUpdate" data-toggle="modal" data-target="#exampleModalCenter2">Edit</a> | <a type="button" class="block" style="margin-top:2px" id="btn_ItemDelete">Delete</a></td></tr>';
             $('#td_body').append(myRow2);
 
+            $('#modalItem_Id').val("");
             $('#modalItemName').val("");
             $('#modalItemQuantity').val("");
             $('#modalItemRate').val("");
@@ -1105,8 +1154,15 @@
             it_Int_Amount = parseInt(it_Amount);
             subTotalObj = { Name: it_Name, Amount: it_Int_Amount };
             subTotalArr.push(subTotalObj);
+
+            var it_Int_Quantity = parseInt(it_Quantity);
+            var it_Int_Rate = parseInt(it_Rate);
+            var it_Int_Discount = it_Discount.toString();
+            item_Table_Obj = { id: 0, invoice_ID: 0, item_ID: it_Use_Id, item_Name: it_Name, quantity: it_Int_Quantity, rate: it_Int_Rate, discount: it_Int_Discount, amount: it_Int_Amount };
+            item_Table_Arr.push(item_Table_Obj);
+
             //subTotalArr
-            console.log(subTotalArr);
+            console.log(item_Table_Arr);
             var subTotalAmt = 0;
             $.each(subTotalArr, function (index, value) {
                 subTotalAmt = subTotalAmt + value.Amount;
@@ -1165,21 +1221,40 @@
 
         $("input[name='chkINV']").click(function () {
             if ($("#chkManual").is(":checked")) {
-                /*$("#prefix").attr("disabled", "disabled");*/
                 $("#nextNumber").removeAttr("disabled");
-                //$("#nextNumber").attr("disabled", "disabled");
+                $("#nextNumber").val("");
                 $("#nextNumber").focus();
             } else {
-                //$("#prefix").removeAttr("disabled");
-                //$("#nextNumber").removeAttr("disabled");
-                //$("#txtPassportNumber").focus();
-                //$("#prefix").attr("disabled", "disabled");
                 $("#nextNumber").attr("disabled", "disabled");
             }
         });
 
         $('#radioModalSave').click(function () {
-            $('#invoiceConfirmNumber').val($('#nextNumber').val());
+            var invNumCheck = $('#nextNumber').val();
+            var Par_invNumCheck = invNumCheck.toString();
+            console.log(Par_invNumCheck);
+            $.ajax({
+                type: 'GET',
+                url: '/Invoices/Invoice_Manual_Generate_Number_Search',
+                dataType: 'json',
+                data: { number: Par_invNumCheck },
+                success: function (status) {
+
+                    if (status == "Number Already Exist !") {
+                        $('#invoice_Validate_Yes').hide();
+                        $('#invoice_Validate_No').show();
+                        $('#invoiceConfirmNumber').val("");
+                    }
+                    else if (status == "Done_") {
+                        $('#invoiceConfirmNumber').val(invNumCheck);
+                        $('#invoice_Validate_No').hide();
+                    }
+                }
+            });
+        });
+
+        $('#radioModalCancel').click(function () {
+            $('#nextNumber').val("");
         });
 
 
@@ -1333,8 +1408,12 @@
                     break;
                 }
             }
-
-            //console.log(subTotalArr);
+            for (var j = item_Table_Arr.length - 1; j >= 0; j--) {
+                if (item_Table_Arr[j].item_Name == alp) {
+                    item_Table_Arr.splice(j, 1);
+                    break;
+                }
+            }
 
             $(this).closest('tr').remove();
             var subTotalAmt1 = 0;
@@ -1353,11 +1432,16 @@
         var R_val_Update, AmountCount_Update, currentRow;
         $(document).on('click', '#btn_ItemUpdate', function () {
             currentRow = $(this).closest("tr");
-            var col1 = currentRow.find("td:eq(0)").text();
-            var col2 = currentRow.find("td:eq(1)").text();
-            var col3 = currentRow.find("td:eq(2)").text();
-            var col4 = currentRow.find("td:eq(3)").text();
-            var col5 = currentRow.find("td:eq(4)").text();
+            var col0 = currentRow.find("td:eq(0)").text();
+            var col1 = currentRow.find("td:eq(1)").text();
+            var col2 = currentRow.find("td:eq(2)").text();
+            var col3 = currentRow.find("td:eq(3)").text();
+            var col4 = currentRow.find("td:eq(4)").text();
+            var col5 = currentRow.find("td:eq(5)").text();
+
+
+            console.log(col0);
+            var col0Int = parseInt(col0);
             var col2Int = parseInt(col2);
             var col3Int = parseInt(col3);
             AmountCount_Update = col3Int * col2Int;
@@ -1365,6 +1449,7 @@
             var col4discountSubInt = parseInt(discountSubstring);
             var col5Int = parseInt(col5);
             R_val_Update = col3;
+            $('#modalItemIdUpdate').val(col0Int);
             $('#modalItemDetailsUpdate').val(col1);
             $('#modalItemQuantityUpdate').val(col2Int);
             $('#modalItemRateUpdate').val(col3Int);
@@ -1417,13 +1502,15 @@
         });
 
         $(document).on('click', '#addTableItemUpdate', function () {
-            var det, quan, rate, dis, amt, quan_Int, rate_Int, dis_Int, amt_Int;
+            var I, det, quan, rate, dis, amt, I_Int, quan_Int, rate_Int, dis_Int, amt_Int;
+            I = $('#modalItemIdUpdate').val();
             det = $('#modalItemDetailsUpdate').val();
             quan = $('#modalItemQuantityUpdate').val();
             rate = $('#modalItemRateUpdate').val();
             dis = $('#modalItemDiscountUpdate').val();
             amt = $('#modalItemAmountUpdate').val();
 
+            I_Int = parseInt(I);
             quan_Int = parseInt(quan);
             rate_Int = parseInt(rate);
             dis_Int = parseInt(dis);
@@ -1437,20 +1524,34 @@
                 }
             }
 
+            for (var j = item_Table_Arr.length - 1; j >= 0; j--) {
+                if (item_Table_Arr[j].item_Name == det) {
+                    item_Table_Arr.splice(j, 1);
+                    break;
+                }
+            }
+
             currentRow.remove();
 
             var myRow3;
-            myRow3 = '<tr><td>' + det + '</td><td>' + quan + '</td><td>' + rate + '</td><td>' + dis + ' %</td><td>' + amt + '</td><td><a type="button" class="block" style="margin-top:2px" id="btn_ItemUpdate" data-toggle="modal" data-target="#exampleModalCenter2">Edit</a> | <a type="button" class="block" style="margin-top:2px" id="btn_ItemDelete">Delete</a></td></tr>';
+            myRow3 = '<tr><td style="display:none"> ' + I + '</td><td>' + det + '</td><td>' + quan + '</td><td>' + rate + '</td><td>' + dis + ' %</td><td>' + amt + '</td><td><a type="button" class="block" style="margin-top:2px" id="btn_ItemUpdate" data-toggle="modal" data-target="#exampleModalCenter2">Edit</a> | <a type="button" class="block" style="margin-top:2px" id="btn_ItemDelete">Delete</a></td></tr>';
             $('#td_body').append(myRow3);
 
             subTotalObj = { Name: det, Amount: amt_Int };
             subTotalArr.push(subTotalObj);
 
+            var it_Edit_Quantity = parseInt(quan);
+            var it_Edit_Rate = parseInt(rate);
+            var it_Edit_Discount = dis.toString();
+            var it_Edit_Amount = parseInt(amt);
+
+            item_Table_Obj = { id: 0, invoice_ID: 0, item_ID: I_Int, item_Name: det, quantity: it_Edit_Quantity, rate: it_Edit_Rate, discount: it_Edit_Discount, amount: it_Edit_Amount };
+            item_Table_Arr.push(item_Table_Obj);
+
             var subTotalAmt2 = 0;
             $.each(subTotalArr, function (index, value1) {
                 subTotalAmt2 = subTotalAmt2 + value1.Amount;
             });
-            console.log(subTotalAmt2);
             $('#shipping_Charges').val(0);
             $('#amount_Adjustment').val(0);
             $('#sub_Total').val(subTotalAmt2);
@@ -1713,8 +1814,75 @@
             $('#salesFormUpdate').hide();
         });
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        $('#saveAsDraft').click(function () {
+
+            var Invoice_Cust_ID = inv_Cust_Id;
+            var InvoiceNumber = parseInt($("#invoiceConfirmNumber").val());
+            var InvoiceNumberString = "INV-" + ($("#invoiceConfirmNumber").val());
+            console.log(InvoiceNumberString);
+            var OrderNumber = parseInt($("#input_Order").val());
+            var InvoiceDate = $("#input_InvoiceDate").val();
+            var Terms = $("#selectedTerm").val();
+            var DueDate = $("#selectedDate").val();
+            var SalePerson_ID = inv_SalePerson_Id;
+            var Subject = $("#inv_Subject").val();
+            var CustomerNote = $('#customer_Notes').val();
+            var Status = "Draft";
+
+            var SubTotal = $("#sub_Total").val();
+            var Shipping = $("#shipping_Charges").val();
+            var Adjustment = $("#amount_Adjustment").val();
+            var TotalAmount = $("#total_Amount").val();
+
+            //-------------------------------------------
+            var invoice_Final = { invoice_ID: 0, invoiceNumber: InvoiceNumber, invoiceNumberString: InvoiceNumberString, orderNumber: OrderNumber, invoiceDate: InvoiceDate, terms: Terms, dueDate: DueDate, subject: Subject, status: Status, customerNote: CustomerNote, salePerson_ID: SalePerson_ID, invoice_Cust_ID: Invoice_Cust_ID };
+            $.ajax({
+                url: '/Invoices/AddInvoice',
+                type: 'POST',
+                datatype: 'json ',
+                data: invoice_Final,
+                success: function (Num) {
+
+                    $.each(item_Table_Arr, function (index, itemP) {
+                        itemP.invoice_ID = Num;
+                    });
+
+                    var amount_Final = { amount_ID: 0, subTotal: SubTotal, shipping: Shipping, adjustment: Adjustment, totalAmount: TotalAmount, invoice_ID: Num };
+                    $.ajax({
+                        url: '/Invoices/AddInvoiceAmount',
+                        type: 'POST',
+                        datatype: 'json ',
+                        data: amount_Final,
+                        success: function (sub) {
+                            console.log(sub);
+
+                            console.log(item_Table_Arr);
+                            for (var k = item_Table_Arr.length - 1; k >= 0; k--) {
+                                var send = item_Table_Arr[k];
+
+                                $.ajax({
+                                    url: '/Invoices/AddInvoice_Item',
+                                    type: 'POST',
+                                    datatype: 'json ',
+                                    data: send,
+                                    success: function (sub1) {
+                                        console.log(sub1);
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            });
+        });
+
+        //------------------------------------------------------------------------------------------------------------------------------------------
 
     });
+
 
     function filterFunction() {
         var input, filter, ul, li, a, i;
@@ -1731,23 +1899,6 @@
             }
         }
     }
-
-    function filterFunction3() {
-        var input, filter, ul, li, a, i;
-        input = document.getElementById("sp_myInput");
-        filter = input.value.toUpperCase();
-        div = document.getElementById("sp_MyDropdown");
-        a = div.getElementsByTagName("a");
-        for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-            } else {
-                a[i].style.display = "none";
-            }
-        }
-    }
-
     function filterFunction2() {
         var input, filter, ul, li, a, i;
         input = document.getElementById("modalItemName");
@@ -1763,7 +1914,21 @@
             }
         }
     }
-
+    function filterFunction3() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("sp_myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("sp_MyDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
     function filterFunction4() {
         var input, filter, ul, li, a, i;
         input = document.getElementById("sP_Search");

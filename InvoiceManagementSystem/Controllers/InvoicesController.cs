@@ -24,6 +24,14 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
+        [HttpGet]
+        public IEnumerable<InvoicesViewModels> InvoiceOverviewList()
+        {
+            var allInvoices = appDbContext.Invoices;
+            return allInvoices;
+
+        }
+
         #region New Invoice
         public IActionResult NewInvoices()
         {
@@ -80,14 +88,75 @@ namespace InvoiceManagementSystem.Controllers
             return Json(maxValue);
         }
 
-        //[HttpGet]
-        //public JsonResult Invoice_Manual_Generate_Number(string obj)
-        //{
+        [HttpGet]
+        public JsonResult Invoice_Manual_Generate_Number_Search(InvoiceNumber obj)
+        {
+            string num = obj.number;
+            if (num == null)
+            {
+                return Json("");
+            }
+            if (num == "")
+            {
+                return Json("");
 
-        //    var result = "dsd";
+            }
+            int Num = Int32.Parse(num);
+            var search = appDbContext.Invoices.Where(x => x.InvoiceNumber == Num).FirstOrDefault();
+            if (search != null)
+            {
+                return Json("Number Already Exist !");
+            }
+            return Json("Done_");
+        }
 
-        //    return Json(result);
-        //}
+        [HttpGet]
+        public IEnumerable<AmountViewModel> AmountOverviewList()
+        {
+            var allInvoices = appDbContext.Amounts;
+            return allInvoices;
+
+        }
+
+        [HttpGet]
+        public IEnumerable<Invoice_Item> Invoice_Items_List()
+        {
+            var allInvoices = appDbContext.Invoice_Items;
+            return allInvoices;
+
+        }
+
+        [HttpPost]
+        public int AddInvoice(InvoicesViewModels invoicesViewModel)
+        {
+
+            appDbContext.Add<InvoicesViewModels>(invoicesViewModel);
+            appDbContext.SaveChanges();
+
+            return invoicesViewModel.InvoiceNumber;
+        }
+
+        [HttpPost]
+        public int AddInvoiceAmount(AmountViewModel amount)
+        {
+
+            appDbContext.Add<AmountViewModel>(amount);
+            appDbContext.SaveChanges();
+            var sub = 12;
+            return sub;
+        }
+
+        [HttpPost]
+        public int AddInvoice_Item(Invoice_Item invoice_Item)
+        {
+
+            appDbContext.Add<Invoice_Item>(invoice_Item);
+            appDbContext.SaveChanges();
+            var sub1 = 13;
+            return sub1;
+        }
 
     }
+
+
 }

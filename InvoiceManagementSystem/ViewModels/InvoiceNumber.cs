@@ -7,7 +7,6 @@ namespace InvoiceManagementSystem.ViewModels
 {
     public class InvoiceNumber
     {
-        public string Prefix { get; set; }
-        public int NextNumber { get; set; }
+        public string number { get; set; }
     }
 }

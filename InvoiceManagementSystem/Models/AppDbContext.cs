@@ -15,7 +15,7 @@ namespace InvoiceManagementSystem.Models
 
         }
 
-        
+
         public DbSet<ItemsViewModels> Items { get; set; }
         public DbSet<CustomersViewModel> Customers { get; set; }
         public DbSet<BillingViewModel> Billings { get; set; }
@@ -25,9 +25,10 @@ namespace InvoiceManagementSystem.Models
         public DbSet<CurrencyViewModel> Currency { get; set; }
         public DbSet<SalesPersonsViewModel> SalesPerson { get; set; }
 
-        public DbSet<InvoicesViewModels>  Invoices { get; set; }
+        public DbSet<InvoicesViewModels> Invoices { get; set; }
 
         public DbSet<Invoice_Item> Invoice_Items { get; set; }
+        public DbSet<AmountViewModel> Amounts { get; set; }
 
 
     }
