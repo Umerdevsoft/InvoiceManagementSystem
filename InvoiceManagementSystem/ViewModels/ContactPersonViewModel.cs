@@ -28,8 +28,8 @@ namespace InvoiceManagementSystem.ViewModels
 
         public string C_P_WorkPlace { get; set; }
         [Required]
-        //[DataType(DataType.PhoneNumber)]
-        public int C_P_Mobile { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string C_P_Mobile { get; set; }
 
         [ForeignKey("CustID")]
         public int C_P_CustID { get; set; }

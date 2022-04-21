@@ -66,7 +66,7 @@
         //var b_Phone = $("#billPhone").val();
         //var b_Fax = $("#billFax").val();
 
-        var obj = { CustID: c_Id, Salutation: c_Salutaion, FirstName: c_FirstName, LastName: c_LastName, CompanyName: c_CompanyName, CustomerDisplayName: c_CustomerDisplayName, Email: c_CustomerEmail, WorkPhone: c_WorkingPhone, Mobile: c_Mobile, Currency: c_Currency };
+        var obj = { CustID: c_Id, Salutation: c_Salutaion, FirstName: c_FirstName, LastName: c_LastName, CompanyName: c_CompanyName, CustomerDisplayName: c_CustomerDisplayName, Email: c_CustomerEmail, WorkPhone: c_WorkingPhone, Mobile: c_Mobile, C_CurrID: c_Currency };
         //var obj1 = { Billing_Id: b_Id, B_Attention: b_Attention, B_Country_Region: b_Country_Region, B_Address_Street1: b_Address_Street1, B_Address_Street2: b_Address_Street2, B_City: b_City, B_State: b_State, B_ZipCode: b_ZipCode, B_Phone: b_Phone, b_Fax: b_Fax };
 
         $.ajax({

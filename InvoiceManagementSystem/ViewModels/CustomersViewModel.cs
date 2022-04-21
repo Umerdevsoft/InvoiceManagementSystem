@@ -29,14 +29,15 @@ namespace InvoiceManagementSystem.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        public int WorkPhone { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string WorkPhone { get; set; }
         [Required]
-        public int Mobile { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string Mobile { get; set; }
+        
         [Required]
-
-
-        [ForeignKey("CustID")]
-        public int C_CurrID { get; set; }
+        public string C_CurrID { get; set; }
+        
         public CurrencyViewModel CurrencyViewModel { get; set; }
 
 

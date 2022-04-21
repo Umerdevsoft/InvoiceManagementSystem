@@ -23,8 +23,8 @@ namespace InvoiceManagementSystem.Controllers
         [HttpGet]
         public IActionResult AllItems()
         {
-            var itemsData = appDbContext.Items;
-            return View(itemsData);
+            //var itemsData = appDbContext.Items;
+            return View();
         }
 
         [HttpPost]

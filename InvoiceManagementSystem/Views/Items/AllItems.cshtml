@@ -80,4 +80,116 @@
 <script src="~/lib/jquery-3.6.0.js"></script>
 <script src="~/Theme/Assets/js/DataTableJquery-3.5.1.js"></script>
 <script src="~/Theme/Assets/js/Datatable.js"></script>
-<script src="~/Theme/Assets/js/AllItems.js"></script>
+<script>
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var min = parseInt($('#min').val(), 10);
+            var max = parseInt($('#max').val(), 10);
+            var age = parseFloat(data[3]) || 0; // use data for the age column
+
+            if ((isNaN(min) && isNaN(max)) ||
+                (isNaN(min) && age <= max) ||
+                (min <= age && isNaN(max)) ||
+                (min <= age && age <= max)) {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/Items/ItemOverviewList',
+            dataType: 'json',
+            success: function (allItems) {
+                console.log(allItems);
+
+
+                var myRow1;
+                $.each(allItems, function (index, item) {
+                    myRow1 = '<tr id="spr" ><td class="col-1" style="text-align:center"> <input type="checkbox" value="' + item.item_ID + '" name="checks" class="checkboxAll" id=""></td><td> <a>' + item.name + '</a></td> <td><a>' + item.description + '</a></td> <td><a>' + item.sellingPrice + '</a></td><td><a>' + item.unit + '</a></td></tr>';
+                    $('#t_Body').append(myRow1);
+                });
+
+                var table = $('#tblItems').DataTable({
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [0,2] },
+                        { "bSearchable": false, "aTargets": [0,2] }
+                    ]});
+                 
+                
+                // Event listener to the two range filtering inputs to redraw on input
+                $('#min, #max').keyup(function () {
+                    table.draw();
+                });
+            }
+        });
+
+        $("#delete_Multiple").click(function () {
+            var ID;
+            var object1 = {};
+            var Arr2 = [];
+            $.each($("input:checkbox[name='checks']:checked"), function () {
+                ID = $(this).val();
+                object1 = { item_ID: ID };
+                Arr2.push(object1);
+            });
+
+            console.log(Arr2);
+            $.each(Arr2, function (index, item) {
+                $.ajax({
+                    url: '/Items/ItemDeleteList',
+                    type: 'POST',
+                    datatype: 'json ',
+                    data: item,
+                    success: function (msg1) {
+                        if (msg1 == "Something went Wrong, Plz Try Again") {
+                            $("#divi1").append(msg1);
+                        }
+                        else {
+                            $("#divi1").append(msg1);
+                        }
+                        //$('#t_Body').children('#spr').remove();
+                        //myRow1 = "";
+                        
+
+                        //$.ajax({
+                        //    type: 'GET',
+                        //    url: '/Items/ItemOverviewList',
+                        //    dataType: 'json',
+                        //    success: function (allItemsAg) {
+                        //        var myRow2;
+                        //        $.each(allItemsAg, function (index, myItem) {
+                        //            myRow2 = '<tr id="spr"><td class="col-1" style="text-align:center"> <input type="checkbox" value="' + myItem.item_ID + '" name="checks" class="checkboxAll" id=""></td><td> <a>' + myItem.name + '</a></td> <td><a>' + myItem.description + '</a></td> <td><a>' + myItem.sellingPrice + '</a></td><td><a>' + myItem.unit + '</a></td></tr>';
+                        //            $('#t_Body').append(myRow2);
+                        //        });
+                        //    }
+                        //});
+
+                    }
+                });
+            });
+
+
+            location.reload();
+        });
+
+
+        $("#selectAll").click(function () {
+            if (this.checked) {
+                $('.checkboxAll').each(function () {
+                    $(".checkboxAll").prop('checked', true);
+                })
+            } else {
+                $('.checkboxAll').each(function () {
+                    $(".checkboxAll").prop('checked', false);
+                })
+            }
+        });
+
+    });
+
+
+   
+</script>

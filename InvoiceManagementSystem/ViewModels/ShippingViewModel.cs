@@ -26,13 +26,16 @@ namespace InvoiceManagementSystem.ViewModels
 
         public string S_State { get; set; }
         [Required]
-        public int S_ZipCode { get; set; }
+        [DataType(DataType.PostalCode)]
+        public string S_ZipCode { get; set; }
 
         [Required]
-        public int S_Phone { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string S_Phone { get; set; }
 
         [Required]
-        public int S_Fax { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string S_Fax { get; set; }
 
         [ForeignKey("CustID")]
         public int S_CustID { get; set; }

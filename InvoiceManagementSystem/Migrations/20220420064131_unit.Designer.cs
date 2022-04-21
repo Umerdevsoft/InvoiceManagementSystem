@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoiceManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220401114145_Tables")]
-    partial class Tables
+    [Migration("20220420064131_unit")]
+    partial class unit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,6 +92,38 @@ namespace InvoiceManagementSystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.AmountViewModel", b =>
+                {
+                    b.Property<int>("Amount_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Adjustment")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Invoice_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InvoicesViewModelsInvoice_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Shipping")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubTotal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Amount_ID");
+
+                    b.HasIndex("InvoicesViewModelsInvoice_ID");
+
+                    b.ToTable("Amounts");
+                });
+
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.BillingViewModel", b =>
                 {
                     b.Property<int>("Billing_Id")
@@ -122,18 +154,21 @@ namespace InvoiceManagementSystem.Migrations
                     b.Property<int>("B_CustID")
                         .HasColumnType("int");
 
-                    b.Property<int>("B_Fax")
-                        .HasColumnType("int");
+                    b.Property<string>("B_Fax")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("B_Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("B_Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("B_State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("B_ZipCode")
-                        .HasColumnType("int");
+                    b.Property<string>("B_ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CustomersViewModelsCustID")
                         .HasColumnType("int");
@@ -167,8 +202,9 @@ namespace InvoiceManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("C_P_Mobile")
-                        .HasColumnType("int");
+                    b.Property<string>("C_P_Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("C_P_Salulation")
                         .IsRequired()
@@ -195,11 +231,7 @@ namespace InvoiceManagementSystem.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("CurrencyCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrencyName")
+                    b.Property<string>("CurrencyNameWithCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -215,8 +247,9 @@ namespace InvoiceManagementSystem.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("C_CurrID")
-                        .HasColumnType("int");
+                    b.Property<string>("C_CurrID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
@@ -241,15 +274,16 @@ namespace InvoiceManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Mobile")
-                        .HasColumnType("int");
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salutation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WorkPhone")
-                        .HasColumnType("int");
+                    b.Property<string>("WorkPhone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustID");
 
@@ -265,6 +299,12 @@ namespace InvoiceManagementSystem.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Discount")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Invoice_ID")
                         .HasColumnType("int");
 
@@ -274,7 +314,16 @@ namespace InvoiceManagementSystem.Migrations
                     b.Property<int>("Item_ID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Item_Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ItemsViewModelsItem_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rate")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -293,7 +342,10 @@ namespace InvoiceManagementSystem.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("CustomersViewModelCustID")
+                    b.Property<string>("CustomerNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomersCustID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DueDate")
@@ -302,7 +354,10 @@ namespace InvoiceManagementSystem.Migrations
                     b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InvoiceNumber")
+                    b.Property<int>("InvoiceNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InvoiceNumberString")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -315,6 +370,9 @@ namespace InvoiceManagementSystem.Migrations
 
                     b.Property<int>("SalePerson_ID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
                         .IsRequired()
@@ -329,7 +387,7 @@ namespace InvoiceManagementSystem.Migrations
 
                     b.HasKey("Invoice_ID");
 
-                    b.HasIndex("CustomersViewModelCustID");
+                    b.HasIndex("CustomersCustID");
 
                     b.HasIndex("salesPersonsViewModelID");
 
@@ -424,18 +482,21 @@ namespace InvoiceManagementSystem.Migrations
                     b.Property<int>("S_CustID")
                         .HasColumnType("int");
 
-                    b.Property<int>("S_Fax")
-                        .HasColumnType("int");
+                    b.Property<string>("S_Fax")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("S_Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("S_Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("S_State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("S_ZipCode")
-                        .HasColumnType("int");
+                    b.Property<string>("S_ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Shipping_Id");
 
@@ -575,6 +636,15 @@ namespace InvoiceManagementSystem.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("InvoiceManagementSystem.ViewModels.AmountViewModel", b =>
+                {
+                    b.HasOne("InvoiceManagementSystem.ViewModels.InvoicesViewModels", "InvoicesViewModels")
+                        .WithMany("Amounts")
+                        .HasForeignKey("InvoicesViewModelsInvoice_ID");
+
+                    b.Navigation("InvoicesViewModels");
+                });
+
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.BillingViewModel", b =>
                 {
                     b.HasOne("InvoiceManagementSystem.ViewModels.CustomersViewModel", "CustomersViewModels")
@@ -619,15 +689,15 @@ namespace InvoiceManagementSystem.Migrations
 
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.InvoicesViewModels", b =>
                 {
-                    b.HasOne("InvoiceManagementSystem.ViewModels.CustomersViewModel", "CustomersViewModel")
+                    b.HasOne("InvoiceManagementSystem.ViewModels.CustomersViewModel", "Customers")
                         .WithMany()
-                        .HasForeignKey("CustomersViewModelCustID");
+                        .HasForeignKey("CustomersCustID");
 
                     b.HasOne("InvoiceManagementSystem.ViewModels.SalesPersonsViewModel", "salesPersonsViewModel")
                         .WithMany()
                         .HasForeignKey("salesPersonsViewModelID");
 
-                    b.Navigation("CustomersViewModel");
+                    b.Navigation("Customers");
 
                     b.Navigation("salesPersonsViewModel");
                 });
@@ -703,6 +773,8 @@ namespace InvoiceManagementSystem.Migrations
 
             modelBuilder.Entity("InvoiceManagementSystem.ViewModels.InvoicesViewModels", b =>
                 {
+                    b.Navigation("Amounts");
+
                     b.Navigation("Invoice_Items");
                 });
 

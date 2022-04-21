@@ -83,7 +83,17 @@ namespace InvoiceManagementSystem.Controllers
         [HttpGet]
         public JsonResult Invoice_Auto_Generate_Number()
         {
-            var maxValue = appDbContext.Invoices.Max(x => x.InvoiceNumber);
+            var maxValue = 0;
+
+            try
+            {
+                maxValue = appDbContext.Invoices.Max(x => x.InvoiceNumber);
+            }
+            catch { 
+            
+            }
+            
+
             maxValue++;
             return Json(maxValue);
         }
