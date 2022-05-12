@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoiceManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220420064131_unit")]
-    partial class unit
+    [Migration("20220512070004_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

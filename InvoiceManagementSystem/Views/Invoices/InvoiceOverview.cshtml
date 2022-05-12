@@ -1,0 +1,439 @@
+﻿@{
+    ViewData["Title"] = "InvoiceOverview";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@*<tr class="trEffect" target="' + item.invoiceNumberString + '">
+        <td class="mailbox-name">
+            <div class="row" id="iRow">
+                <div class="col" id="iCol">
+                    <input type="checkbox" value="" class="" id="">
+                    <span style="margin-left:2px">Lorem ipsum</span>
+                    <span style="float:right">PKR XX,XXX.XX</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span style="margin-left:18px">' + item.invoiceNumberString + '</span>
+                    <span style="color:grey"><b>|</b> 25 Jan 2022</span>
+                    <span style="float:right;color:grey">Draft</span>
+                </div>
+            </div>
+        </td>
+    </tr>*@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <!---Check box Card start-->
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h2 class="card-title col-9" style="">All Invoices</h2>
+                    <a class="col-2 " asp-controller="Invoices" asp-action="NewInvoices" style=""><i class="fa fa-plus"> New</i></a>
+                </div>
+                <!-- /.card-header -->
+                <!--<div class="card-body p-0">
+                <div class="table-responsive mailbox-messages" id="divTable">
+                    <table id="MailBox" class="table table-hover table-striped">
+                        <tbody id="MailBox1">
+                            <tr>
+                                <td class="invTd">
+                                    <div class="row" id="iRow">
+                                        <div class="col" id="iCol">
+                                            <input type="checkbox" value="" class="" id="">
+                                            <span style="margin-left:2px">Lorem ipsum</span>
+                                            <span style="float:right">PKR XX,XXX.XX</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <span style="margin-left:18px">INV-000004</span>
+                                            <span style="color:grey"><b>|</b> 25 Jan 2022</span>
+                                            <span style="float:right;color:grey">Draft</span>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>-->
+                <!-- /.mail-box-messages -->
+                <!--</div>-->
+                <div class="card-body p-0">
+                    <div class="table-responsive mailbox-messages" id="divTable">
+                        <table id="MailBoxTable" class="table table-hover table-striped">
+                        </table>
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- End Checkbox card -->
+        </div>
+        <div class="col-8">
+
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-12">
+                        <h4 style="color:grey" id="inv_Status">
+                            XXXXX
+                        </h4>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- info row -->
+                <div class="row invoice-info">
+                    <div class="col-sm-7 invoice-col">
+                        <strong>Your Company Name</strong>
+                        <p>Name</p>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-5 invoice-col">
+                        <h4><strong>INVOICE</strong></h4>
+                        <p id="inv_no">INV-XXXXXXXX</p>
+                        <p>Balance due: <span><strong id="inv_Old_Balance">PKR XX,XXXXX</strong></span></p>
+
+                    </div>
+
+                    <!-- /.col -->
+                    <div class="col-sm-7 invoice-col">
+                        <p>Bill To</p>
+                        <p><strong id="inv_CompanyName">XXXXXXXXXX</strong></p>
+                    </div>
+                    <!-- /.col -->
+                    <!-- /.col -->
+                    <div class="col-sm-5 invoice-col">
+                        <p>Invoice Date : <span><strong id="inv_Date">DD-MM-YYYY</strong></span></p>
+                        <p>Terms: <span><strong id="inv_Term">XXXXX</strong></span></p>
+                        <p>Due Date : <span><strong id="inv_DueDate">DD-MM-YYYY</strong></span></p>
+                        <p id="po_Tag">P.O# : <span><strong id="inv_PurchaseOrder">XXXXX</strong></span></p>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <!-- Table row -->
+                <div class="row">
+                    <div class="col-12 table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Items & Description</th>
+                                    <th>Qty</th>
+                                    <th>Rate</th>
+                                    <th>Discount</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inv_ItemTable">
+                                @*<tr>
+                                        <td>1</td>
+                                        <td>Call of Duty</td>
+                                        <td>1.00</td>
+                                        <td>XXX,XXXXX</td>
+                                        <td>5.00</td>
+                                        <td>XXXXXX</td>
+                                    </tr>*@
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <!-- accepted payments column -->
+                    <div class="col-7" style="padding-top:125px">
+                        <div class="row">
+                            <div class="col-2">
+                                <p><strong>Notes:</strong></p>
+                            </div>
+                            <div class="col">
+                                <p><span id="inv_CustomerNote"></span></p>
+                            </div>
+                        </div>
+                        <p><strong>Thanks for your business.</strong></p>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-5">
+                        <div>
+                            <p>Sub Total : <span> <strong id="inv_SubTotal">XXXXXXX</strong></span></p>
+                        </div>
+                        <div id="gst_div">
+                            <p>GST <b>(17%)</b> : <span> <strong>XXXXXXX</strong></span></p>
+                        </div>
+                        <div>
+                            <p>Total : <span><b>PKR</b>&nbsp<strong id="inv_Total">XXXXXXX</strong></span></p>
+                        </div>
+                        <div id="paymentMade_div">
+                            <p>Payment Mode : <span><b>PKR</b><strong>XXXXXXX</strong></span></p>
+                        </div>
+                        <div>
+                            <p>Balance Due : <span><b>PKR</b><strong>XXXXXXX</strong></span></p>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <!-- /.invoice -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/lib/jquery-3.6.0.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $.ajax({
+            type: 'GET',
+            url: '/Invoices/InvoiceOverviewList',
+            dataType: 'json',
+            success: function (AllInvoices) {
+                console.log(AllInvoices);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/Customers/CustomersOverviewList',
+                    dataType: 'json',
+                    success: function (AllCusName) {
+                        console.log(AllCusName);
+
+                        $.ajax({
+                            type: 'GET',
+                            url: '/Invoices/GetAmountList',
+                            dataType: 'json',
+                            success: function (AllAmount) {
+                                console.log(AllAmount);
+
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/Invoices/Invoices_Items_List',
+                                    dataType: 'json',
+                                    success: function (AllInvoices_Items) {
+                                        console.log(AllInvoices_Items);
+
+                                        var myDisp;
+                                        $.each(AllInvoices, function (index, item) {
+                                            console.log(item);
+
+                                            var inv_Cust_Id = item.invoice_Cust_ID;
+                                            var inv_Invoice_Id = item.invoice_ID;
+                                            var Cust_Find = AllCusName.find(x => x.custID === inv_Cust_Id);
+                                            var Cust_Find_Name = Cust_Find.customerDisplayName;
+                                            console.log(Cust_Find_Name);
+                                            var Amount_Find = AllAmount.find(x => x.invoice_ID === inv_Invoice_Id)
+                                            var Amount_Find_Amount;
+                                            if (Amount_Find === undefined) {
+                                                Amount_Find_Amount = 0;
+                                            }
+                                            else {
+                                                Amount_Find_Amount = Amount_Find.totalAmount;
+                                                console.log(Amount_Find_Amount);
+                                            }
+
+                                            myDisp = '<tr class="trEffect" target="' + item.invoice_ID + '"><td class="mailbox-name"><div class="row" id="iRow"><div class="col" id="iCol"><span style="margin-left:2px">' + Cust_Find_Name + '</span><span style="float:right">PKR ' + Amount_Find_Amount + '</span></div></div><div class="row"><div class="col"><span style="margin-left:2px">' + item.invoiceNumberString + '</span><span style="color:grey"><b>|</b> ' + item.invoiceDate + '</span><span style="float:right;color:grey">' + item.status + '</span></div></div></td></tr >';
+                                            $('#MailBoxTable').append(myDisp);
+                                            //myCard = '<div class="card" id="card' + item.invoice_ID + '" style="display:none"><div class="card-header" data-card-widget="collapse"><h1>' + item.invoice_ID + '</h1> <h3 class="card-title">Overview</h3><div class="card-tools"><div class="row"><input type="text" id="divInput' + item.invoice_ID + '" value="' + item.invoice_ID + '" style="display:none"><div id="' + item.invoice_ID + '" class="divUpdate  col" target="' + item.invoice_ID + '"><a type="button" id="btnUpdate' + item.invoice_ID + '" target="' + item.invoice_ID + '" class="btn btn-tool" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-edit"></i></a></div><div id="" class="divDelete col" target="' + item.invoice_ID + '"><a type="button" id="btnDelete' + item.invoice_ID + '" target="' + item.invoice_ID + '" class="btn btn-tool"><i class="fas fa-trash"></i></a></div></div></div></div><div class="card-body"><div class="row"><div class="col-4">Item type</div><div class="col-8"><b>' + item.invoice_ID + '</b></div></div><div class="row"><div class="col-4">Created Source</div><div class="col-8"><b></b></div></div><br /><div class="row"><div class="col-4"><b>Sales Information</b></div></div><div class="row"><div class="col-4">Selling Price</div><div class="col-8"><b>PKR ' + item.invoice_ID + '</b></div></div><div class="row"><div class="col-4">Description</div><div class="col-8">' + item.invoice_ID + '</div></div></div></div>'
+                                            //$('#myDisplay').append(myCard);
+                                        });
+
+                                        $('.trEffect').click(function () {
+                                            var forDisplayInv = $(this).attr('target');
+
+                                            forDisplayInv_Int = parseInt(forDisplayInv);
+
+                                            var invoice_Id_Find = AllInvoices.find(x => x.invoice_ID === forDisplayInv_Int);
+
+                                            if (invoice_Id_Find.status === "Draft") {
+                                                $('#po_Tag').hide();
+                                                $('#gst_div').hide();
+                                                $('#paymentMade_div').hide();
+                                            }
+                                            else if (invoice_Id_Find.status === "Paid") {
+                                                $('#po_Tag').show();
+                                                $('#gst_div').show();
+                                                $('#paymentMade_div').show();
+                                            }
+
+                                            $('#inv_no').html(invoice_Id_Find.invoiceNumberString);
+                                            $('#inv_Status').html(invoice_Id_Find.status);
+
+                                            var this_inv_Date = invoice_Id_Find.invoiceDate;
+                                            var inv_Date_Substr = this_inv_Date.substring(8, 10) + this_inv_Date.substring(4, 8) + this_inv_Date.substring(0, 4);
+                                            $('#inv_Date').html(inv_Date_Substr);
+                                            $('#inv_Term').html(invoice_Id_Find.terms);
+                                            $('#inv_PurchaseOrder').html(invoice_Id_Find.orderNumber);
+                                            $('#inv_CustomerNote').html(invoice_Id_Find.customerNote);
+
+                                            var this_inv_DueDate = invoice_Id_Find.dueDate;
+                                            var inv_DueDate_Substr = this_inv_DueDate.substring(8, 10) + this_inv_DueDate.substring(4, 8) + this_inv_DueDate.substring(0, 4);
+                                            $('#inv_DueDate').html(inv_DueDate_Substr);
+
+                                            var this_Cust_Find = AllCusName.find(x => x.custID === invoice_Id_Find.invoice_Cust_ID);
+                                            $('#inv_CompanyName').html(this_Cust_Find.companyName);
+
+                                            var this_Amount_Find = AllAmount.find(x => x.invoice_ID === invoice_Id_Find.invoice_ID);
+                                            $('#inv_SubTotal').html(this_Amount_Find.subTotal);
+                                            $('#inv_Total').html(this_Amount_Find.totalAmount);
+
+                                            var Invoice_Items_Arr = [];
+                                            for (var i = 0; i < AllInvoices_Items.length; i++) {
+                                                if (AllInvoices_Items[i].invoice_ID === invoice_Id_Find.invoice_ID) {
+                                                    Invoice_Items_Arr.push(AllInvoices_Items[i]);
+                                                }
+                                            }
+                                            //console.log(Invoice_Items_Arr);
+                                            $('#inv_ItemTable tr').remove();
+                                            var one_Item;
+                                            var count=1;
+                                            $.each(Invoice_Items_Arr, function (index, inv_Item) {
+                                                one_Item = '<tr><td>' + count + '</td><td>' + inv_Item.item_Name + '</td><td>' + inv_Item.quantity + '</td><td>' + inv_Item.rate + '</td><td>' + inv_Item.discount + '</td><td>' + inv_Item.amount + '</td></tr>';
+                                                $('#inv_ItemTable').append(one_Item);
+                                                count++;
+                                            });
+
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+
+
+
+                //$('.icheck-primary').click(function () {
+                //    if ($('.master' + $(this).attr('target')).is(":checked")) {
+                //        $('#card' + $(this).attr('target')).show();
+                //    }
+                //    else {
+                //        $('#card' + $(this).attr('target')).hide();
+                //    }
+                //});
+
+                //$('.upd').click(function () {
+                //    /*$('#card' + $(this).attr('target')).show();*/
+                //    $('#inv_no').html('dss');
+                //    console.log("Click");
+                //});
+
+                //$('input[type="checkbox"]').click(function () {
+                //    if ($(this).is(":checked")) {
+                //        console.log("Checkbox is checked.");
+                //    }
+                //    else if ($(this).is(":not(:checked)")) {
+                //        console.log("Checkbox is unchecked.");
+                //    }
+                //});
+            }
+        });
+
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/Invoices/InvoiceOverviewList',
+        //    dataType: 'json',
+        //    success: function (AllInvoices) {
+        //        console.log(AllInvoices.length);
+
+        //var myList;
+        //for (var i = 0; i < AllInvoices.length; i++) {
+        //    console.log(AllInvoices[i].status);
+
+        //    myList = '<tr target="' + AllInvoices[i].invoice_ID + '"><td class="master' + AllInvoices[i].invoice_ID + '"><div class="row"><div class="col" id="iCol"><span style="margin-left:2px">Name</span><span style="float:right">PKR 22344</span></div></div><div class=""><div class="col"><span style="margin-left:18px">' + AllInvoices[i].invoiceNumberString + '</span><span style="color:grey"><b>|</b>' + AllInvoices[i].invoiceDate + '</span><span style="float:right;color:grey">' + AllInvoices[i].status + '</span></div></div></td></tr>';
+        //    $('#MailBox1').append(myList);
+
+        //}
+
+
+
+        //    }
+        //});
+
+        //$('#invTr').children('#invTd').children('#invDr').children('#checkCol').click(function () {
+        //    if ($('.myCheckbox' + $('#invTr').attr('target')).is(":checked")) {
+        //        $('#test').hide();
+        //        console.log("abc");
+        //    }
+        //});
+
+        //$('#checkCol').click(function () {
+
+        //    if ($('.myCheckbox' + $(this).attr('target')).is(":checked")) {
+        //        $('#test').hide();
+        //        console.log("abc");
+        //    }
+        //});
+
+        //$('#myCheckbox').change(function () {
+        //    if (this.checked) {
+        //        var returnVal = confirm("Are you sure?");
+        //        $(this).prop("checked", returnVal);
+        //        console.log("abc");
+        //    }
+        //    //$('#textbox1').val(this.checked);
+        //});
+
+        //$('.myCheckbox').click(function () {
+        //    if (this.checked) {
+        //        console.log('abcd');
+        //    }
+        //});
+
+        //$('#invTd').click(function () {
+        //    console.log('abcd');
+        //});
+
+        //$('tr').click(function () {
+
+        //    var value = $(this).html();
+        //    alert(value);
+        //    console.log(value);
+        //});
+
+        //$('#iCol').click(function () {
+
+        //    var value = $(this).html();
+        //    alert(value);
+        //});
+
+        //$(".myCheckbox1").change(function () {
+        //    if (this.checked) {
+        //        console.log('abc');
+        //    }
+        //});
+
+        //$('input[type="checkbox"]').click(function () {
+        //    if ($(this).prop("checked") == true) {
+        //        console.log("Checkbox is checked.");
+        //    }
+        //    else if ($(this).prop("checked") == false) {
+        //        console.log("Checkbox is unchecked.");
+        //    }
+        //});
+
+        //$('input[type="checkbox"]').click(function () {
+        //    if ($(this).is(":checked")) {
+        //        console.log("Checkbox is checked.");
+        //    }
+        //    else if ($(this).is(":not(:checked)")) {
+        //        console.log("Checkbox is unchecked.");
+        //    }
+        //});
+    });
+
+        //<div class="row" id="invDr"><div class="col" id="checkCol" target="' + item.invoice_ID + '"><input type="checkbox" class="myCheckbox' + item.invoice_ID +'"/><span style="margin-left:2px">' + Cust_Find_Name + '</span><span style="float:right">PKR ' + Amount_Find_Amount + '</span></div></div><div class="row"><div class="col"><span style="margin-left:18px">' + item.invoiceNumberString + '</span><span style="color:grey"><b>|</b>' + item.invoiceDate + '</span><span style="float:right;color:grey">' + item.status + '</span></div></div>
+
+        //myList = '<tr><td id="invTd"><div class="row"><div class="col"><span style="margin-left:2px">Name</span><span style="float:right">PKR 30210</span></div></div><div class="row"><div class="col"><span style="margin-left:18px">' + item.invoiceNumberString + '</span><span style="color:grey"><b>|</b>' + item.invoiceDate + '</span><span style="float:right;color:grey">' + item.status + '</span></div></div></td></tr>';
+
+        //myRow = '<tr class="trEffect" target="' + item.invoiceNumberString + '"><td><div> <input type="checkbox" value=""></div></td><td class="mailbox-name"><a>' + item.invoice_ID + '</a></td></tr>';
+</script>
+

@@ -24,11 +24,29 @@ namespace InvoiceManagementSystem.Controllers
         }
         #endregion
 
+
+
+        #region InvoiceOverview Page
+
+        public IActionResult InvoiceOverview()
+        {
+            return View();
+        }
+        #endregion
+
         [HttpGet]
         public IEnumerable<InvoicesViewModels> InvoiceOverviewList()
         {
             var allInvoices = appDbContext.Invoices;
             return allInvoices;
+
+        }
+
+        [HttpGet]
+        public IEnumerable<Invoice_Item> Invoices_Items_List()
+        {
+            var allInvoices_Items = appDbContext.Invoice_Items;
+            return allInvoices_Items;
 
         }
 
@@ -66,6 +84,7 @@ namespace InvoiceManagementSystem.Controllers
 
         }
         #endregion
+
         [HttpGet]
         public JsonResult DeleteSalesPerson(SalesPersonsViewModel salesPerson)
         {
@@ -89,10 +108,11 @@ namespace InvoiceManagementSystem.Controllers
             {
                 maxValue = appDbContext.Invoices.Max(x => x.InvoiceNumber);
             }
-            catch { 
-            
+            catch
+            {
+
             }
-            
+
 
             maxValue++;
             return Json(maxValue);
@@ -165,6 +185,16 @@ namespace InvoiceManagementSystem.Controllers
             var sub1 = 13;
             return sub1;
         }
+
+        #region GetAmountList
+        [HttpGet]
+        public IEnumerable<AmountViewModel> GetAmountList()
+        {
+            var Amounts = appDbContext.Amounts;
+            return Amounts;
+
+        }
+        #endregion
 
     }
 
